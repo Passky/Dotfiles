@@ -24,7 +24,7 @@
                ,(cons "melpa" (concat proto "://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))))))
 
 (setq package-archives
-	  (alist-get 'tencent my-package-archives-alist))
+	  (alist-get 'melpa my-package-archives-alist))
 
 ;; Refer to https://emacs-china.org/t/elpa/11192
 (defun my-test-package-archives (&optional no-chart)
@@ -70,20 +70,9 @@ Return the fastest package archive."
 (setq package-quickstart t
 	  package-quickstart-file my-cache-file)
 
-(defun my-initialize-package ()
-  (interactive)
-  (require 'package)
-  (package-initialize)
-  (package-quickstart-refresh))
+(package-initialize)
 
-(defun my-re-initialize-package ()
-  "Delete generated autoload.el and re-initalize."
-  (interactive)
-  (delete-file package-quickstart-file)
-  (delete-file (concat package-quickstart-file "c"))
-  (package-refresh-contents)
-  (my-initialize-package)
-  (defun my-add-package (package &optional no-refresh)
+(defun my-add-package (package &optional no-refresh)
 	"Ask elpa to install given PACKAGE."
 	(cond
 	 ((package-installed-p package)
@@ -93,45 +82,6 @@ Return the fastest package archive."
 	 (t
 	  (package-refresh-contents)
 	  (my-add-package package t))))
-  (load-file (concat my-emacs-d "init.el"))
-  )
-
-(defun my-re-initialize-package-force ()
-  "Ignore `package-check-signature' and re-initalize.
-   Warning!!! It is dangerous!."
-  (interactive)
-  (unless my-server-tested?
-	(setq package-archives
-		  (alist-get (my-test-package-archives) my-package-archives-alist)) )
-  (let ((package-check-signature nil)) ; just lack of security,but it's hard to be safe everywhere.
-	(my-re-initialize-package)))
-
-(defun my-add-package (package &optional no-refresh)
-  "Avoid void function error."
-  (ignore))
-
-;; (require 'benchmark-init)
-;; (add-hook 'window-setup-hook 'benchmark-init/deactivate)
-;; (benchmark-init/activate)
-
-(defun my-maybe-add-package (package &optional no-refresh)
-  "Try to install PACKAGE, and return non-nil if successful.
-In the event of failure, return nil and print a warning message.
-Optionally require MIN-VERSION.  If NO-REFRESH is non-nil, the
-available package lists will not be re-downloaded in order to
-locate PACKAGE."
-  (condition-case err
-	  (my-add-package package no-refresh)
-	(error
-	 (message "Couldn't install optional package `%s': %S" package err)
-	 nil)))
-
-(unless (file-exists-p my-cache-file)
-  (my-re-initialize-package))
-
-(ignore-errors
-  ;; it will use a variable package-activated-list which is not loaded
-  (load my-cache-file t t))
 
 ;; for native-comp branch
 (when (fboundp 'native-compile-async)
