@@ -24,7 +24,7 @@
                ,(cons "melpa" (concat proto "://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))))))
 
 (setq package-archives
-	  (alist-get 'melpa my-package-archives-alist))
+	  (alist-get 'tencent my-package-archives-alist))
 
 ;; Refer to https://emacs-china.org/t/elpa/11192
 (defun my-test-package-archives (&optional no-chart)
