@@ -57,13 +57,7 @@ Return the fastest package archive."
     ;; Return the fastest
     fastest))
 
-;; load after package-archives
-;; (require 'package)
-;; (when (>= emacs-major-version 27)
-;;     ;; emacs 27 or higher
-;;     (setq package-quickstart t))
-
-;; copy from https://github.com/AnthonyDiGirolamo/dot-all
+;; new feature in emacs27
 (defconst my-cache-file (concat my-emacs-d "lisp/autoloads.el")
   "Directory of cache file.")
 
