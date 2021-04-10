@@ -66,6 +66,12 @@ Return the fastest package archive."
 
 (package-initialize)
 
+(defun my-re-init ()
+  "For cross big version update."
+  (delete-file (concat package-quickstart-file "c"))
+  (delete-file package-quickstart-file)
+  (package-quickstart-refresh))
+
 (defun my-add-package (package &optional no-refresh)
 	"Ask elpa to install given PACKAGE."
 	(cond
