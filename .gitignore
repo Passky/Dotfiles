@@ -29,7 +29,6 @@ autoloads.elc
 #Release
 .vim/sessions/*.*
 #build
-.clangd
 cmake-*
 .vim/.netrwhist
 .config/nvim/.netrwhist

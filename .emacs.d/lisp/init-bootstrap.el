@@ -73,6 +73,7 @@ Return the fastest package archive."
 (defun my-initialize-package ()
   (interactive)
   (require 'package)
+  (package-initialize)
   (package-quickstart-refresh))
 
 (defun my-re-initialize-package ()
@@ -80,8 +81,8 @@ Return the fastest package archive."
   (interactive)
   (delete-file package-quickstart-file)
   (delete-file (concat package-quickstart-file "c"))
-  (package-initialize)
   (package-refresh-contents)
+  (my-initialize-package)
   (defun my-add-package (package &optional no-refresh)
 	"Ask elpa to install given PACKAGE."
 	(cond
@@ -93,7 +94,7 @@ Return the fastest package archive."
 	  (package-refresh-contents)
 	  (my-add-package package t))))
   (load-file (concat my-emacs-d "init.el"))
-  (my-initialize-package))
+  )
 
 (defun my-re-initialize-package-force ()
   "Ignore `package-check-signature' and re-initalize.
@@ -124,6 +125,9 @@ locate PACKAGE."
 	(error
 	 (message "Couldn't install optional package `%s': %S" package err)
 	 nil)))
+
+(unless (file-exists-p my-cache-file)
+  (my-re-initialize-package))
 
 (ignore-errors
   ;; it will use a variable package-activated-list which is not loaded
