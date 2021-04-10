@@ -1,0 +1,45 @@
+From https://emacs-china.org/t/richard-m-stallman-resigns/10542/13
+
+
+The announcement of the Friday event does an injustice to Marvin Minsky:
+
+关于周五事件的通告，对 Marvin Minsky 是不公正的。
+
+“deceased AI ‘pioneer’ Marvin Minsky (who is accused of assaulting one of Epstein’s victims [2])”
+
+“已故的人工智能‘先锋’ Marvin Minsky （被控告侵害了 Epstein 事件的受害者之一 ）”
+
+ 注意这里的 assaulting 一词，是 rms 争论的重点，这个词有 攻击、袭击 之意，按照 rms 的说法，这个词意味着主动侵害
+
+The injustice is in the word “assaulting”. The term “sexual assault” is so vague and slippery that it facilitates accusation inflation: taking claims that someone did X and leading people to think of it as Y, which is much worse than X.
+
+不公正之处，是 “assulting” 这个用语。“sexual assault”（性侵犯）这个用语非常的糢糊，会夸大指控的严重性：宣称某人做了 X 并误导别人觉得这个人做了 Y，Y 远远比 X 严重。
+
+The accusation quoted is a clear example of inflation. The reference reports the claim that Minsky had sex with one of Epstein’s harem. (See https://www.theverge.com/2019/8/9/20798900/marvin-minsky-jeffrey-epstein-sex-trafficking-island-court-records-unsealed.) 1 Let’s presume that was true (I see no reason to disbelieve it).
+
+上面引用的指控，明显是一种夸大。根据报道 （https://www.theverge.com/2019/8/9/20798900/marvin-minsky-jeffrey-epstein-sex-trafficking-island-court-records-unsealed） Minksy 与 Epstein 的性奴（harem，不知道怎么翻比较确切）之一发生了性关系。让我们假设这是真的（我找不到理由不相信）。
+
+The word “assaulting” presumes that he applied force or violence, in some unspecified way, but the article itself says no such thing. Only that they had sex.
+
+“assaulting” 这个词，意味着他使用了某种暴力，但那篇报道并没有说到这个，只说了他们发生了性关系。
+
+We can imagine many scenarios, but the most plausible scenario is that she presented herself to him as entirely willing. Assuming she was being coerced by Epstein, he would have had every reason to tell her to conceal that from most of his associates.
+
+我们可以想像很多种情况，但最合理的情况是，她在 Marvin 面前表现的像是完全自愿的。假如她是被 Epstein 强迫的，那他自然会让她保守秘密。
+
+I’ve concluded from various examples of accusation inflation that it is absolutely wrong to use the term “sexual assault” in an accusation.
+
+我从各种各样的指控夸大事例中总结出，在指控时使用 “sexual assault” 是绝对错误的。
+
+Whatever conduct you want to criticize, you should describe it with a specific term that avoids moral vagueness about the nature of the criticism.
+
+无论你想要批判什么行为，你都应该使用特定的词汇来描述，以此避免批判本身道德上的模糊性。
+
+--- 
+
+试着翻译了一下 rms 的原文。
+
+外网上（比如 twitter）近来一片喊打喊杀之势，很多人直接就攻击 rms 是恋童癖。也有不少人是以前就不爽 rms，现在就趁机出来大踩特踩。
+
+我自己是觉得他的 argument 在逻辑上没什么问题，也很佩服他在“政治正确”如此严苛之时敢于发声。
+

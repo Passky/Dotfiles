@@ -1,0 +1,87 @@
+nnoremap <space>p "+p  
+vnoremap <space>y "+y  
+
+set backspace=2          " 使用回车键正常处理indent,eol,start等
+set nohlsearch            " 高亮显示搜索结果
+set incsearch           " 开启实时搜索功能
+set ignorecase          " 搜索时大小写不敏感
+set smartcase           " 智能搜索大小写判断
+set number               "  
+set relativenumber               " 开启行号显示
+set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
+se so=4                  " 上下滚屏时保留4行
+inoremap kj <esc>
+
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <space>wj <c-w>j
+nnoremap <space>wk <c-w>k
+nnoremap <space>wh <c-w>h
+nnoremap <space>wl <c-w>l
+nnoremap <space>wq <c-w>q
+nnoremap <space>wo :only<cr>
+noremap <M-u> <C-w>p<C-u><C-w>p
+noremap <M-d> <C-w>p<C-d><C-w>p
+
+" fast save
+noremap <C-S> :w<cr>
+inoremap <C-S> <ESC>:w<cr>
+
+" QuickMotion
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+
+" insert mode as emacs
+inoremap <c-a> <home>
+inoremap <c-e> <end>
+inoremap <c-d> <del>
+
+" faster command mode
+cnoremap <c-h> <left>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoremap <c-l> <right>
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-f> <c-d>
+cnoremap <c-b> <left>
+cnoremap <c-d> <del>
+
+nnoremap <space><space>s		:source ~/.vsvimrc<CR>
+nnoremap K :vsc Edit.QuickInfo<CR>
+nnoremap <space>qb       : vsc Build.BuildSolution<CR>
+nnoremap <space>cf      : vsc View.SolutionExplorer<CR>
+nnoremap <space>.       :vsc EditorContextMenus.CodeWindow.QuickActionsForPosition<CR>
+nnoremap <space>qq		:vsc Debug.StartWithoutDebugging<cr>
+nnoremap <space>qd		:vsc Debug.Start<cr>
+
+" Navigate 
+nnoremap <C-O>			:vsc View.NavigateBackward<CR>
+nnoremap <C-I>			:vsc View.NavigateForward<CR>
+nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gr :vsc Edit.FindAllReferences<CR>
+nnoremap gy	:vsc Edit.GoToImplementation<CR>
+
+" `F' work
+nnoremap <space>ff :vsc File.OpenFile<CR>
+nnoremap <space>fL :vsc Edit.FindinFiles<cr> "grep all
+
+nnoremap <space>cld :vsc View.ErrorList<CR>
+nnoremap <space>] :vsc View.NextError<CR>
+nnoremap <space>[ :vsc View.PreviousError<CR>
+
+" Quick Comment"
+nnoremap gcc :vsc Edit.ToggleComment<CR>
+vnoremap gc  :vsc Edit.ToggleComment<CR>
+
+nnoremap <space>cr	:vsc Refactor.Rename<cr>
+nnoremap <space>fg		:vsc Edit.FindinFiles<cr>
+"nmap <C-]> :vsc Edit.NextMethod<cr>zz
+"nmap <C-[> :vsc Edit.PreviousMethod<cr>zz
+
+" Debug
+nnoremap <space>db		:vsc Debug.ToggleBreakpoint<cr>

@@ -1,0 +1,76 @@
+let mapleader = "\\"      " 定义<leader>键
+nnoremap <leader>p "+p
+vnoremap <leader>y "+y
+"set clipboard=unnamedplus
+"set relativenumber               " 开启行号显示
+set backspace=2          " 使用回车键正常处理indent,eol,start等
+set whichwrap+=<,>,h,l   " 设置光标键跨行
+set nohlsearch            " 高亮显示搜索结果
+set incsearch           " 开启实时搜索功能
+set ignorecase          " 搜索时大小写不敏感
+set smartcase           " 智能搜索大小写判断
+set wildmenu             " vim自身命名行模式智能补全
+set noeb                 " 关闭错误的提示
+set number               "
+set vb t_vb=             " 去除警报声
+set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
+se so=4                  " 上下滚屏时保留4行
+
+inoremap kj <esc>
+nnoremap <space>wj <c-w>j
+nnoremap <space>wk <c-w>k
+nnoremap <space>wh <c-w>h
+nnoremap <space>wl <c-w>l
+nnoremap <space>wq <c-w>q
+nnoremap <space>wo :only
+
+nnoremap gg :1<cr>
+
+" fast save
+noremap <C-S> :w<cr>
+inoremap <C-S> <ESC>:w<cr>
+
+" QuickMotion
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+
+" insert mode as emacs
+inoremap <c-a> <home>
+inoremap <c-e> <end>
+inoremap <c-d> <del>
+
+" faster command mode
+cnoremap <c-h> <left>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoremap <c-l> <right>
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-f> <c-d>
+cnoremap <c-b> <left>
+cnoremap <c-d> <del>
+
+" 分屏窗口移动,与滚动另一页的片段
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+noremap <M-u> <C-w>p<C-u><C-w>p
+noremap <M-d> <C-w>p<C-d><C-w>p
+
+nnoremap <C-j> :cn<CR>
+nnoremap <C-k> :cp<CR>
+
+nnoremap <leader>1 1gt<CR>
+nnoremap <leader>2 2gt<CR>
+nnoremap <leader>3 3gt<CR>
+nnoremap <leader>4 4gt<CR>
+nnoremap <leader>5 5gt<CR>
+nnoremap <leader>6 6gt<CR>
+nnoremap <leader>7 7gt<CR>
+nnoremap <leader>8 8gt<CR>
+nnoremap <leader>9 8gt<CR>
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>tc :tabclose<cr>

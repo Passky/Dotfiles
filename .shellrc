@@ -1,0 +1,908 @@
+# ; -*- mode: sh;-*-
+# vim:ft=bash ts=2 sw=2 sts=2 et fenc=utf-8
+
+# check if in $PATH
+# if type apt >/dev/null 2>&1 ; then
+
+# prefer clang
+# # Fact is that I will always forget this and it comes with strange issue, so comment this right now.
+# if type clang >/dev/null 2>&1 ; then
+# 	export CC='clang'
+# fi
+
+# Export cache path for clangd
+export XDG_CACHE_HOME=$HOME/.cache 
+
+# set up $PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.dotnet:$PATH"
+
+# when there's no emacs-server use which editor, if empty then start a emacs-server
+# or pass -a "" to parameter to emacsclient means the same
+export ALTERNATE_EDITOR=""
+
+# # reset tty
+# stty sane
+
+# alias cp=" cp -i"                          # confirm before overwriting something
+# alias vi='vim --clean'
+alias cd=' cd'
+alias gitu='git add . && git commit && git push'
+alias df=' df -h'                          # human-readable sizes
+alias free=' free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less
+alias vbox="sudo modprobe vboxdrv"
+alias ggrep='git grep  --exclude-standard --max-depth=-1 -e'
+alias grg='rg --no-require-git -e'
+alias ediff="git mergetool -t ediff"
+alias gfind='git ls-tree -r HEAD --name-status'
+alias glast="git --no-pager show --pretty=format:'%h %s (%an)' --name-only"
+alias magit='e -e "(magit-status \"$(pwd)\")"'
+alias dired='e -e "(dired \"$(pwd)\")"'
+alias escript="emacs -q --no-site-file --batch -l"
+alias edrime="rm -rf ~/.emacs.d/rime/luna_pinyin.userdb/LOCK"
+alias gohd="cd /run/media/"
+alias myaria="aria2c -s 10 -x 10 "
+# This is in software way by tuning gamma,won't do the same trick in hardware
+if type xrandr >/dev/null 2>&1; then
+  alias mybright="xrandr --output `xrandr | grep " connected" | cut -f1 -d " "` --brightness"
+fi
+alias ip="curl -i http://ip.cn"
+# sql works now mariadb
+alias msqlc="mariadb-install-db"
+alias msqls="cd '/usr' ; /usr/bin/mysqld_safe --datadir='./data'"
+alias msqlt="cd '/usr/mysql-test' ; perl mysql-test-run.pl"
+alias 2pdf='libreoffice --headless --convert-to pdf'
+alias pacmirrorcn="sudo pacman-mirrors -i -c China -m rank" # This is only useful in manjaro
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+#-H targetsubproject(-H.)  -Btargetdir(-BRelease -> ./build)  -G projectmakefiletarget(-GNinja)  -D prefixettings(-DCMAKE_CXX_COMPILER=clang++)
+alias cmdn='cmake -H. -GNinja -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE'
+alias cmrn='cmake -H. -GNinja -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE'
+alias cmd='cmake -H.  -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE'
+alias cmr='cmake -H.  -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE'
+alias cmb='cmake --build build'
+alias ccj="ln -s ./build/compile_commands.json ./"
+
+if [ "$OSTYPE" = "cygwin" ]; then
+  OS_NAME='CYGWIN'
+elif [ "`uname -s`" = "Darwin" ]; then
+  OS_NAME="Darwin"
+elif grep -q Microsoft /proc/version; then
+  OS_NAME="WSL"
+elif [[ "`uname`" =~ "MINGW" ]]; then
+  OS_NAME="win64"
+else
+  OS_NAME=`uname -r`
+fi
+
+if [[ "$TERM" == "xterm" ]]; then
+  export TERM='screen-256color'
+fi
+
+if type emacs >/dev/null 2>&1; then
+  export EDITOR="emacsclient"         # $EDITOR opens in terminal
+  export VISUAL="emacs"         # $VISUAL opens in GUI mode
+elif type nvim >/dev/null 2>&1; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+elif type vim  >/dev/null 2>&1; then
+  export EDITOR=vim
+  export VISUAL=vim
+elif type vi >/dev/null 2>&1; then
+  export EDITOR=vi
+  export VISUAL=vi
+fi
+
+# #x - archive extractor
+# # usage: x <file>
+# Easy extact
+function x() {
+  if [ -f $1 ] ; then
+	case $1 in
+	  *.tar.xz)    tar xvJf $1    ;;
+	  *.tar.bz2)   tar xvjf $1    ;;
+	  *.tar.gz)    tar xvzf $1    ;;
+	  *.bz2)       bunzip2 $1     ;;
+	  *.rar)       unrar e $1     ;;
+	  *.gz)        gunzip $1      ;;
+	  *.tar)       tar xvf $1     ;;
+	  *.tbz2)      tar xvjf $1    ;;
+	  *.tgz)       tar xvzf $1    ;;
+	  *.apk)       unzip $1       ;;
+	  *.epub)      unzip $1       ;;
+	  *.xpi)       unzip $1       ;;
+	  *.zip)       unzip $1       ;;
+	  *.odt)       unzip $1       ;;
+	  *.war)       unzip $1       ;;
+	  *.jar)       unzip $1       ;;
+	  *.Z)         uncompress $1  ;;
+	  *.7z)        7z x $1        ;;
+	  *)           echo "don't know how to extract '$1'..." ;;
+	esac
+  else
+	echo "'$1' is not a valid file!"
+  fi
+}
+
+# easy compress - archive wrapper
+function compress() {
+  if [ -n "$1" ] ; then
+	FILE=$1
+	case $FILE in
+	  *.tar) shift && tar cf $FILE $* ;;
+	  *.tar.bz2) shift && tar cjf $FILE $* ;;
+	  *.tar.gz) shift && tar czf $FILE $* ;;
+	  *.tgz) shift && tar czf $FILE $* ;;
+	  *.zip) shift && zip $FILE $* ;;
+	  *.rar) shift && rar $FILE $* ;;
+	esac
+  else
+	echo "usage: compress foo.tar.gz ./foo ./bar"
+	# Then foo->foo.zip
+  fi
+}
+
+
+##
+# Automatic setting of $DISPLAY (if not set already)
+# This works for linux - your mileage may vary....
+# The problem is that different types of terminals give
+# different answers to 'who am i'......
+# I have not found a 'universal' method yet
+##
+function get_xserver ()
+{
+  case $TERM in
+	xterm )
+	  XSERVER=$(who am i | awk '{print $NF}' | tr -d ')''(' )
+	  # Ane-Pieter Wieringa suggests the following alternative:
+	  # I_AM=$(who am i)
+	  # SERVER=${I_AM#*(}
+	  # SERVER=${SERVER%*)}
+	  XSERVER=${XSERVER%%:*}
+	  ;;
+	aterm | rxvt)
+	  # find some code that works here.....
+	  ;;
+  esac
+}
+
+if [ -z ${DISPLAY:=""} ]; then
+  get_xserver
+  if [[ -z ${XSERVER}  || ${XSERVER} == $(hostname) ||
+		  ${XSERVER} == "unix" ]]; then
+	DISPLAY=":0.0"        # Display on local host
+  else
+	DISPLAY=${XSERVER}:0.0    # Display on remote host
+  fi
+fi
+
+if type apt >/dev/null 2>&1; then
+  alias yay="apt search"
+  alias upworld="sudo apt update && sudo apt upgrade -y"
+  if type deborphan >/dev/null 2>&1; then
+	alias pacorphan="sudo apt-get remove --purge $(deborphan)"
+  else
+	echo "Please install deborphan"
+  fi
+elif type dnf >/dev/null 2>&1; then
+  alias yay="dnf search"
+  alias upworld="sudo dnf upgrade -y"
+elif type zypper >/dev/null 2>&1; then
+  alias yay="zypper search"
+  alias upworld="sudo zypper refresh && sudo zypper dup"
+elif type pacman >/dev/null 2>&1; then
+  alias pacorphan='sudo pacman -Rns $(pacman -Qtdq)'
+  alias pacover='sudo pacman -S --overwrite' # "path to file to overwrite" + paackagename
+  if !type yay  >/dev/null 2>&1; then
+	alias yay="pacman -Ss"
+	alias upworld="sudo pacman -Syyu --noconfirm"
+  else
+	alias upworld="yay -Syyu --noconfirm"
+  fi
+fi
+alias upgradepip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias upgradepip_old="pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+
+# Color man pages export LESS_TERMCAP_mb=$'\E[01;32m'
+export LESS_TERMCAP_md=$'\E[01;32m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;36m'
+export LESS=-r
+
+[ -f "$HOME/.localshellrc"  ] && . "$HOME/.localshellrc"
+[ -f "$HOME/.zsh/z.sh"  ] && . "$HOME/.zsh/z.sh"
+#       -c     restrict matches to subdirectories of the current directory
+#      -e     echo the best match, don't cd
+#      -h     show a brief help message
+#      -l     list only
+#      -r     match by rank only
+#      -t     match by recent access only
+#      -x     remove the current directory from the datafile
+#            Set $_Z_CMD to change the command name (default z).
+#              Set $_Z_DATA to change the datafile (default $HOME/.z).
+#              Set  $_Z_MAX_SCORE  lower  to  age  entries  out faster (default
+#              9000).
+#              Set $_Z_NO_RESOLVE_SYMLINKS to prevent symlink resolution.
+#              Set $_Z_NO_PROMPT_COMMAND to handle PROMPT_COMMAND/precmd  your-
+#              self.
+#              Set $_Z_EXCLUDE_DIRS to an array of directory trees to  exclude.
+#              Set $_Z_OWNER to allow usage when in 'sudo -s' mode.
+
+# Not own .ssh/config
+function noownssh()
+{
+  sudo chmod 600 ~/.ssh/config
+}
+
+# Own the file
+function iown()
+{
+  sudo chown -R $USER $@
+}
+
+# make file executable
+function iexec()
+{
+  sudo chmod +x $@
+}
+
+#delete
+function del(){
+  export Trashbin="~/.Trash"
+  if [[ ! -d "$Trashbin" ]];then
+	mkdir ~/.Trash
+  fi
+  mv --target-directory=$HOME/.Trash/ $@
+}
+
+# (un)install *.deb package
+function installdeb()
+{
+  sudo dpkg -i $1 && sudo apt install -f
+}
+function uninstalldeb()
+{
+  sudo dpkg -r $1
+}
+
+# finds directory sizes and lists them for the current directory
+function dirsize ()
+{
+  du -shx * .[a-zA-Z0-9_]* . 2> /dev/null | \
+	egrep '^ *[0-9.]*[MG]' | sort -hr > /tmp/list
+  # egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
+  egrep '^ *[0-9.]*M' /tmp/list
+  egrep '^ *[0-9.]*G' /tmp/list
+  rm -rf /tmp/list
+}
+
+# all file size in this dir
+function listsize()
+{
+  du -s -k  * | awk '{printf "%.3f MiB %s\n", $1/1024, $2}' | sort -hr
+}
+
+# size of a file
+function filesize
+{
+  local file=$1
+  if [ "$OS_NAME" = "Darwin" ]; then
+	eval $(stat -s $file) # macos
+	if [ $? -eq 0 ]
+	then
+	  echo $st_size
+	  return 0
+	fi
+  else
+	size=`stat -c%s $file 2>/dev/null`/1024/1024 # linux
+	if [ $? -eq 0 ]
+	then
+	  export FILE_SIZE=$(echo "${size}" | awk '{ split( "B KB MB GB TB PB" , v ); s=1; while( $1>1024 ){ $1/=1024; s++ } printf "%.2f %s", $1, v[s] }')
+	  echo $FILE_SIZE
+	  return 0
+	fi
+  fi
+  return -1
+}
+
+# get current host related info
+function sysinfo()
+{
+  echo -e "\nYou are logged on ${RED}$HOST"
+  echo -e "\nAdditionnal information:$NC " ; uname -a
+  echo -e "\n${RED}Users logged on:$NC " ; w -h
+  echo -e "\n${RED}Current date :$NC " ; date
+  echo -e "\n${RED}Machine stats :$NC " ; uptime
+  echo -e "\n${RED}Memory stats :$NC " ; free
+  echo -e "\n${RED}Local IP Address :$NC" ; myip
+}
+
+# Get IP (call with myip)
+function myip()
+{
+  myip=`curl http://cip.cc`
+  echo "${myip}"
+}
+
+function exwm-start()
+{
+  xhost +
+  xinit
+  setxkbmap -option 'ctrl:no caps'
+  xsetroot -cursor_name left_ptr
+  export VISUAL=emacsclient
+  export EDITOR="$VISUAL"
+  exec dbus-launch --exit-with-session  emacs --eval "(exwm-enable)"
+}
+
+function setproxy()
+{
+  host_ip=127.0.0.1
+  echo Setting proxy for $host_ip
+  if [ $# -eq 1 ] ; then
+	export ALL_PROXY="socks5://$host_ip:$1"
+	# git config http.proxy socks5://$host_ip:$1
+	# git config https.proxy socks5://$host_ip:$1
+	# git config url."http://".insteadOf git://
+  else
+	export ALL_PROXY="socks5://$host_ip:$1"
+	export HTTP_PROXY="http://$host_ip:$2"
+	export HTTPS_PROXY="http://$host_ip:$2"
+	export http_proxy="http://$host_ip:$2"
+	export https_proxy="http://$host_ip:$2"
+	# git config http.proxy http://$host_ip:$2
+	# git config https.proxy http://$host_ip:$2
+	# git config url."http://".insteadOf git://
+  fi
+}
+
+function wsl-proxy()
+{
+  host_ip=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+  # host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
+  echo Setting proxy for $host_ip
+  if [ $# -eq 1 ] ; then
+	export ALL_PROXY="socks5://$host_ip:$1"
+	# git config http.proxy socks5://$host_ip:$1
+	# git config https.proxy socks5://$host_ip:$1
+  else
+	export ALL_PROXY="socks5://$host_ip:$1"
+	export HTTP_PROXY="http://$host_ip:$2"
+	export HTTPS_PROXY="http://$host_ip:$2"
+	export http_proxy="http://$host_ip:$2"
+	export https_proxy="http://$host_ip:$2"
+	# git config http.proxy http://$host_ip:$2
+	# git config https.proxy http://$host_ip:$2
+	# git config url."http://".insteadOf git://
+  fi
+}
+
+# fix wsl interop
+fix_wsl2_interop() {
+  for i in $(pstree -np -s $ | grep -o -E '[0-9]+'); do
+	if [[ -e "/run/WSL/${i}_interop" ]]; then
+	  export WSL_INTEROP=/run/WSL/${i}_interop
+	fi
+  done
+}
+
+function unsetproxy()
+{
+  unset HTTPS_PROXY
+  unset HTTP_PROXY
+  unset ALL_PROXY
+  unset https_proxy
+  unset http_proxy
+  # git config --unset http.proxy
+  # git config --unset https.proxy
+  # git config --unset url."http://".insteadOf
+}
+
+gdbtool () { emacs -nw --eval "(gdb \"gdb --annotate=3 -i=mi $*\")";}
+pdbtool () { emacs -nw --eval "(pdb \"python -m pdb $*\")";}
+
+# run command background
+function mybg()
+{
+  nohup $@ &>/dev/null &
+}
+
+#backup linux system
+function backup_my_system(){
+  echo "HINT: backup file could be mylinux-'date +%Y%m%d-%H%M'.tgz"
+  #my home directory is already backed up, so I don't need archive it now
+  echo "BACKUP: tar zcvpf mylinux.tgz --exclude=/proc/* --exclude=/lost+found --exclude='mylinux.tgz' --exclude=/mnt/* --exclude=/home/cb/* --exclude=/sys/* /"
+  echo "RESTORE: 'tar zxvpf mylinux.tgz -C /' to restore system"
+  echo "http://i.linuxtoy.org/docs/guide/ch31s11.html for grub fstab xorg.conf"
+}
+
+# This function is roughly the same as 'killall' on linux
+# but has no equivalent (that I know of) on Solaris
+function killps()   # kill by process name
+{
+  local pid pname sig="-TERM"   # default signal
+  if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+	echo "Usage: killps [-SIGNAL] pattern"
+	return;
+  fi
+  if [ $# = 2 ]; then sig=$1 ; fi
+  for pid in $(my_ps| awk '!/awk/ && $0~pat { print $1 }' pat=${!#} ) ; do
+	pname=$(my_ps | awk '$1~var { print $5 }' var=$pid )
+	if ask "Kill process $pid <$pname> with signal $sig?"
+	then kill $sig $pid
+	fi
+  done
+}
+
+function get_logic_cpu_cores()
+{
+  # return logic cpu core -1 for build
+  expr `cat /proc/cpuinfo| grep "processor"| wc -l` - 1
+}
+
+# swap 2 filenames around
+function swap()
+{
+  local TMPFILE=tmp.$$
+  mv "$1" $TMPFILE
+  mv "$2" "$1"
+  mv $TMPFILE "$2"
+}
+
+# both $1 and $2 are absolute paths beginning with /
+# returns relative path to $2/$target from $1/$source
+function relativepath() {
+  local source=$1
+  local target=$2
+
+  common_part=$source # for now
+  result="" # for now
+
+  while [[ "${target#$common_part}" == "${target}" ]]; do
+	# no match, means that candidate common part is not correct
+	# go up one level (reduce common part)
+	common_part="$(dirname $common_part)"
+	# and record that we went back, with correct / handling
+	if [[ -z $result ]]; then
+	  result=".."
+	else
+	  result="../$result"
+	fi
+  done
+
+  if [ "$common_part" = "/" ]; then
+	# special case for root (no common path)
+	result="$result/"
+  fi
+
+  # since we now have identified the common part,
+  # compute the non-common part
+  forward_part="${target#$common_part}"
+
+  # and now stick all parts together
+  if [[ -n $result ]] && [[ -n $forward_part ]]; then
+	result="$result$forward_part"
+  elif [[ -n $forward_part ]]; then
+	# extra slash removal
+	result="${forward_part:1}"
+  fi
+
+  echo $result
+}
+
+function relativepwd() {
+  relativepath $PWD $1
+}
+
+# xclip has some problem with my emacs, so I use xsel for everything
+function gclip() {
+  if [ "$OS_NAME" = "CYGWIN" ]; then
+	cat /dev/clipboard
+  elif [ "$OS_NAME" = "Darwin" ]; then
+	pbpaste $@;
+  elif type powershell.exe >/dev/null 2>&1; then
+	powershell.exe -command Get-Clipboard
+  elif type xsel >/dev/null 2>&1; then
+	xsel -ob $@;
+  elif type xclip >/dev/null 2>&1; then
+	xclip -o $@;
+  else
+	echo "Neither xsel or xclip is installed!"
+  fi
+}
+
+function pclip() {
+  if [ "$OS_NAME" = "CYGWIN" ]; then
+	# https://stackoverflow.com/questions/29501860/how-can-bash-read-from-piped-input-or-else-from-the-command-line-argument
+	echo -n $(cat) >> /dev/clipboard
+  elif [ "$OS_NAME" = "Darwin" ]; then
+	pbcopy $@;
+  elif type clip.exe >/dev/null 2>&1; then
+	# Linux sub-system on Windows 10
+	clip.exe $@
+  elif type xsel >/dev/null 2>&1; then
+	xsel -ib $@;
+  elif type xclip >/dev/null 2>&1; then
+	xclip -selection c $@;
+  else
+	echo "Neither xsel or xclip is installed!"
+  fi
+}
+
+function adjustclock()
+{
+  sudo rdate -s time-c.nist.gov
+}
+
+function cdroot
+{
+  cd $(git rev-parse --show-toplevel)
+}
+
+function fef  () {
+  if [ -z "$1" ]; then
+	echo "Usage: fef file-extension PATTERN"
+	echo "Find file containing PATTERN wiht file-extension"
+	echo "Example: fef scss sup"
+  else
+	if type fzf >/dev/null 2>&1; then
+	  find .  -type f \( -path .fseventsd -path .svn -o -path .git -o -path .hg -o -path .sass-cache -o -path node_modules -o -path .cache \) -prune -o -name "$1" -exec grep -l "$2" {} \; | fzf | sed -e "s%^ *\([a-z0-9A-Z_.\/-]*\).*%\1%"|tr -d "\n" | pclip
+	else
+	  echo "Fall back to non fzf version"
+	  find .  -type f \( -path .fseventsd -path .svn -o -path .git -o -path .hg -o -path .sass-cache -o -path node_modules -o -path .cache \) -prune -o -name "$1" -exec grep -l "$2" {} \;
+	fi
+  fi
+}
+
+function woman()
+{
+  if type emacs >/dev/null 2>&1; then
+	emacs -nw --eval "(woman \"$1\")"
+  elif [ "$OS_NAME" = "Darwin" ]; then
+	$HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -nw --eval "(woman \"$1\")"
+  else
+	man "$1"
+	echo "Please Install emacs."
+  fi
+}
+
+# if there's no argument then open dired
+function _emnw()
+{
+  if type emacs >/dev/null 2>&1; then
+	TERM=xterm-direct emacs -nw "$@"
+  elif [ "$OS_NAME" = "Darwin" ]; then
+	TERM=xterm-direct $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -t "$@"
+  else
+	echo "Please Install emacs."
+  fi
+}
+
+alias emnw='_emnw'
+
+# if there's no argument then open dired
+function _e()
+{
+  if [[ $# == 0 ]]; then
+	if type emacs >/dev/null 2>&1; then
+	  TERM=xterm-direct emacsclient -t --eval "(setq default-directory \"$PWD\")"
+	elif [ "$OS_NAME" = "Darwin" ]; then
+	  TERM=xterm-direct $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t --eval "(setq default-directory \"$PWD)\")"
+	else
+	  echo "Please Install emacs."
+	fi
+  else
+	if type emacs >/dev/null 2>&1; then
+	  TERM=xterm-direct emacsclient -t "$@"
+	elif [ "$OS_NAME" = "Darwin" ]; then
+	  TERM=xterm-direct  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t "$@"
+	else
+	  echo "Please Install emacs."
+	fi
+  fi
+}
+
+alias e='_e'
+
+# if there's no argument then open dired
+function _ec()
+{
+  # -n means do not to wait client finish edit
+  # so terminal won't ba captured
+  if [[ $# == 0 ]]; then
+	if type emacs >/dev/null 2>&1; then
+	  emacsclient -c -n -e "(cd \"$PWD\")"
+	elif [ "$OS_NAME" = "Darwin" ]; then
+	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n -e "(cd \"$PWD\")"
+	else
+	  echo "Please Install emacs."
+	fi
+  else
+	if type emacs >/dev/null 2>&1; then
+	  emacsclient -c -n "$@"
+	elif [ "$OS_NAME" = "Darwin" ]; then
+	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n "$@"
+	else
+	  echo "Please Install emacs."
+	fi
+  fi
+}
+
+alias ec='_ec'
+
+function _edc
+{
+  mybg emacs --dump-file ~/.emacs.d/emacs.pdmp "$@"
+}
+alias edc="_edc"
+
+function _ednw
+{
+  # TODO: when git bash gets more mature,remove this
+  if [ "$OS_NAME" = "win64" ]; then
+	winpty emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@"
+  else 
+	TERM=xterm-direct emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@"
+  fi
+}
+alias ednw="_ednw"
+
+function dbusemacs(){
+  eval $(dbus-launch)
+  export DBUS_SESSION_BUS_ADDRESS
+  mybg emacs
+}
+
+function update_vim()
+{
+  git clone --depth=1 https://gitee.com/mirrors/vim.git ~/.myvim
+  cd ~/.myvim
+  ./configure --with-features=huge \
+   --enable-multibyte \
+   --enable-rubyinterp=dynamic \
+   --enable-luainterp=dynamic \
+   --enable-pythoninterp=dynamic \
+   --enable-python3interp=dynamic \
+   --enable-tclinterp=dynamic \
+   --enable-perlinterp=dynamic \
+   --enable-gui=false \
+   --enable-cscope  \
+   --enable-fontset \
+   --enable-largefile \
+   --disable-netbeans \
+   --with-compiledby="passky|cmpassky@outlook.com" \
+   CFLAGS="-O3 -march=native" \
+   --prefix=$HOME/.local
+
+  # -flto=2 is not support everywhere
+
+  make -j `get_logic_cpu_cores`
+  make install
+  cd -
+}
+
+function update_emacs()
+{
+  # dep: libjansson-dev libgnutls28-dev texinfo
+  # texinfo might be makeinfo in other distribution
+  git clone --depth=1 https://gitee.com/mirrors/emacs.git ~/.myemacs
+  cd ~/.myemacs
+  ./autogen.sh
+  ./configure --without-x --without-sound --prefix=$HOME/.local --with-gnutls=ifavailable --program-transform-name='s/^ctags$/ctags.emacs/' --enable-link-time-optimization  CFLAGS="-O3 -march=native"
+
+  make -j `get_logic_cpu_cores`
+  make install
+  cd -
+}
+
+function update_gui_emacs()
+{
+  # dep: libjansson-dev libgnutls28-dev texinfo  libgif-dev libgtk-3-dev libjpeg-dev libxpm-dev 
+  git clone --depth=1 https://gitee.com/mirrors/emacs.git ~/.myemacs
+  cd ~/.myemacs
+  ./autogen.sh
+  ./configure --prefix=$HOME/.local --with-xft=ifavailable --with-mailutils=ifavailable -with-xpm=ifavailable --with-jpeg=ifavailable --with-gif=ifavailable --with-tiff=ifavailable --with-png=ifavailable  --with-json=ifavailable --with-gnutls=ifavailable --program-transform-name='s/^ctags$/ctags.emacs/' --enable-link-time-optimization  CFLAGS="-O3 -march=native"
+
+  make -j `get_logic_cpu_cores`
+  make install
+  cd -
+}
+
+function up_python3()
+{
+  ## Reconf:
+  # root@debdev ~# update-alternatives --config python
+
+  # Especially for distro with history reason not to direct python3 to default python
+  sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+  # and why will debian point pip to pip3 by default? 
+  # Can we just use script lang as script lang instead of doing something big?
+  # It's package manage system is even worse than racket!
+  sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+}
+
+function update_python()
+{
+  # --enable-optimizations
+  mkdir ~/mypython
+  cd ~/mypython
+  wget https://mirrors.huaweicloud.com/python/3.8.2/Python-3.8.2.tar.xz
+  tar -xf Python-3.8.2.tar.xz
+  cd Python-3.8.2
+  ./configure  \
+   --prefix=$HOME/.local \
+   --with-ssl
+
+  make -j `get_logic_cpu_cores`
+  make install
+  pip3.8 install --upgrade pip
+}
+
+function update_nodejs()
+{
+  mkdir ~/mynodejs
+  cd ~/.mynodejs
+  wget https://mirrors.huaweicloud.com/nodejs/latest-erbium/node-v12.18.3.tar.xz
+  tar -xf node-v12.18.3.tar.xz
+  cd node-v12.18.3
+  ./configure  \
+   --prefix=$HOME/.local
+
+  make -j `get_logic_cpu_cores`
+  make install
+}
+
+function update_gcc()
+{
+  #--enable-multilib
+  #--disable-multilib
+  #--enable-bootstrap
+  #--enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64
+  # gcc11 need a compiler with c++11 support that's gcc 4.9
+  if [[ -s ~/.__MYgcc ]]; then
+	echo "type 1 to rebuild"
+	read rep
+	if [[ ${rep} == '1' ]]; then
+	  cd ~/.__MYgcc
+	  cd gcc-8.2.0
+	  make uninstall
+	  cd ..
+	  rm * -rf
+	  wget https://mirrors.huaweicloud.com/gnu/gcc/gcc-8.2.0/gcc-8.2.0.tar.xz
+	  tar -xf gcc-8.2.0.tar.xz
+	  cd gcc-8.2.0
+	  ./contrib/download_prerequisites
+	  ./configure  \
+	   --prefix=$HOME/.local \
+	   --enable-shared --enable-threads=posix \
+	   --enable-host-shared \
+	   --enable-languages=c,c++ \
+	   --disable-libunwind-exceptions \
+	   --enable-bootstrap \
+	   --disable-multilib \
+	   --enable-checking=release
+
+	  make -j `get_logic_cpu_cores`
+	  make install
+	fi
+  else
+	mkdir ~/.__MYgcc
+	cd ~/.__MYgcc
+	wget https://mirrors.huaweicloud.com/gnu/gcc/gcc-8.2.0/gcc-8.2.0.tar.xz
+	tar -xf gcc-8.2.0.tar.xz
+	cd gcc-8.2.0
+	./contrib/download_prerequisites
+	./configure  \
+	 --prefix=$HOME/.local \
+	 --enable-languages=c,c++ \
+	 --enable-host-shared \
+	 --enable-shared --enable-threads=posix \
+	 --disable-libunwind-exceptions \
+	 --disable-multilib \
+	 --enable-bootstrap \
+	 --enable-checking=release
+
+	make -j `get_logic_cpu_cores`
+	make install
+  fi
+
+  # after compiler newer version of gcc
+  export LD_LIBRARY_PATH=$HOME/.local/lib64
+  export LIBRARY_PATH=$HOME/.local/lib64
+  export C_INCLUDE_PATH=$HOME/.local/include
+  export CPLUS_INCLUDE_PATH=$HOME/.local/include
+}
+
+function update_tmux()
+{
+  # Dependency: libevent,bison
+  # CPPFLAGS=-O3 -Ofast
+  git clone --depth=1 https://gitee.com/mirrors/tmux.git ~/.__MYtmux
+  cd ~/.__MYtmux
+  sh autogen.sh
+  ./configure --prefix=$HOME/.local
+
+  make -j `get_logic_cpu_cores`
+  make install
+  cd -
+}
+
+function update_git()
+{
+  #CPPFLAGS=-O3 -Ofast
+  if [ -s $HOME/.git ]; then
+	cd ~/.__MYgit
+	make uninstall
+	make distclean
+	git pull origin master
+	./configure --prefix=$HOME/.local
+
+	make -j `get_logic_cpu_cores`
+	cp ./git ~/.local/bin/ -f
+	cd -
+  else
+	git clone --depth=1 https://gitee.com/mirrors/git.git ~/.__MYgit
+	cd ~/.__MYgit
+	./configure --prefix=$HOME/.local
+
+	make -j `get_logic_cpu_cores`
+	cp ./git ~/.local/bin/ -f
+	cd -
+  fi
+}
+
+
+function update_nvim()
+{
+  # dep: libtool-bin pkg-config
+  git clone https://gitee.com/mirrors/neovim.git ~/.mynvim
+  cd ~/.mynvim
+  make CMAKE_EXTRA_FLAGS=-DCMAKE_INSTALL_PREFIX=$HOME/.local
+  make install
+}
+
+function get_clang()
+{
+  curl -s https://raw.githubusercontent.com/chromium/chromium/master/tools/clang/scripts/update.py | python - --output-dir=~/Stable
+  cd /usr/local/bin
+  sudo ln -s ~/Stable/bin/{clang,clang++,lld} .
+  sudo ln -s lld ld
+}
+
+
+function get_racket_langserver ()
+{
+  if type racket >/dev/null 2>&1 ; then
+	raco pkg install racket-langserver
+  else
+	echo "Please install racket at"
+	echo "https://download.racket-lang.org/"
+  fi
+}
+
+function run_baidunetdisk()
+{
+  # This is a electron app,may find a better way later.
+  HOME="${HOME:-/tmp}/.local/share/baidu" mybg /usr/lib/baidunetdisk/baidunetdisk "$@"
+}
+
+function set_wireshark ()
+{
+  # set up permission
+  # Seems like pacman did not handle it well.
+  sudo groupadd wireshark
+  sudo gpasswd -a `whoami` wireshark
+}
+

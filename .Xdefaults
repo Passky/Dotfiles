@@ -1,0 +1,49 @@
+! This is old style configration file, only will be loaded when there's no .Xresources,
+! But in wsl,just be old :)
+XTerm*background:  #000000
+XTerm*foreground:  #9f9f9f
+XTerm*color0:      #000000
+XTerm*color1:      #9e1828
+XTerm*color2:      #aece92
+XTerm*color3:      #968a38
+XTerm*color4:      #414171
+XTerm*color5:      #963c59
+XTerm*color6:      #418179
+XTerm*color7:      #bebebe
+XTerm*color8:      #666666
+XTerm*color9:      #cf6171
+XTerm*color10:     #c5f779
+XTerm*color11:     #fff796
+XTerm*color12:     #4186be
+XTerm*color13:     #cf9ebe
+XTerm*color14:     #71bebe
+XTerm*color15:     #ffffff
+
+! keyboard
+XTerm*vt100.translations: #override \
+    Shift Ctrl <Key> C: copy-selection(CLIPBOARD) \n\
+    Shift Ctrl <Key> V: insert-selection(CLIPBOARD)
+
+! fix alt key input
+xterm*eightBitInput: false
+xterm*altSendsEscape: true
+XTerm.vt100.metaSendsEscape: true
+
+! Fix the backspace key 
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+
+! font and locale
+! set locale to false to force to use utf-8
+xterm*locale: false
+xterm.utf8: true
+
+! font
+XTerm*font: -misc-fixed-medium-r-normal-*-18-120-100-100-c-90-iso10646-1
+XTerm*wideFont: -misc-fixed-medium-r-normal-*-18-120-100-100-c-180-iso10646-1
+xterm*fontMenu*fontdefault*Label: Default
+xterm*faceName:AR PL Uming CN
+xterm*faceSize:10
+XTerm*scrollbar: false
+xterm*xftAntialias: true
+XTerm*preeditType: Root

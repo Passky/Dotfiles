@@ -1,0 +1,23 @@
+* My note of my first react app
+** Set up dependency
+Do not use
+==sudo npm install -g create-react-app==
+ensure npx(comes with npm 5.2+) always use the newest one
+#+begin_src shell
+npx create-react-app my-app --template [template-name] # check it by search in cra-template-*
+cd my-app
+npm start # start the app in localhost:3000
+#+end_src
+
+**
+**
+**
+**
+**
+**
+**
+**
+**
+** Strange problem
+- use multi route in newer React version will throw error like this ==props.history is undefined==
+https://stackoverflow.com/questions/42992911/react-router-only-one-child/43690296#43690296

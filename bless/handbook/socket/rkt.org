@@ -1,0 +1,57 @@
+#+begin_src racket
+#lang racket
+
+;;; Commentary:
+;; Trying to port a socket work from https://github.com/ahyatt/emacs-websocket
+;; This implements RFC 6455, which can be found at
+;; http://tools.ietf.org/html/rfc6455.
+
+;;; This is from upstream:
+;;   A websocket structure.
+;; This follows the W3C Websocket API, except translated to racket
+;; idioms.  The API is implemented in both the websocket struct and
+;; additional methods.  Due to how defstruct slots are accessed, all
+;; API methods are prefixed with \"websocket-\" and take a websocket
+;; as an argument, so the distrinction between the struct API and
+;; the additional helper APIs are not visible to the caller.
+;; A websocket struct is created with `websocket-open'.
+;; `ready-state' contains one of `connecting', `open', or
+;; `closed', depending on the state of the websocket.
+;; The W3C API \"bufferedAmount\" call is not currently implemented,
+;; since there is no racket API to get the buffered amount from the
+;; subprocess.  There may, in fact, be output data buffered,
+;; however, when the `on-message' or `on-close' callbacks are
+;; called.
+;; `on-open', `on-message', `on-close', and `on-error' are described
+;; in `websocket-open'.
+
+
+(requiren net/base64)
+
+(mes! "shit")
+(struct pas/websocket
+  ([ready-state 'connecting]
+   client-data
+   on-open
+   on-message
+   on-close
+   on-error
+   negotiated-protocols
+   negotiated-extensions
+   [server-p nil]
+   
+   ;; Other data - clients should not have to access this.
+   [url nil]
+   [protocols nil]
+   [conn nil]
+   ;; Only populated for servers, this is the server connection.
+   server-conn
+   accept-string
+   [inflight-input nil])
+  )
+(def)
+
+;; use this to print
+(define pas/debug? nil)
+
+#+end_src

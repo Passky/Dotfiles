@@ -1,0 +1,10 @@
+# mode:conf-unix-mode
+[wsl2]
+memory=1GB
+swap=12GB
+localhostForwarding=true
+
+[wsl1]
+memory=1GB
+swap=12GB
+localhostForwarding=true

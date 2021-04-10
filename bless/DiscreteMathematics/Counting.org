@@ -1,0 +1,19 @@
+* This was renote at
+SCHEDULED: <2020-11-24 Tue>
+
+** solutions
+
+*** X1 + X2 + X3 < 11 while X{1,2,3} is a nonnegtive integer
+大概是高中的隔板法
+- answer:78
+
+*** a set {a,b,c,d,e,f} ,get bcf's next order [set means no repeat]
+generate permutation **non ordered**
+- answer : bcf -> bde
+  because it is non-ordered
+**** for example
+abc->abd->abe->abf-> **acd** *(or acb is same as abc)* -> ace
+*** 齐次线性方程组解
+see 课本
+*** 非齐次线性递归解
+https://www.slader.com/discussion/question/what-is-the-general-form-of-the-particular-solution-guaranteed-to-exist-of-the-linear-nonhomogeneous/

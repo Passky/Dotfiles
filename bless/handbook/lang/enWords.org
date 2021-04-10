@@ -1,0 +1,26 @@
+* Words List
+#+caption: words
+| words                 | attr    | meaning           |
+| compelled             | adj     | forced            |
+| compulsion            | n       | be forced         |
+| degrade(..ding)       | v(adj)  | shame on sb.      |
+| abolish               | v       | cancel            |
+| indication            | v       | show              |
+| adverse(..ity)        | adj\n   | bad  ...          |
+| revenue               | n       | money             |
+| polar(ize)            | adj(v)  | extremes opposite |
+| coincide   with       | v       | the same          |
+| laborer               | n       | struggle worker   |
+| industrial            |         |                   |
+| esteem                | v       | admire            |
+| correlate             | adj     | relation          |
+| autonomy              | n       | self-control      |
+| precision             |         |                   |
+| motivated             |         |                   |
+| foster                |         | 促进,增长         |
+| outsource to universe | shatter | undermine         |
+| 削弱->compromise      | erode   | erode             |
+|                       |         |                   |
+|-----------------------+---------+-------------------|
+* grammar focus
+register

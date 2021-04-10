@@ -1,0 +1,132 @@
+* Pre Story
+This is first version of my Interpreter of simple calcuate
+Heavily use pattern match, see "./pcase.org" doc.
+
+* First ver
+Interpreter is pattern match and
+** Simple Binary Tree
+This is first version of adding binary tree together
+#+begin_src emacs-lisp
+(defun tree-sum (exp)
+  "Return the sum of EXP tree."
+  (pcase exp ; pcase is a `macro'
+	(`(,left ,right) ; check if it is a tree
+	(let ((r1 (tree-sum left))
+		  (r2 (tree-sum right)))
+	  (+ r1 r2)))
+	((pred numberp) ; check if is a number
+	 exp)))
+
+(message "%s" (tree-sum '((1 2) (1 (1 2)))))
+#+end_src
+
+#+RESULTS:
+: 7
+** Enhance with opration
+#+begin_src emacs-lisp
+
+(defun tree-sum-with-opration (exp)
+  "Return the sum of EXP tree."
+  (pcase exp ; pcase is a `macro'
+	(`(,opration ,left ,right) ; check if it is a tree
+	 (let ((r1 (tree-sum-with-opration left))
+		   (r2 (tree-sum-with-opration right)))
+	   (pcase opration
+		 ('/ (/ r1 r2))
+		 ('- (- r1 r2))
+		 ('+ (+ r1 r2))
+		 ('* (* r1 r2))
+		 )))
+	(`(,left ,right) ; default oprator
+	 (let ((r1 (tree-sum-with-opration left))
+		   (r2 (tree-sum-with-opration right)))
+	   (+ r1 r2)))
+	((pred numberp) ; check if is a number
+	 exp)))
+
+(defun mit-tree-sum-with-opration (exp)
+  "Return the sum of EXP tree."
+  (pcase exp ; pcase is a `macro'
+	(`(,left ,opration ,right) ; check if it is a tree
+	 (let ((r1 (mit-tree-sum-with-opration left))
+		   (r2 (mit-tree-sum-with-opration right)))
+	   (pcase opration
+		 ('/ (/ r1 r2))
+		 ('- (- r1 r2))
+		 ('+ (+ r1 r2))
+		 ('* (* r1 r2))
+		 )))
+	(`(,left ,right) ; default oprator
+	 (let ((r1 (mit-tree-sum-with-opration left))
+		   (r2 (mit-tree-sum-with-opration right)))
+	   (+ r1 r2)))
+	((pred numberp) ; check if is a number
+	 exp)))
+
+  (message "%s" (tree-sum-with-opration '(* (* 1 2) (* 1 (* 1 2)))))
+#+end_src
+
+#+RESULTS:
+: 4
+** My-little-scheme
+Base env confiration
+#+begin_src emacs-lisp :tangle yes
+  (my-ensure 'cl-lib)
+  (my-ensure 'pcase)
+  ;; define a empty environment
+  (setq my-lc-env '())
+
+  ;; using association list,
+  ;; deprecated in emacs
+  (defun my-lc-insert (dest env)
+    "Bind DEST into ENV."
+    (cons dest env))
+
+  (defun my-lc-reflect (source dest env)
+    "Map SOURCE to DEST in ENV."
+    (cons '(,source ,dest) env))
+
+  (defun my-lc-lookup (dest env)
+    "Look up for DEST in ENV."
+    (cl-loop for dest in env
+             for variable = (car dest)
+             for value = (cdr bind)
+             if (eq dest variable)
+             return va
+             finally return nil))
+  (defun my-lc-int (expression env)
+    "My little scheme execenv,
+  apply EXPRESSTION in ENV."
+    (pcase expression
+      ))
+
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(defmacro lambda (&rest cdr)
+  "Return an anonymous function.
+Under dynamic binding, a call of the form (lambda ARGS DOCSTRING
+INTERACTIVE BODY) is self-quoting; the result of evaluating the
+lambda expression is the expression itself.  Under lexical
+binding, the result is a closure.  Regardless, the result is a
+function, i.e., it may be stored as the function value of a
+symbol, passed to `funcall' or `mapcar', etc.
+
+ARGS should take the same form as an argument list for a `defun'.
+DOCSTRING is an optional documentation string.
+ If present, it should describe how to call the function.
+ But documentation strings are usually not useful in nameless functions.
+INTERACTIVE should be a call to the function `interactive', which see.
+It may also be omitted.
+BODY should be a list of Lisp expressions.
+
+\(fn ARGS [DOCSTRING] [INTERACTIVE] BODY)"
+  (declare (doc-string 2) (indent defun)
+           (debug (&define lambda-list lambda-doc
+                           [&optional ("interactive" interactive)]
+                           def-body)))
+  ;; Note that this definition should not use backquotes; subr.el should not
+  ;; depend on backquote.el.
+  (list 'function (cons 'lambda cdr)))
+#+end_src

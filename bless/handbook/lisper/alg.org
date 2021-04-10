@@ -1,0 +1,73 @@
+* two-sum
+#+begin_src emacs-lisp :tangle yes
+(defun two-sum (target nums i j)
+  (if (= target (+ (aref nums i) (aref nums j)))
+      (vector i j)
+    (if (< j (1- (length nums)))
+        (two-sum target nums i (1+ j))
+      (two-sum target nums (1+ i) (+ i 2)))))
+#+end_src
+
+#+begin_src racket
+  ;; dose not work,may it's any of other scheme implement?
+  (define-syntax (1+ x)
+    (set x (+ 1 x)))
+
+  (define (ts vec n)
+    (let ([l (vector-length vec)])
+      (let rec ([i1 0])
+        (and (< i1 l)
+             (or
+              (let rec2 ([i2 0])
+                (and (< i2 l)
+                     (if (= (+ (vector-ref vec i1)
+                               (vector-ref vec i2))
+                            n)
+                         (list i1 i2)
+                         (rec2 (1+ i2)))))
+              (rec (1+ i1))))))) 
+
+
+  ;; 链接：https://leetcode-cn.com/problems/two-sum/solution/racket-yong-di-gui-dai-ti-xun-huan-by-db-igfc/
+  ;; 用尾递归代替循环
+  (define/contract (two-sum nums target)
+    (-> (listof exact-integer?) exact-integer? (listof exact-integer?))
+
+    (let loop1 ([l1 nums]
+                [i 0])
+      (unless (empty? (cdr l1))
+          (define x (let loop2 ([l2 (cdr l1)]
+                                [j (add1 i)])
+                      (unless (empty? l2)
+                          (let ([a (car l1)]
+                                [b (car l2)])
+                            (if (equal? (+ a b) target)
+                                (list i j)
+                                (loop2 (cdr l2) (add1 j)))))))
+          (if (void? x)
+              (loop1 (cdr l1) (add1 i))
+              x))))
+
+  ;; 用回溯代替多重循环：
+  (define/contract (two-sum nums target)
+    (-> (listof exact-integer?) exact-integer? (listof exact-integer?))
+    (let recur ([lst nums]
+                [res empty]
+                [sz 0]
+                [sum 0]
+                [i 0])
+      (if (= sz 2)
+        (if (= sum target) (reverse res) #f)
+        (let loop ([l lst]
+                   [j i])
+          (let ([n (car l)])
+            (define h (recur (cdr l) (cons j res) (add1 sz) (+ sum n) (add1 j)))
+            (if (list? h)
+                h 
+                (if (empty? (cdr l)) 
+                    #f 
+                    (loop (cdr l) (add1 j)))))))))
+
+#+end_src
+
+* 全排序(permutation)

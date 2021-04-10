@@ -1,0 +1,36 @@
+#+begin_src dot :file myrelation :cmdline -tpdf :exports none :results silent
+
+#+end_src
+[[file:./a]]
+
+* Logic
+
+** propositional logic,predicates quantifiers.
+
+** defination
+
+
+* Algebra
+
+* combination counting
+
+** basic
+
+** pigeonhole principle
+
+** permutation combination
+
+** sequence
+
+
+* Structure
+
+** sets
+
+** function
+
+** relation
+
+** tree
+
+** graph

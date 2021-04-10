@@ -1,0 +1,14 @@
+#+begin_src racket
+
+#lang racket
+(require racket/math)
+
+(define (fizzbuzz? n)
+  (or
+    (= 0 (remainder n 3))
+    (= 0 (remainder n 5))))
+
+; Solution
+(printf "~a" (foldl + 0 (filter fizzbuzz? (range 1000))))
+
+#+end_src

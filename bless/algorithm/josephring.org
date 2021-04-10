@@ -1,0 +1,149 @@
+#+begin_src C :includes <stdio.h>
+  int cir(int n, int m) {
+    int p = 0;
+    for (int i = 2; i <= n; i++) {
+      p = (p + m) % i;
+    }
+    return p + 1;
+  }
+  int main() { printf("%d",cir(3,3)); }
+#+end_src
+
+#+RESULTS:
+: 2
+
+作者：叶影
+来源：知乎
+https://zhuanlan.zhihu.com/p/35487124
+#+begin_src java
+  using System.Collections.Generic;
+
+  public sealed class JosephusSample
+  {
+      private JosephusSample(int total, int maxFlag)
+      {
+          Total = total;
+          MaxFlag = maxFlag;
+      }
+
+      public static JosephusSample CreateInstance(int total, int maxFlag)
+      {
+          //if (total < 1)
+          //{
+          //    throw new ArgumentOutOfRangeException("总数必须大于0");
+          //}
+          //if (maxFlag < 2)
+          //{
+          //    throw new ArgumentException("报数最大值必须大于1");
+          //}
+          return new JosephusSample(total, maxFlag);
+      }
+
+      public int Total { get; }
+
+      public int MaxFlag { get; }
+      // by array
+
+      public IList<int> GetResultByArray()
+      {
+          int[] idArray = new int[Total];
+          for (int i = 0; i < Total; i++)
+              {
+                  idArray[i] = i + 1;
+              }
+          int endIndex = Total - 1;
+          int currentIndex = 0;
+          int flag = 1;
+          int tempId = 0;
+          while (endIndex >= 0)
+              {
+                  if (flag >= MaxFlag)
+                      {
+                          tempId = idArray[currentIndex];
+                          for (int i = currentIndex; i < Total - 1; i++)
+                              {
+                                  idArray[i] = idArray[i + 1];
+                              }
+                          idArray[Total - 1] = tempId;//当前离席者放到数组末尾
+                          flag = 1;
+                          endIndex--;//游戏人数-1
+                          currentIndex--;//下一个报数成员的索引-1，即当前索引值不变
+                      }
+                  else
+                      {
+                          flag++;
+                      }
+                  if (currentIndex == endIndex)
+                      {
+                          currentIndex = 0;
+                      }
+                  else
+                      {
+                          currentIndex++;
+                      }
+              }
+          return idArray;
+      }
+
+      // 隊列模擬法
+      public IList<int> GetResultByQueue()
+      {
+          Queue<int> idQueue = new Queue<int>();
+          for (int i = 1; i <= Total; i++)
+              {
+                  idQueue.Enqueue(i);
+              }
+          List<int> result = new List<int>(Total);
+          int flag = 1;
+          while (idQueue.Count > 0)
+              {
+                  if (flag >= MaxFlag)
+                      {
+                          result.Add(idQueue.Dequeue());//离席
+                          flag = 1;
+                      }
+                  else
+                      {
+                          idQueue.Enqueue(idQueue.Dequeue());//逃过一劫，移到队尾
+                          flag++;
+                      }
+              }
+          return result;
+      }
+
+      public int GetResultByRecursion()
+      {
+          return GetRecursiveResult(Total);
+      }
+
+      private int GetRecursiveResult(int t)
+      {
+          if (t <= 1)
+              {
+                  return 1;
+              }
+          return (GetRecursiveResult(t - 1) + MaxFlag - 1) % t + 1;
+      }
+
+      public int GetResultByFastRecursion()
+      {
+          int result = 1;
+          int delta;
+          for (int t = 2; t <= Total; t++)
+              {
+                  if (result + MaxFlag < t)
+                      {
+                          delta = (t - result) / MaxFlag;
+                          if (delta > Total - t)
+                              {
+                                  delta = Total - t;
+                              }
+                          t = t + delta;
+                          result = result + MaxFlag * delta;
+                      }
+                  result = (result + MaxFlag - 1) % t + 1;
+              }
+          return result;
+      }
+  }
+#+end_src

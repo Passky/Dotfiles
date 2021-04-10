@@ -1,0 +1,73 @@
+
+** C/C++/D
+https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.html
+:var VARIABLE=VALUE
+
+A global C, C++, or D variable named VARIABLE will be declared and initialized with VALUE
+
+Possible types for VARIABLE may be:
+
+int,
+double,
+string or const char*,
+type[]    // type = int, double, string, const char*
+type[][]  // type = int, double, string, const char*
+
+The later type, type[][], is used for variables storing Org tables
+
+The type[] is used for lists or vectors declared in the header.
+:cmdline
+command line arguments to pass to the executable compiled from the code block.
+:flags
+flags to pass to the compiler.
+:main
+can be set to "no" to inhibit wrapping of the code block in a main function call.
+:includes
+(C & C++ only) accepts either a single string name, or a list of names of files to #include in the execution of the code block.
+:import
+(D only) An import statement will be declared in the D source before the source code.
+:defines
+(C & C++ only) just like :includes but for #defines lines at the top of the code.
+:namespaces
+(C++ only) accepts either a single name, or a list of names of namespaces to use. The final format will look like this: using namespace name;
+:libs
+(C & C++ only) useful for linking with a library, may be given -L/path/to/lib and -llibrary instructions.
+** Talking about C/C++
+
+*** bit
+assume a is a int,
+~a 反转
+a|a 或
+a&a 与
+a^a 异或
+*** 返回x,y最大公约数
+使用辗转相除法,不用判断x,y等于0或否.
+#+begin_src C++ :includes <cstdio> :namespace std
+    auto gcd =[](int x,int y)->int{
+        int r;
+        while(y>0) {
+            r=x%y;
+            x=y;
+            y=r;
+        }
+        return x;
+     };
+    printf("%d",gcd(18,12));
+#+end_src
+
+#+RESULTS:
+: 6
+
+*** recursive lambda
+#+begin_src C++ :includes <function>
+  // Could say std::function is a simple warp for function pointer
+  std::function<void(void)> mainLoop = [&mainLoop](void) -> void { return };
+#+end_src
+
+#+RESULTS:
+
+
+
+*** string to int
+since string is a complex construct
+use =std::stoi();=

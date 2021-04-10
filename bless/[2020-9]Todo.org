@@ -1,0 +1,143 @@
+[[https://www.cnblogs.com/Open_Source/archive/2011/07/17/2108747.html#sec-1-1]]
+* Passed
+** Shorterm TODO
+** 2020 [100%]
+*** DONE [#A] 8th weekend
+	CLOSED: [2020-12-28 Mon 23:59] SCHEDULED: <2020-11-09 Mon>
+**** DONE 社团培训
+	 SCHEDULED: <2020-11-14 Sat>
+	- [X] 时间规划
+	- [X] 内容准备
+**** DONE 复习 [100%]
+	 SCHEDULED: <2020-11-05 Thu>
+	- [X] 看一些数据库教程
+	- [X] 数字电路复习
+	- [X] 概率论复习
+
+**** DONE 杂物
+*****  Homework [100%]
+	  SCHEDULED: <2020-11-01 Sun>
+	  - [X] 数电以及实现
+	  - [X] 概率作业以及复习
+	  - [X] 音乐作业补交
+	  - [X] 帮lyk室友安装系统
+***** Shity Things
+	  SCHEDULED: <2020-11-10 Tue>
+	  - [X] 周一下午第三四节课值班
+	  - [X] 新中国建国后分步走的战略有几步？
+** Today's homework
+** DONE 英语作文
+
+   SCHEDULED: <2020-11-17 Tue>
+   See in 批改网,20号结束
+
+
+* Working
+
+** DONE 离散quiz
+CLOSED: [2020-11-24 Tue 18:38] DEADLINE: <2020-11-19 Thu>
+也挺烂 6 points
+
+** DONE 概率期中考
+CLOSED: [2020-11-23 Mon 21:16] DEADLINE: <2020-11-20 Fri>
+我估计是不咋地
+
+** 社团 [0%]
+
+   在Presentation文件夹里
+
+*** TODO [#A] 如何维护电脑?
+	SCHEDULED: <2020-11-21 Sat>
+
+*** TODO [#B] markdown入门
+	SCHEDULED: <2020-11-28 Sat>
+
+*** TODO python guide
+
+Might be ignored.
+
+** DONE HOMEWORK
+   SCHEDULED: <2020-12-12 Sat +1w>
+   :PROPERTIES:
+   :LAST_REPEAT: [2020-12-25 Fri 08:09]
+   :END:
+
+   - State "DONE"       from "TODO"       [2020-12-25 Fri 08:09]
+   - State "DONE"       from "TODO"       [2020-12-25 Fri 08:09]
+   - State "DONE"       from "TODO"       [2020-11-24 Tue 18:38]
+- 9.1 4 6 30 56
+- 9.2 20 22 24 28
+  rational 有理数
+- 9.3 Ex.2(a) 4(a) 14 22 26 32(for only 26)
+- 9.4 26(a)(c) 28(a)(c)
+
+
+
+*** 概率统计
+- 2 5 6 7 12 13 15 21 23 29 31
+
+** TODO 数据库原理的期末作业
+SCHEDULED: <2020-11-22 Sun>
+*** 要求:数据库(不限具体类型),实现一个application(不限限制类型),需要gui交互
+*** 我的思考
+- 不考虑安全问题,性能和robust与否->sqlite,很多语言都自带buildin的方便实现
+- 不浪费太多时间,需要gui交互:
+  - pyqt : pybinding比较简单,但还需要二次打包和编译qt(windows现在没有现成的二进制包)
+  - js: 不用二次打包,方便使用
+敲定为react+js架构实现
+- 如何偷包
+  https://developer.okta.com/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react
+  https://reactdevstation.github.io/2020/04/04/sqllite.html
+
+** 期末复习
+SCHEDULED: <2020-12-14 Mon>
+
+**** 数据库系统概论
+- 人大配套网站有习题
+  https://chinadb.ruc.edu.cn
+- 嗯背
+***** 单章进度记录
+
+
+** TODO 英语六级
+SCHEDULED: <2020-12-09 Wed>
+
+** 看管人直播和大熟肉
+
+*** TODO 八美肉
+SCHEDULED: <2019-05-08 Wed +1d>
+:PROPERTIES:
+
+- State "DONE"       from "TODO"       [2019-05-18 Sat 12:07]
+- State "DONE"       from "TODO"       [2019-05-28 Tue 02:43]
+- State "DONE"       from "TODO"       [2019-06-04 Tue 22:09]
+- State "DONE"       from "TODO"       [2019-07-08 Sat 12:07]
+- State "DONE"       from "TODO"       [2019-07-13 Sat 09:12]
+- State "DONE"       from "TODO"       [2019-07-18 Thu 01:07]
+- State "DONE"       from "TODO"       [2019-07-24 Wed 00:37]
+- State "DONE"       from "TODO"       [2019-08-03 Sat 23:22]
+- State "DONE"       from "TODO"       [2019-09-15 Sun 00:48]
+- State "DONE"       from "TODO"       [2019-11-24 Sun 03:53]
+- State "DONE"       from "TODO"       [2020-02-28 Thu 22:35]
+- State "DONE"       from "TODO"       [2020-03-01 Fri 19:07]
+- State "DONE"       from "TODO"       [2020-03-02 Sat 14:26]
+- State "DONE"       from "TODO"       [2020-03-05 Thu 15:48]
+- State "DONE"       from "TODO"       [2020-03-08 Sun 13:31]
+
+*** TODO tmsk
+SCHEDULED: <2020-05-01 Fri +1w>
+:PROPERTIES:
+
+- State "DONE"       from "TODO"       [2020-02-28 Fri 13:29]
+- State "DONE"       from "TODO"       [2020-03-03 Tue 16:19]
+- State "DONE"       from "TODO"       [2020-03-04 Wed 09:41]
+- State "DONE"       from "TODO"       [2020-03-07 Sat 10:24]
+- State "DONE"       from "TODO"       [2020-03-08 Sun 14:49]
+- State "DONE"       from "TODO"       [2020-05-30 Sat 15:52]
+- State "DONE"       from "TODO"       [2020-08-22 Sat 16:24]
+- State "DONE"       from "TODO"       [2020-09-20 Sun 12:13]
+- State "DONE"       from "TODO"       [2020-11-18 Wed 16:08]
+*** TODO 普通管人
+
+* 概率 矩估计 极大似然
+7,8 公式

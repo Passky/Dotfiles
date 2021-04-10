@@ -1,0 +1,145 @@
+
+** Talking about shell
+
+#+begin_src sh
+cd ~/
+ls -a -l
+# 文件夹不存在则创建
+# if [ ! -d "/data/" ];then
+#   mkdir /data
+# else
+#   echo "文件夹已经存在"
+# fi
+
+# # 文件存在则删除
+# if [ ! -f "/data/filename" ];then
+#   echo "文件不存在"
+# else
+#   rm -f /data/filename
+# fi
+
+# if [ -d "/data/" ];then
+#   echo "文件夹存在"
+# else
+#   echo "文件夹不存在"
+# fi
+
+# if [ -f "/data/filename" ];then
+#   echo "文件存在"
+# else
+#   echo "文件不存在"
+# fi
+
+# 文件比较符
+# -e 判断对象是否存在
+# -d 判断对象是否存在，并且为目录
+# -f 判断对象是否存在，并且为常规文件
+# -L 判断对象是否存在，并且为符号链接
+# -h 判断对象是否存在，并且为软链接
+# -s 判断对象是否存在，并且长度不为0
+# -r 判断对象是否存在，并且可读
+# -w 判断对象是否存在，并且可写
+# -x 判断对象是否存在，并且可执行
+# -O 判断对象是否存在，并且属于当前用户
+# -G 判断对象是否存在，并且属于当前用户组
+# -nt 判断file1是否比file2新  [ "/data/file1" -nt "/data/file2" ]
+# -ot 判断file1是否比file2旧  [ "/data/file1" -ot "/data/file2" ]
+#+end_src
+
+#+RESULTS:
+| total      | 600 |        |        |        |     |    |       |                       |    |                                 |
+| drwx------ |  37 | passky | passky |   4096 | Dec |  4 | 08:19 | 0                     |    |                                 |
+| drwxr-xr-x |   3 | root   | root   |   4096 | Nov | 15 | 09:02 | ..                    |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    189 | Dec |  3 | 12:46 | a.c                   |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   1479 | Nov | 30 | 11:52 | a.cc                  |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     54 | Dec |  3 | 19:30 | a.el                  |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    208 | Dec |  4 | 08:10 | a.go                  |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     86 | Dec |  1 | 19:50 | a.java                |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    401 | Dec |  3 | 21:09 | a.py                  |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |      0 | Nov | 30 | 12:07 | a.sh                  |    |                                 |
+| -rw------- |   1 | passky | passky |     61 | Nov | 27 | 08:22 | .authinfo             |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    136 | Nov | 30 | 12:07 | a.v                   |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     21 | Jul | 11 | 00:57 | .bash_logout          |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     57 | Jul | 11 | 00:57 | .bash_profile         |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     27 | Nov | 15 | 09:11 | .bashrc               | -> | /home/passky/config/.bashrc     |
+| -rw-r--r-- |   1 | passky | passky |    150 | Dec |  3 | 19:07 | b.cc                  |    |                                 |
+| drwx------ |  33 | passky | passky |   4096 | Nov | 27 | 08:19 | .cache                |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    821 | Nov | 15 | 09:06 | .condarc              |    |                                 |
+| drwxr-xr-x |  40 | passky | passky |   4096 | Dec |  2 | 20:46 | .config               |    |                                 |
+| drwxr-xr-x |  13 | passky | passky |   4096 | Dec |  3 | 12:15 | config                |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     55 | Nov | 15 | 09:06 | .ctags                |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   1016 | Nov | 23 | 03:10 | .custom.el            |    |                                 |
+| drwxr-xr-x |   4 | passky | passky |   4096 | Nov | 17 | 00:26 | .deepinwine           |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 26 | 11:02 | Desktop               |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   4855 | Oct | 30 |  2017 | .dir_colors           |    |                                 |
+| drwxr-xr-x |   4 | passky | passky |   4096 | Dec |  3 | 10:27 | Documents             |    |                                 |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Nov | 26 | 20:46 | Downloads             |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     28 | Nov | 15 | 09:11 | .emacs.d              | -> | /home/passky/config/.emacs.d    |
+| -rw-r--r-- |   1 | passky | passky |   1799 | Nov | 30 | 16:03 | fuck.js               |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   2155 | Nov | 15 | 09:06 | .gdbinit              |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |  91309 | Nov | 15 | 09:06 | .gdbinit_backup       |    |                                 |
+| drwxr-xr-x |  13 | passky | passky |   4096 | Nov | 30 | 15:26 | git                   |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     30 | Nov | 15 | 09:11 | .gitconfig            | -> | /home/passky/config/.gitconfig  |
+| drwx------ |   2 | passky | passky |   4096 | Dec |  3 | 23:22 | .git-credential-cache |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     30 | Nov | 15 | 09:11 | .gitignore            | -> | /home/passky/config/.gitignore  |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 25 | 19:00 | .hdl_checker          |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 23 | 21:42 | Homoney               |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   2787 | Nov | 15 | 09:06 | .ideavimrc            |    |                                 |
+| drwxr-xr-x |   5 | passky | passky |   4096 | Nov | 19 | 07:55 | .ipython              |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 20 | 02:07 | .jupyter              |    |                                 |
+| -rw------- |   1 | passky | passky |     91 | Nov | 30 | 16:24 | .lesshst              |    |                                 |
+| drwxr-xr-x |   7 | passky | passky |   4096 | Nov | 22 | 03:02 | .local                |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   1937 | Nov | 21 | 08:04 | .localshellrc         |    |                                 |
+| drwxr-xr-x |   4 | passky | passky |   4096 | Nov | 18 | 03:23 | .m2                   |    |                                 |
+| drwx------ |   5 | passky | passky |   4096 | Nov | 15 | 09:12 | .mozilla              |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 22 | 21:28 | .mplayer              |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 18 | 03:24 | .mume                 |    |                                 |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Nov | 15 | 10:22 | Music                 |    |                                 |
+| drwxr-xr-x |  22 | passky | passky |   4096 | Dec |  3 | 16:36 | .__MYemacs            |    |                                 |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Dec |  1 | 17:36 | News                  |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    118 | Dec |  1 | 17:36 | .newsrc-dribble       |    |                                 |
+| -rw------- |   1 | passky | passky |     19 | Nov | 25 | 02:10 | .node_repl_history    |    |                                 |
+| drwxr-xr-x |   5 | passky | passky |   4096 | Dec |  3 | 12:15 | .npm                  |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    461 | Nov | 15 | 09:06 | .npmrc                |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   1777 | Nov | 18 | 17:33 | out.org               |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 20 | 03:27 | Pictures              |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 15 | 09:11 | .pip                  |    |                                 |
+| drwx------ |   3 | passky | passky |   4096 | Nov | 15 | 09:35 | .pki                  |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 15 | 09:04 | Public                |    |                                 |
+| -rw------- |   1 | passky | passky |      0 | Nov | 20 | 01:42 | .python_history       |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   1165 | Nov | 22 | 20:35 | qr_dASzRa.py          |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    875 | Nov | 15 | 10:08 | .screenrc             |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     28 | Nov | 15 | 09:11 | .shellrc              | -> | /home/passky/config/.shellrc    |
+| -rw-r--r-- |   1 | passky | passky |   2137 | Nov | 30 | 15:54 | shit.js               |    |                                 |
+| -rw------- |   1 | passky | passky |     21 | Nov | 30 | 16:04 | .sqlite_history       |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 15 | 09:11 | .ssh                  |    |                                 |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 26 | 11:06 | .steam                |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     31 | Nov | 26 | 10:58 | .steampath            | -> | /home/passky/.steam/sdk32/steam |
+| lrwxrwxrwx |   1 | passky | passky |     29 | Nov | 26 | 10:58 | .steampid             | -> | /home/passky/.steam/steam.pid   |
+| drwxr-xr-x |   2 | passky | passky |   4096 | Nov | 15 | 09:04 | Templates             |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     30 | Nov | 15 | 09:11 | .tmux.conf            | -> | /home/passky/config/.tmux.conf  |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Nov | 15 | 09:23 | .tooling              |    |                                 |
+| drwxr-xr-x |   6 | passky | passky |   4096 | Nov | 25 | 02:56 | Videos                |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     24 | Nov | 15 | 09:11 | .vim                  | -> | /home/passky/config/.vim        |
+| -rw------- |   1 | passky | passky |  23373 | Dec |  4 | 08:10 | .viminfo              |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     26 | Nov | 15 | 09:11 | .vimrc                | -> | /home/passky/config/.vimrc      |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Nov | 15 | 10:20 | .vscode               |    |                                 |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Nov | 15 | 09:35 | .vscode-oss           |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   2056 | Nov | 15 | 09:06 | .vscodevimrc          |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   2731 | Nov | 15 | 09:06 | .vsvimrc              |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   1214 | Nov | 15 | 09:06 | .wgetrc               |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     52 | Nov | 15 | 09:06 | .wslconfig            |    |                                 |
+| -rwxr-xr-x |   1 | passky | passky |    100 | Oct | 30 |  2017 | .Xclients             |    |                                 |
+| -rwxr-xr-x |   1 | passky | passky |   1521 | Nov | 11 | 07:05 | .xinitrc              |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |     83 | Nov | 15 | 09:06 | .xprofile             |    |                                 |
+| drwxr-xr-x |   3 | passky | passky |   4096 | Nov | 26 | 03:29 | .yarn                 |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |    160 | Nov | 30 | 14:32 | .yarnrc               |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |   3211 | Dec |  4 | 08:05 | .z                    |    |                                 |
+| drwx------ |   2 | passky | passky |   4096 | Nov | 25 | 01:31 | .zcompcache           |    |                                 |
+| -rw-r--r-- |   1 | passky | passky |  47005 | Nov | 25 | 03:13 | .zcompdump            |    |                                 |
+| -r--r--r-- |   1 | passky | passky | 112288 | Dec |  4 | 08:19 | .zcompdump.zwc        |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     24 | Nov | 15 | 09:11 | .zsh                  | -> | /home/passky/config/.zsh        |
+| lrwxrwxrwx |   1 | passky | passky |     27 | Nov | 15 | 09:11 | .zshenv               | -> | /home/passky/config/.zshenv     |
+| -rw------- |   1 | passky | passky |  23049 | Dec |  4 | 08:10 | .zsh_history          |    |                                 |
+| lrwxrwxrwx |   1 | passky | passky |     26 | Nov | 15 | 09:11 | .zshrc                | -> | /home/passky/config/.zshrc      |
+|            |     |        |        |        |     |    |       |                       |    |                                 |

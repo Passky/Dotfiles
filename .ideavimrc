@@ -1,0 +1,95 @@
+let mapleader = "\\"      " 定义<leader>键
+nnoremap <leader>p "+p
+vnoremap <leader>y "+y
+set backspace=2          " 使用回车键正常处理indent,eol,start等
+set whichwrap+=<,>,h,l   " 设置光标键跨行
+set nohlsearch            " 高亮显示搜索结果
+set incsearch           " 开启实时搜索功能
+set ignorecase          " 搜索时大小写不敏感
+set smartcase           " 智能搜索大小写判断
+set wildmenu             " vim自身命名行模式智能补全
+set noeb                 " 关闭错误的提示
+set number               "
+set vb t_vb=             " 去除警报声
+set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
+se so=4                  " 上下滚屏时保留4行
+set surround
+set commentary
+set argtextobj
+inoremap kj <esc>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <space>wj <c-w>j
+nnoremap <space>wk <c-w>k
+nnoremap <space>wh <c-w>h
+nnoremap <space>wl <c-w>l
+nnoremap <space>wq <c-w>q
+nnoremap <space>wo :only<cr>
+noremap <M-u> <C-w>p<C-u><C-w>p
+noremap <M-d> <C-w>p<C-d><C-w>p
+
+" fast save
+noremap <C-S> :w<cr>
+inoremap <C-S> <esc>:w<cr>
+
+" QuickMotion
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
+
+" insert mode as emacs
+inoremap <c-a> <home>
+inoremap <c-e> <end>
+inoremap <c-d> <del>
+
+" faster command mode
+cnoremap <c-h> <left>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoremap <c-l> <right>
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+cnoremap <c-f> <c-d>
+cnoremap <c-b> <left>
+cnoremap <c-d> <del>
+
+"nnoremap fp :action ShowFilePath<CR>
+nnoremap gc :action GotoClass<CR>
+nnoremap ga :action GotoAction<CR>
+nnoremap <space>qf :action ShowPopupMenu<CR>
+nnoremap <space>fm :action RecentFiles<CR>
+nnoremap <space>fs :action FileStructurePopup<CR>
+nnoremap <space>ff :action GotoFile<CR>
+nnoremap <space>qf :action HideAllWindows<CR>
+nnoremap <space>qc :action HideAllWindows<CR>
+
+noremap <space><space>s :source ~/.ideavimrc<CR>
+
+" jump to next error
+nnoremap <space>[ :action GotoNextError<CR>
+" jump to previous error，就近原则
+nnoremap <space>] :action GotoPreviousError<CR>
+
+nnoremap <space>fg :action FindInPath<CR>
+
+nnoremap <space>lr :action RefactoringMenu<CR>
+
+" 本行皆为debug所用
+nnoremap <space>qq :action Run<CR>
+nnoremap <space>qd :action Debug<CR>
+" 继续运行
+nnoremap <space>dc :action Resume<CR>
+" step over
+nnoremap <space>dn :action StepOver<CR>
+" step into
+nnoremap <space>ds :action SmartStepInto<CR>
+" evaluate expression - v
+nnoremap <space>dp :action EvaluateExpression<CR>
+" breakpoints
+nnoremap <space>dl :action ViewBreakpoints<CR>
+nnoremap <space>db :action ToggleLineBreakpoint<CR>
+" mute breakpoints
+nnoremap <space>dm :action XDebugger.MuteBreakpoints<CR>

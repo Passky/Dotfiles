@@ -1,0 +1,148 @@
+{
+    //"coc.preferences.formatOnType": true,
+    "diagnostic.warningSign": "!!",
+    "coc.preferences.enableFloatHighlight": true,
+    "suggest.minTriggerInputLength": 2,
+    "suggest.autoTrigger": "always",
+    "suggest.maxCompleteItemCount": 10,
+    "coc.preferences.bracketEnterImprove": true,
+    "coc.preferences.extensionUpdateCheck": "weekly",
+    "coc.preferences.maxFileSize": "1MB",
+    "coc.preferences.hoverTarget": "float",
+    "coc.source.around.firstMatch": true,
+    "suggest.labelMaxLength": 65, //补全preview字数的上限
+    "coc.preferences.rootPatterns": [
+        ".git/",
+        ".ccls",
+        ".svn/",
+        ".root",
+        ".root/",
+        "compile_commands.json"
+    ],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "json",
+        "c",
+        "cpp",
+        "python"
+    ],
+    //"python.jediEnabled": false,
+    //"python.pythonPath": "python3",
+    // "java.jdt.ls.home": "/usr/bin/jdtls",
+    "java.enabled": true,
+    "rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
+    "go.goplsPath": "/usr/bin/go-langserver",
+    "python.analysis.autoSearchPaths": true,
+    "pyright.typeCheckingMode": "basic",
+    "pyright.useLibraryCodeForTypes": true,
+    "pyright.disableCompletion": false,
+    "python.formatting.provider": "yapf",
+    "clangd.semanticHighlighting": true,
+    "clangd.arguments": [
+        //"--completion-style=bundled"
+        "--background-index",
+        "--suggest-missing-includes",
+        "--cross-file-rename",
+        "--clang-tidy",
+        "--index-file=~/.tmp/.clangd-cache"
+    ],
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "cuda",
+                "objc",
+                "objcpp",
+                "cc",
+                "c++"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                ".ccls-root",
+                "compile_commands.json, .svn/ , .git/",
+                ".root",
+                ".root/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/.ccls-cache"
+                },
+                "client": {
+                    "snippetSupport": true
+                },
+                "highlight": {
+                    "lsRanges": true
+                }
+            }
+        }
+    },
+    "python": {
+        "command": "python3",
+        "args": [
+            "-mpyls",
+            "-vv",
+            "--log-file",
+            "/tmp/lsp_python.log"
+        ],
+        "trace.server": "verbose",
+        "filetypes": [
+            "python"
+        ],
+        "settings": {
+            "pyls": {
+                "enable": true,
+                "trace": {
+                    "server": "verbose"
+                },
+                "commandPath": "",
+                "configurationSources": [
+                    "pycodestyle"
+                ],
+                "plugins": {
+                    "jedi_completion": {
+                        "enabled": true
+                    },
+                    "jedi_hover": {
+                        "enabled": true
+                    },
+                    "jedi_references": {
+                        "enabled": true
+                    },
+                    "jedi_signature_help": {
+                        "enabled": true
+                    },
+                    "jedi_symbols": {
+                        "enabled": true,
+                        "all_scopes": true
+                    },
+                    "mccabe": {
+                        "enabled": true,
+                        "threshold": 15
+                    },
+                    "preload": {
+                        "enabled": true
+                    },
+                    "pycodestyle": {
+                        "enabled": true
+                    },
+                    "pydocstyle": {
+                        "enabled": false,
+                        "match": "(?!test_).*\\.py",
+                        "matchDir": "[^\\.].*"
+                    },
+                    "pyflakes": {
+                        "enabled": true
+                    },
+                    "rope_completion": {
+                        "enabled": true
+                    },
+                    "yapf": {
+                        "enabled": true
+                    }
+                }
+            }
+        }
+    },
+    "python.jediEnabled": false
+}

@@ -1,0 +1,27 @@
+# ; -*- mode: sh;-*-
+# vim:ft=bash ts=2 sw=2 sts=2 et fenc=utf-8
+
+# {{ for newly installed arch-wsl
+# useradd -m -s /bin/bash 用户名 # 创建用户
+# passwd 用户名 # 初始化用户密码
+# /etc/sudoers
+# pacman-key --init/--populate archlinux
+# export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
+# export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+# wslconfig /unregister <DistributionName>
+
+# build LLVM
+# cmake -Hllvm -BRelease -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DLLVM_TARGETS_TO_BUILD=X86 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;lldb;lld;"
+
+# Newly installed debian -> remember to autoremove ibus,or fcitx won't work
+
+## An arch bug
+# export JAVA_HOME=/usr/lib/jvm/default
+
+# # swap ctrl and caplock
+# /usr/bin/setxkbmap -option "ctrl:nocaps"
+
+## opensuse wsl bug
+# sudo systemd-tmpfiles --create
+
+# alias wednw='winpty ednw'

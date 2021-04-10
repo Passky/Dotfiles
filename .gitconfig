@@ -1,0 +1,98 @@
+[user]
+	name = passky
+	email = cmpassky@outlook.com
+
+[github]
+    name = passky
+	user = cmpassky@outlook.com
+
+[gitee]
+    name = passkyw
+	user = cmpassky@outlook.com
+
+[grep]
+	lineNumber = true
+	column = true
+	threads = 0
+	fallbackToNoIndex = true
+	patternType = fixed
+
+[credential]
+	helper = cache --timeout=28800
+
+[core]
+	editor = vim
+	quotepath = false
+	excludesfile = ~/.gitignore
+	#pager = vim -
+	#autocrlf = input # linux/macosx
+	#autocrlf = true # windows
+
+[push]
+	default = simple
+	rebase = true
+	followTags = true
+
+[pull]
+	rebase = true
+
+[merge]
+	tool = vimdiff
+
+# Use ediff as merge tool
+[mergetool.ediff]
+# Usage: git mergetool -t ediff
+	cmd = emacs -nw  --eval \"(setq startup-now t)\" --eval \"(progn (setq ediff-quit-hook 'kill-emacs) (if (file-readable-p \\\"$BASE\\\") (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\") (ediff-merge-files \\\"$LOCAL\\\" \\\"$REMOTE\\\" nil \\\"$MERGED\\\")))\"
+
+[diff]
+	mnemonicprefix = true
+	algorithm = patience
+
+[apely]
+	ignorewhitespace = change
+	whitespace = nowarn
+
+[alias]
+	rbi = rebase -i
+	who = shortlog --summary --numbered --email
+	ls = ls-tree -r HEAD --name-status
+	subup = submodule update --init --recursive
+	last = log -1 HEAD
+	latest = for-each-ref --sort=-committerdate --format="%(committername)@%(refname:short) [%(committerdate:short)] %(contents)"
+	unstage = reset HEAD --
+	unadd = reset HEAD --
+	untrack = rm --cached
+
+[color]
+	ui = true
+
+[color "branch"]
+	current = green bold
+	local = green
+	remote = yellow
+
+[color "diff"]
+	frag = magenta
+	meta = yellow
+	new = green
+	old = red
+	newMoved = cyan
+	oldMoved = blue
+
+[color "status"]
+	added = green reverse
+	changed = yellow reverse
+	untracked = red reverse
+
+[pretty]
+	custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
+	# │        │            │            │             └─ author name
+	# │        │            │            └─ message
+	# │        │            └─ date (relative)
+	# │        └─ decorations (branch, heads or tags)
+	# └─ hash (abbreviated)
+
+; [http]
+; [url "https://github.com.cnpmjs.org/"]
+; 	insteadof = https://github.com/
+	

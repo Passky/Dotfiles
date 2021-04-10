@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-03-29 Mon 02:27 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="passky" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgfd9f2b1">1. Circle in history</a>
+<ul>
+<li><a href="#org1254ebc">1.1. 输入法 例子</a></li>
+<li><a href="#orged8369f">1.2. Intro</a></li>
+<li><a href="#org73611ea">1.3. 什麼是更好的人機交互?</a>
+<ul>
+<li><a href="#orgfdcbd71">1.3.1. The table</a></li>
+<li><a href="#org2c3185d">1.3.2. 離散與連續</a></li>
+</ul>
+</li>
+<li><a href="#org5209fa1">1.4. 迴旋的發展</a></li>
+<li><a href="#org1315374">1.5. OLD STORY</a></li>
+<li><a href="#org3ec1633">1.6. 人机交互的发展历史</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfd9f2b1" class="outline-2">
+<h2 id="orgfd9f2b1"><span class="section-number-2">1</span> Circle in history</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org1254ebc" class="outline-3">
+<h3 id="org1254ebc"><span class="section-number-3">1.1</span> 输入法 例子</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+身边认识的用型码的人
+最早的全拼输入法既没有词语输入也没有整句输入，连简拼、智能组词、自学习词语和自动词频调整都没有，词语只有库里那点，不认识的生僻字只能去翻字典，我相信现在人去用这输入法肯定是会抓狂的，再加上当年中年人拼音教学一直很落后，也无怪乎当年那么多人都要去搞形码输入法了。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orged8369f" class="outline-3">
+<h3 id="orged8369f"><span class="section-number-3">1.2</span> Intro</h3>
+<div class="outline-text-3" id="text-1-2">
+<blockquote>
+<p>
+虽然有时候，这个世界看起来有点走了一个轮回，又回到起点的感觉，老的被淘汰的东西又复活了，但实际上这就是所谓螺旋式的上升，看起来是老技术的复辟，实际上是老技术被后来的技术改造后，升级成了更新更好的技术.
+</p>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-org73611ea" class="outline-3">
+<h3 id="org73611ea"><span class="section-number-3">1.3</span> 什麼是更好的人機交互?</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+人机交互,是一门研究系统与用户之间的交互关系的学问.
+说白了,就是研究怎么用户怎样"更好"地向系统交流信息,
+什么是"更好"?
+</p>
+<ul class="org-ul">
+<li>更精确</li>
+<li><p>
+更快速
+</p>
+
+<p>
+从人机交互这个概念发展以来,就是在这两者间做"我都要"的尝试与取舍,
+之前有同学提到的宁静技术,目标就是在超大量信息流中提供最精准的信息.
+让我们先陈列一下常见交互方式这两个能力的强弱.
+</p></li>
+</ul>
+</div>
+
+
+<div id="outline-container-orgfdcbd71" class="outline-4">
+<h4 id="orgfdcbd71"><span class="section-number-4">1.3.1</span> The table</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> 交互</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">方式</th>
+<th scope="col" class="org-left">精准度</th>
+<th scope="col" class="org-left">速度</th>
+<th scope="col" class="org-left">学习成本</th>
+<th scope="col" class="org-left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">实体输入设备(譬如键盘)</td>
+<td class="org-left">极高</td>
+<td class="org-left">慢</td>
+<td class="org-left">?</td>
+<td class="org-left">擅长应付"离散"的数据</td>
+</tr>
+
+<tr>
+<td class="org-left">鼠标/触摸屏/写画板</td>
+<td class="org-left">高</td>
+<td class="org-left">快</td>
+<td class="org-left">?</td>
+<td class="org-left">适用范围小</td>
+</tr>
+
+<tr>
+<td class="org-left">语音</td>
+<td class="org-left">中等</td>
+<td class="org-left">中等</td>
+<td class="org-left">?</td>
+<td class="org-left">甚至对口音有比较严苛的要求</td>
+</tr>
+
+<tr>
+<td class="org-left">手势</td>
+<td class="org-left">中等</td>
+<td class="org-left">中等</td>
+<td class="org-left">？</td>
+<td class="org-left">需要额外设备支持</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org2c3185d" class="outline-4">
+<h4 id="org2c3185d"><span class="section-number-4">1.3.2</span> 離散與連續</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+这是一个"概念",
+电脑显示器的像素是离散的,但我们会认为鼠标给我们"连续"而精准的2d输入和定位能力,
+比如说图像编辑或者建模,比如说游戏时把射击指针对准别人.
+而文本处理,打开程序(<code>这里要解释为什么</code>),选择窗口
+但"连续"已经被滥用了,比如你希望打开一个文件浏览器
+为什么你需要把指针划过一个曲线,移到耗费了大量系统资源进行布局计算的一个按钮上,而不是简单地通过模糊搜索打开这个文件呢?
+这里起决定性的交互动作反而是离散的鼠标点击,而不是划过的弧线.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5209fa1" class="outline-3">
+<h3 id="org5209fa1"><span class="section-number-3">1.4</span> 迴旋的發展</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+但從歷史的發展角度來看,正是被"濫用"的鼠標戰勝了鍵盤,讓全人來從黑漆漆的終端界面大跨步到可以點點點的圖形交互界面.
+這正證明了鼠標比之鍵盤的強大之處.
+確切地說,這證明了"當時"鼠標確實比鍵盤易用且強大,
+這是當時的終端界面,沒有補全,沒有
+#+end<sub>quote</sub>
+</p>
+
+<p>
+我們接下來就用wps和office的故事來舉個例子吧
+</p>
+
+<p>
+<code>Do we really need this?</code> 首先這對手腕不友好,其次&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1315374" class="outline-3">
+<h3 id="org1315374"><span class="section-number-3">1.5</span> OLD STORY</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+這是dos時代wps和office的樣子,你可能很難想象文字塊進行編輯都需要按下標記開始快捷鍵,然後用方向鍵把光標移到需要的位置,再通過鍵盤快捷鍵來複製粘貼.
+<code>圖片 * 2</code>
+又或者是標記一個標題用的是專用的標記符號,表格還需要繁雜的製表符才能建立,只有通過打印模擬才能看到最後排版的效果.
+而那時候電腦的機能又很爛,那wps被所見即所得的microsoft word擊敗也是理所應當的
+<code>圖片</code>
+</p>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="outline-container-org3ec1633" class="outline-3">
+<h3 id="org3ec1633"><span class="section-number-3">1.6</span> 人机交互的发展历史</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>拼音輸入法 <code>可能不合適</code></li>
+</ul>
+
+
+
+<p>
+<code>來源</code>
+</p>
+<blockquote>
+<p>
+Office 当年为何击败了 DOS 版 WPS 却未能击败同样非所见即所得的 TeX 系？ - 刘一的回答 - 知乎
+<a href="https://www.zhihu.com/question/325608428/answer/727287753">https://www.zhihu.com/question/325608428/answer/727287753</a>
+</p>
+
+<p>
+最后就是计算机性能在这三十年也是突飞猛进的发展，现在Tex已经可以轻易实现实时渲染，使用者可以快速方便的看到效果并进行调整，而当年的计算机性能是无法做到这一切的，全部要靠打印模拟功能才行，当然打印模拟也没有现在这么快这么好用，调整就变成了一场噩梦.
+虽然有时候这个世界看起来有点走了一个轮回，又回到起点的感觉，老的被淘汰的东西又复活了，但实际上这就是所谓螺旋式的上升，看起来是老技术的复辟，实际上是老技术被后来的技术改造后，升级成了更新更好的技术例如，
+很多年轻人可能都会对八九十年代无数人研究汉字编码，对五笔、郑码、认知码这些形码输入法的风靡一时无法理解，他们会好奇为什么这么多人非要研究出一个新的输入法来代替现在已经非常好用的拼音。事实是，我们现在的拼音输入法是从最古老的原始的全拼输入法，经过了智能ABC、微软拼音、紫光拼音、拼音加加等诸多输入法十多年的进化，最终在搜狗输入法完善的。最早的全拼输入法既没有词语输入也没有整句输入，连简拼、智能组词、自学习词语和自动词频调整都没有，词语只有库里那点，不认识的生僻字只能去翻字典，我相信现在人去用这输入法肯定是会抓狂的，再加上当年中年人拼音教学一直很落后，也无怪乎当年那么多人都要去搞形码输入法了。幸好也有无数人没有放弃拼音输入法，拼了命的进行优化调整，很多我们已经极其熟悉的特性也在当年出现并完善，最终在搜狗这里集大成。所以也可以说，我们现在的拼音输入法，和二三十年前的拼音输入法也已经是完全不同的存在了
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: passky</p>
+<p class="date">Created: 2021-03-29 Mon 02:27</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

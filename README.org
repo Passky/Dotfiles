@@ -1,0 +1,172 @@
+** COPYRIGHT
+- This setup is based on @redguardtoo but heavily rebuild,
+
+- I also copy many interesting codes from
+  - @ramsayleung (about eshell) l
+  - lunary-emacs
+  - doom-emacs
+  - https://github.com/seagle0128/.emacs.d
+  - https://github.com/condy0919/.emacs.d
+  and thanks to them all!
+
+- Use dictionary from https://github.com/dolph/dictionary to provide words completion in markdown and org.
+
+*  About use
+** Setup
+bash install.sh
+
+** Strange Problem
+- Your emacs lacks of emoji support? Install symbola! The default fallback font.
+
+*** [Warning] failed to handler mux client connection] :
+This was because non accurate system time.
+To solve:
+sudo timedatectl set-local-rtc true # setup system time
+
+** What you need:
+- git
+- clangd/ccls & node (lsp)
+- GNU find&grep (emacs)
+- python/ctags (vim/Leaderf)
+- fd (optional)
+- aspell/hunspell(if you like wucuo)
+** After install any package
+run =my-re-initialize-package=
+** Some Tricks
+*** vim-like column edit
+- C-v to select region
+  - If to head
+    - I to enter
+    - ESC to apply change
+  - If to end
+    - $ to select end
+    - A to enter
+    - ESC to apply change
+*** vim
+*** Emacs
+**** Builtin git support (vc-git)
+- print git log
+=vc-print-root-log=
+=vc-print-log=
+- change branch
+=vc-revision-other-window=
+**** Binary Edit
+=hexl-mode=
+**** If we are running a Emacs server?
+=(boundp 'server-process)=
+**** Benchmark
+benchmark-init,see init in =init-benchmark.el=
+esup, just run =esup=
+
+**** Colors
+- (purple '("#68217A" "#662277" "magenta"))
+- (blue '("#237AD3" "#2277DD" "brightblack"))
+- (yellow       '("#D7BA7D" "#DDBB77" "brightyellow"))
+- (magenta      '("#C586C0" "#CC88CC" "brightmagenta"))
+- (cyan         '("#85DDFF" "#5FD7FF" "brightcyan"))
+- (red          '("#D16969" "#DD6666" "red"))
+- (orange       '("#DB8E73" "#DD8877" "brightred"))
+- (green        '("#579C4C" "#559944" "green"))
+- (light-green  '("#B5CEA8" "#BBCCAA" "green"))
+- (silver      '("#f4f4f4" "#a8a8a8" "white"))
+- (teal         '("#35CDAF" "#33CCAA" "brightgreen"))
+- (yellow       '("#D7BA7D" "#DDBB77" "brightyellow"))
+- (light-yellow '("#D9DAA2" "#DDDDAA" "brightyellow"))
+- (blue         '("#339CDB" "#3399DD" "brightblue"))
+**** Replace in a ivy search-(ivy occor)
+- use counsel search
+- 'C-c C-o' into ivy-occur
+- 'w' or 'i' or 'C-c C-o" into -(ivy-wgrep-change-to-wgrep-mode)
+- String actions
+- C-c C-c to commit action
+**** Capture the value of shell command
+shell-command-to-string
+*** Where is the fucking font?
+/usr/share/fonts
+
+*** Dos to Unix
+
+**** vim
+- =:set ff=unix=
+
+**** emacs
+;; a interactive function
+- =(set-buffer-file-coding-system)=
+
+**** bsd sed
+- see more detailed in https://emacs-china.org/t/mac-sed-r-n-n-dos-unix/15250/3
+  $'string' is =ANSI-C Quoting= see it at https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html
+  #+begin_src shell
+  $ man sed | head -2
+
+  # SED(1)                    BSD General Commands Manual                   SED(1)
+
+  printf '\r\n' | sed $'s/\r//' | hexdump -C
+  00000000  0a                                                |.|
+  00000001
+  #+end_src
+
+*** delete a line shorter than 3
+
+**** vim
+- =:g/^.\{,3\}$/d=
+
+**** gnu work
+- =set '/..../!d' file=
+- =awk 'length>3' file=
+- awk ‘NF>3’ FS= file
+** emacs lisp as script
+*** This trick cound prevent options comes with the pipe of /usr/bin/env
+#+begin_src shell
+":"; exec  emacs -q --no-site-file --batch -l "$0" "$@" * --- mode: emacs-lisp;
+lexical-binding: t; ---
+
+#+end_src
+*** arguments
+- Detailed error
+
+(setq debug-on-error t)
+Full debug trace
+- command-line-args
+
+Without -args(options) and name of script
+- command-line-args-left
+- (nth 2 command-line-args)  -> name of script
+
+Unknown arguments
+- command-line-functions
+- stdin and out
+
+message->stderr <- deprecated
+read-from-minibuffer or read----
+
+#+begin_src shell
+*!/bin/sh
+":"; exec emacs --script "$0" "$@" * --- mode: emacs-lisp;
+lexical-binding: t; ---
+(defun print-option ()
+  (princ (format "option is %s\n" argi)))
+  (add-to-list 'command-line-functions  *'print-option)
+  (defun print-option-value (option)
+    (princ (format "value of option %s is %s\n" option (pop
+    command-line-args-left))))
+    (add-to-list 'command-switch-alist '("-f" . print-option-value))
+#+end_src
+
+*** EmacsScript的执行顺序
+从上面命令行参数的说明中,大致可以推断出EmacsScript的执行顺序为:
+- Emacs读取并执行EmacsScript中的内容
+- Emacs遍历 command-line-args-left 中的参数,对于command-switch-alist 中的参数调用对应的函数,对于不在command-switch-alist 中的参数依次调用 command-line-functions中的函数
+- 倘若 command-line-functiions 中没有定义函数,或者某参数在依次调用 command-line-functions 中的函数后所有函数都返回nil的话,那么该参数交由emacs本身处理.
+  
+
+** FUCK csdn
+1、必应搜索： https://cn.bing.com/search?q=-csdn.net+%s
+2、谷歌搜索： https://www.google.com/search?q=-csdn.net+%s
+3、百度搜索： https://www.baidu.com/s?wd=%s+-csdn.net
+** Apt add third-party-repo
+https://wiki.debian.org/DebianRepository/UseThirdParty
+    - 把 keyring 下载到 /usr/share/keyrings 下面
+    - 在 sources.list 里用 sign-by 指定给这个第三方源
+    - 在 apt pref 里 pin-priority: 100 以允许第三方源升级自己的包，但不能升级 Debian 的包
+

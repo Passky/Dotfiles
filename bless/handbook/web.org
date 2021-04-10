@@ -1,0 +1,93 @@
+* HTML Components
+** bool value
+** html using css
+<link rel="stylesheet" href="main.css"/>
+** Used by searcn engine
+#+begin_src html
+  <meta name="description" content="The Mozilla Developer Network (MDN) provides
+                                    information about Open Web technologies including HTML, CSS, and APIs for both
+                                    Web sites and HTML5 Apps. It also documents Mozilla products, like Firefox OS.">
+#+end_src
+
+** add icon for this
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" sizes="x*y">
+
+** script js
+async,charset,defer,language,src =path-to-file=
+#+begin_src html
+  <script src="file-to-pth">
+  </script>
+#+end_src
+
+#+begin_src html
+    <script type="text/javascript">
+      document.write("Hello World!")
+  prompt("shit") // give a prompt and get input,python-like a lot
+    </script>
+#+end_src
+** hyperlink
+#+html:
+<p>我创建了一个指向
+<a href="https://www.mozilla.org/zh-CN/">Mozilla 主页</a>
+的超链接。
+</p>
+** An sample
+#+begin_src html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>My CSS experiment</title>
+      <style>
+        h1 {
+        color: blue;
+        background-color: yellow;
+        border: 1px solid black;
+        }
+
+        p {
+        color: red;
+        }
+      </style>
+    </head>
+    <body>
+      <p>这是我的页面</p>
+      <h1>made</h1>
+      <h2>made</h2>
+    </body>
+  </html>
+#+end_src
+
+
+
+* CSS components
+** state
+You can mix them up.
+- tag.classname -> specialize for attr(tag could be empty)
+- tag:state -> for state
+- a b -> tag b in tag a    
+- a+b -> same level in certain order
+
+** import
+@import 'shit.css'
+** builtin css
+Not recommended.
+#+begin_src html
+  <style>
+    h1 {
+    color: blue;
+    background-color: yellow;
+    border: 1px solid black;
+    }
+#+end_src
+
+** Function
+#+begin_src css
+  .box {
+      padding: 10px;
+      width: calc(90% - 30px);
+      background-color: rebeccapurple;
+      color: white;
+  }
+#+end_src
+

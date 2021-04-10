@@ -1,0 +1,100 @@
+
+** Talking about emacs-lisp
+*** cl-lib with defstruct(oop) feature
+elisp provide a =cl-lib= package,
+emulate many of cl-function for example =cl-defun=
+#+begin_src emacs-lisp :file "open.el"
+  (require'cl-lib)
+  (setq alist (list
+               1 2 3 4 5 6))
+  (setq changedlist (cl-remove-if
+                     (lambda (x) (= (% x 2) 0))
+        alist ))
+
+  (dolist (i changedlist)
+    (message "%d " i))
+
+  (cl-defstruct liso (fuck 1)
+               (shit 2) )
+
+  (setq astruct (make-liso :fuck 1 :shit 2))
+  (print (liso-fuck astruct ))
+#+end_src
+
+#+RESULTS:
+: 1
+*** lets take a look on macro!
+macro就是操作列表,
+因为lisp的代码也是列表
+所以可以生成code
+- =`= treat as normal expression and not evaluate it
+- =,= used in =`= expression block to unquote(evaluate) it
+- =',= = =(quote 'foo)=
+- =,@= will splice the following list
+- =(intern `str')= creates a symbol 'shit
+- =(make-symbol )= won't cause variable name conflicts
+
+#+begin_src emacs-lisp :file "open.el"
+  (cl-defmacro my-delay-after-init(my-func &optional (delay 1))
+    "a delay exec `my-func' after init, default `delay' is `1'"
+    `(add-hook 'after-init-hook '(lambda ()
+                                   (run-with-idle-timer ,delay nil ,my-func)
+                                   )))
+
+  (cl-defmacro my-generate-function (name-of-parameter name-of-function)
+    "I don't wanna know"
+    `(defun ,name-of-function (,name-of-parameter)
+    (typeof (aref ',name-of-parameter))
+       ))
+
+(cl-defmacro my-delay-after-mode (op-mode my-func &optional (delay 1))
+  "A delay exec `MY-FUNC' after `OP-MODE', default `DELAY' is 1."
+  (let ((funsymbol (intern (format "%s-mode-hook" op-mode) )))
+    `(add-hook ',funsymbol '(lambda ()
+                              (run-with-idle-timer ,delay nil ,my-func)
+                              ))))
+  (macroexpand '(my-delay-after-mode prog '(lambda () (message "shit"))))
+#+end_src
+
+#+RESULTS:
+| add-hook | prog-mode-hook | '(lambda nil (run-with-idle-timer 1 nil '(lambda nil (message shit)))) |
+*** factorial and mathematics functions
+see =float-sun.el=
+provides =float-pi= and =float-e= and more.
+=expt= = =pow= in c
+#+begin_src emacs-lisp
+      (defun __fact(to-multiply next-gen)
+        (if (or (= to-multiply 1) (= to-multiply 0))
+            next-gen
+          (__fact (- to-multiply 1) (* next-gen to-multiply))
+          )
+        )
+
+      (defun fact (input)
+         (__fact (- input 1) input))
+
+      (defun pow (purpo num)
+        (setq temp purpo)
+        (dotimes (i num)
+          (setq temp (* temp purpo))
+          (message "%d" temp)
+          )
+        purpo)
+
+      (setq outnum 0)
+
+  (let ((i 1))
+    (while ( < i 400)
+      (setq outnum (+ (/ (float (expt 5 i) ) (fact i)) outnum))
+      (cl-incf i)
+      )
+    )
+
+  ;; (setq outnum (+ (/ (float (expt 5 i) ) (fact i)) outnum)))
+
+    (message "%f %f" outnum (expt float-e 5))
+
+#+end_src
+
+#+RESULTS:
+: 147.413159 148.413159
