@@ -15,8 +15,9 @@
 
 ;; In Emacs 27+, package initialization occurs before `user-init-file'
 ;; so ban it
-(setq package-enable-at-startup nil)
-(advice-add #'package--ensure-init-file :override #'ignore) ; DEPRECATED: removed in emacs28
+;; use package-quickstart instead of my own hack,so comment it
+;; (setq package-enable-at-startup nil)
+;; (advice-add #'package--ensure-init-file :override #'ignore) ; DEPRECATED: removed in emacs28
 
 ;; {{ Suppress GUI features
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.

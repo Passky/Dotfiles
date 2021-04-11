@@ -15,7 +15,7 @@
 (dolist (package '(ivy counsel swiper 
 					   company company-capf company-files company-dabbrev company-dabbrev-code company-yasnippet company-prescient prescient yasnippet-snippets yasnippet 
 					   which-key evil evil-matchit evil-collection evil-surround evil-nerd-commenter evil-surround evil-avy bing-dict htmlize
-					   hl-todo buffer-move wgrep hydra pyim pyim-basedict xclip volatile-highlights page-break-lines package elpy ivy-posframe posframe dumb-jump
+					   hl-todo buffer-move wgrep hydra xclip volatile-highlights page-break-lines package elpy ivy-posframe posframe dumb-jump
 					   rainbow-delimiters elpy diff-hl quickrun 
 					   lsp-ui lsp-ui-doc lsp-completion lsp-diagnostics lsp lsp-lens lsp-mode lsp-protocol lsp-hack lsp-java lsp-pyright dap-mode 
 					   rust-mode cargo racket-doc racket-eldoc racket-mode racket-xp-complete racket-xp geiser 

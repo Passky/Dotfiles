@@ -1,10 +1,18 @@
 ;;; commenary
-;;; {{spell checker
+;;; {{ spell checker (requires aspell or hunspell)
 (my-add-package 'wucuo)
 
 ;;;{{ Input method.
 ; 1. For where without pyim,you can use builtin pinyin `chinese-py'
-; 2. You can use builtin japanese input method,which named `japanese'. Just smooth enough
+; 2. You can use builtin japanese input method,which named `japanese', smooth enough.
+
+;; Better rime
+(my-add-package 'rime)
+(after! rime
+  (setq rime-show-candidate 'posframe))
+
+;;; Stop using pyim,since it still needs rime.
+;;; But just keep these configration
 ;; (my-add-package 'pyim)
 ;; (my-add-package 'pyim-basedict)
 ;; (my-add-package 'liberime)
@@ -53,11 +61,6 @@
 ;; 	  (setq pyim-page-tooltip 'posframe)
 ;; 	(setq pyim-page-tooltip 'popup)
 ;; 	))
-
-;; Better rime
-(my-add-package 'rime)
-(after! rime
-  (setq rime-show-candidate 'posframe))
 
 ;;; {{ language learn
 ;; japanese

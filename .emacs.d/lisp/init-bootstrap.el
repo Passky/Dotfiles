@@ -64,8 +64,8 @@ Return the fastest package archive."
 (setq package-quickstart t
 	  package-quickstart-file my-cache-file)
 
-(unless (bound-and-true-p *dump*)
-  (package-initialize))
+;; (unless (bound-and-true-p *dump*)
+;;   (package-initialize))
 
 (defun my-re-init ()
   "For cross big version update."
