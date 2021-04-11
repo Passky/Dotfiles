@@ -128,7 +128,12 @@
 ;; TODO: EAF is great,considering add it.
 ;; {{ builtin doc-view,reading pdf
 (with-eval-after-load 'doc-view
-  (setq doc-view-resolution 200))
+  ;; This requires ghost script or mudraw/pdfdraw(mupdf)
+  (setq doc-view-resolution 250))
+
+;; Latex work space
+(my-add-package 'latex-preview-pane) ; on the fly pdf preview
+;; REVIEW: Use org-latex-impatient in org for quick review
 
 
 
