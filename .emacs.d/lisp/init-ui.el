@@ -18,36 +18,36 @@
 ;; Highlight the current line.
 ;; NOTE: `tty-defined-color-alist' won't be correct until `tty-setup-hook',but that won't get triggerred in gui emacs
 (add-hook 'window-setup-hook #'(lambda ()
-								(when (or (>= (length tty-defined-color-alist) 256) *gui*)
-								  (global-hl-line-mode)
-								  )))
+								 (when (or (>= (length tty-defined-color-alist) 256) *gui*)
+								   (global-hl-line-mode)
+								   )))
 
 (with-eval-after-load 'hl-line
-	;; (set-face-background hl-line-face "grey10")
-	;; (custom-set-faces '(hl-line ((t (:underline nil)))))
+  ;; (set-face-background hl-line-face "grey10")
+  ;; (custom-set-faces '(hl-line ((t (:underline nil)))))
   )
 ;; }}
 
 ;; {{ prettify
 (defcustom my-prettify-symbols-alist
   '(("lambda" . ?λ)
-    ("<-" . ?←)
-    ("->" . ?→)
-    ("->>" . ?↠)
-    ("=>" . ?⇒)
-    ("map" . ?↦)
-    ("/=" . ?≠)
-    ("!=" . ?≠)
-    ("==" . ?≡)
-    ("<=" . ?≤)
-    (">=" . ?≥)
-    ("=<<" . (?= (Br . Bl) ?≪))
-    (">>=" . (?≫ (Br . Bl) ?=))
-    ("<=<" . ?↢)
-    (">=>" . ?↣)
-    ("&&" . ?∧)
-    ("||" . ?∨)
-    ("not" . ?¬))
+	("<-" . ?←)
+	("->" . ?→)
+	("->>" . ?↠)
+	("=>" . ?⇒)
+	("map" . ?↦)
+	("/=" . ?≠)
+	("!=" . ?≠)
+	("==" . ?≡)
+	("<=" . ?≤)
+	(">=" . ?≥)
+	("=<<" . (?= (Br . Bl) ?≪))
+	(">>=" . (?≫ (Br . Bl) ?=))
+	("<=<" . ?↢)
+	(">=>" . ?↣)
+	("&&" . ?∧)
+	("||" . ?∨)
+	("not" . ?¬))
   "Alist of symbol prettifications.
 Nil to use font supports ligatures."
   :group 'my
@@ -148,20 +148,52 @@ Nil to use font supports ligatures."
 				tab-bar-close-button-show nil
 				tab-bar-new-tab-choice "*scratch*"))
 
-(let ((lexical-binding nil))
-  ;; This is a trick
-  (defmacro my-make-select-tab (num)
-	"Damn macro won't eval arguments unless you deal with it."
-	;; HACK: We use dynamic scope there,since eval param in macro is won't work in lexical scope
-	(let* ((number (eval num))
-		   (func-name (intern (format "my-select-tab-%s" number))))
-	  `(defun ,func-name ()
-		 (interactive)
-		 (tab-bar-select-tab ,number))))
+(defun my-make-select-tab (num)
+  "Damn macro won't eval arguments unless you deal with it."
+  (let* ((func-name (format "my-select-tab-%s" num))
+		 (func-body (format
+					 "(defun %s () 
+(interactive)
+						 (tab-bar-select-tab %s))" func-name num)))
+	func-body))
 
-  (dolist (i (range 0 10))
-	(my-make-select-tab i)))
+;; Use this to generate codes below
+;; (dolist (i (range 1 10))
+;;   (eval (my-make-select-tab  i)))
 
+(defun my-select-tab-0 ()
+  (interactive)
+  (tab-bar-select-tab 0))
+(defun my-select-tab-1 ()
+  (interactive)
+  (tab-bar-select-tab 1))
+(defun my-select-tab-2 ()
+  (interactive)
+  (tab-bar-select-tab 2))
+(defun my-select-tab-3 ()
+  (interactive)
+  (tab-bar-select-tab 3))
+(defun my-select-tab-4 ()
+  (interactive)
+  (tab-bar-select-tab 4))
+(defun my-select-tab-5 ()
+  (interactive)
+  (tab-bar-select-tab 5))
+(defun my-select-tab-6 ()
+  (interactive)
+  (tab-bar-select-tab 6))
+(defun my-select-tab-7 ()
+  (interactive)
+  (tab-bar-select-tab 7))
+(defun my-select-tab-8 ()
+  (interactive)
+  (tab-bar-select-tab 8))
+(defun my-select-tab-9 ()
+  (interactive)
+  (tab-bar-select-tab 9))
+(defun my-select-tab-10 ()
+  (interactive)
+  (tab-bar-select-tab 10))
 ;; {{ Highlight matching paren
 (my-delay-after-init #'(lambda () (show-paren-mode t)) 1.5)
 (with-eval-after-load 'paren
@@ -170,8 +202,8 @@ Nil to use font supports ligatures."
   (set-face-background 'show-paren-match nil)
   (set-face-underline 'show-paren-match t)
   (setq show-paren-delay 0.1
-        show-paren-when-point-inside-paren t
-        show-paren-when-point-in-periphery t))
+		show-paren-when-point-inside-paren t
+		show-paren-when-point-in-periphery t))
 
 ;; highlight brackets according to their depth
 (add-hook 'prog-mode 'rainbow-delimiters-mode)
@@ -218,17 +250,13 @@ Nil to use font supports ligatures."
 				 ;; the buffer name; the file name as a tool tip
 				 '(:eval evil-mode-line-tag)
 				 '(:eval (propertize "%b " 'face nil 'help-echo (buffer-file-name)))
-
 				 ;; line and column
 				 "(" ;; '%02' to set to 2 chars at least; prevents flickering
 				 "%02l" "," "%01c"
 				 ") "
-
 				 "["
-
 				 ;; the current major mode for the buffer.
 				 '(:eval mode-name)
-				 
 				 " "
 				 ;; buffer file encoding
 				 '(:eval (let ((sys (coding-system-plist buffer-file-coding-system)))
@@ -237,8 +265,6 @@ Nil to use font supports ligatures."
 							   "UTF-8"
 							 (upcase (symbol-name (plist-get sys :name))))))
 				 " "
-
-
 				 ;; was this buffer modified since the last save?
 				 '(:eval (if (buffer-modified-p)
 							 (propertize "Moded"
@@ -253,7 +279,6 @@ Nil to use font supports ligatures."
 				 '(:eval (when buffer-read-only
 						   (concat ","  (propertize "RO" 'face nil 'help-echo "Buffer is read-only"))))
 				 "] "
-
 				 ;;global-mode-string, org-timer-set-timer in org-mode need this
 				 '(:eval global-mode-string)
 				 " "
