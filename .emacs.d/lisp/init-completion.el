@@ -68,7 +68,7 @@
 		company-require-match nil ; allow input string that do not match candidate words
 		company-minimum-prefix-length 1 ; faster!
 		company-tooltip-align-annotations t
-		company-tooltip-limit 20 ; faster!
+		company-tooltip-limit 8 ; faster!
 		completion-ignore-case t      ; ignore case for `company-capf'
         company-etags-ignore-case t
         company-etags-everywhere t

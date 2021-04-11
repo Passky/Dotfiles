@@ -72,7 +72,7 @@
 ;; 										 ))
 ;; 								  ))
 
-;; (add-hook 'emacs-lisp-mode-hook 'flymake-mode)
+(add-hook 'emacs-lisp-mode-hook 'flymake-start)
 
 (provide 'init-lisp)
 ;;; init-lisp.el ends here

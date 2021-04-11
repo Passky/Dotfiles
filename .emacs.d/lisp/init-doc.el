@@ -132,7 +132,11 @@
   (setq doc-view-resolution 250))
 
 ;; Latex work space
-(my-add-package 'latex-preview-pane) ; on the fly pdf preview
+(my-add-package 'latex-preview-pane) ; on the fly latex build and pdf preview
+;; \resizebox{\textwidth}{!}{...} make width same with screen and resize with height
+(add-hook 'latex-mode-hook '(lambda ()
+							  (flymake-start)
+							  (latex-preview-pane-mode)))
 ;; REVIEW: Use org-latex-impatient in org for quick review
 
 
