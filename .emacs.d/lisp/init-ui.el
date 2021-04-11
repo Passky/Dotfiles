@@ -212,17 +212,16 @@ Nil to use font supports ligatures."
   (setq rainbow-delimiters-max-face-count 3))
 
 ;;{{ Theme && modeline
-;; TODO: We do not have to install this package in emacs-28
-(my-add-package 'modus-themes) ; This can be removed
+;; (my-add-package 'modus-themes)
+(my-add-package 'gruvbox-theme)
 (unless (bound-and-true-p *dump*)
-  ;; (require 'modus-themes) ; This can be removed
   (setq modus-themes-bold-constructs t
 		modus-themes-variable-pitch-ui t
 		modus-themes-variable-pitch-headings t
 		modus-themes-slanted-constructs nil
 		;; modus-themes-mode-line '3d
 		)
-  (load-theme 'modus-vivendi t))
+  (load-theme 'gruvbox-dark-soft t))
 
 (defun my-disable-enabled-theme ()
   "Disable all enabled theme."
