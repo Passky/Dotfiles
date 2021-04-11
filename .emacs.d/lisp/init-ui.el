@@ -307,10 +307,8 @@ Nil to use font supports ligatures."
 (my-delay-after-init #'(lambda () (which-key-mode t)) 0.3)
 (with-eval-after-load 'which-key
   ;; (setq which-key-allow-imprecise-window-fit t) ; performance
-  (setq which-key-separator ":")
-  (my-def-key :keymaps 'override "C-c k" 'which-key-show-top-level)
-  (my-def-key :keymaps 'override "M-c k" 'which-key-show-top-level)
-  (setq which-key-idle-delay 0.5
+  (setq which-key-separator ":"
+		which-key-idle-delay 0.5
 		which-key-add-column-padding 1))
 ;; }}
 
