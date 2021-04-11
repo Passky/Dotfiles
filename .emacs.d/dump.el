@@ -28,7 +28,7 @@
 					   ))
   (require package))
 
-(defconst *dump* t
+(defvar *dump* t
   "Using dumping now.")
 
 ;; dump image
