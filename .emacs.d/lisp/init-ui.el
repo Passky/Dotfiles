@@ -194,6 +194,7 @@ Nil to use font supports ligatures."
 (defun my-select-tab-10 ()
   (interactive)
   (tab-bar-select-tab 10))
+
 ;; {{ Highlight matching paren
 (my-delay-after-init #'(lambda () (show-paren-mode t)) 1.5)
 (with-eval-after-load 'paren
