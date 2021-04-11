@@ -159,7 +159,7 @@ Nil to use font supports ligatures."
 
 ;; Use this to generate codes below
 ;; (dolist (i (range 1 10))
-;;   (eval (my-make-select-tab  i)))
+;;   (eshell-printn (my-make-select-tab  i)))
 
 (defun my-select-tab-0 ()
   (interactive)

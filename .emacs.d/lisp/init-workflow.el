@@ -63,10 +63,9 @@
 (after! find-file-in-project
   (when (executable-find "fd")
 	(setq ffip-use-rust-fd t))
-  (when (executable-find "fdfind")
+  (when (executable-find "fdfind") ; apt/yum/dnf named fd strangely for historical reason
 	(setq ffip-use-rust-fd t)
-	(setq ffip-find-executable (executable-find "fdfind")))
-  )
+	(setq ffip-find-executable (executable-find "fdfind"))))
 
 ;; {{ Auto-save
 (my-add-package 'super-save)
