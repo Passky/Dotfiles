@@ -71,7 +71,7 @@
 ;; 										 (company-capf company-etags)
 ;; 										 ))
 ;; 								  ))
-
+(autoload 'flymake-start "flymake" "Enable flymake" t)
 (add-hook 'emacs-lisp-mode-hook 'flymake-start)
 
 (provide 'init-lisp)
