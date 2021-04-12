@@ -69,7 +69,7 @@
 
 ;; {{ Auto-save
 (my-add-package 'super-save)
-(my-delay-after-init #'(lambda () (super-save-mode t)) 0.7)
+(my-delay-eval #'(lambda () (super-save-mode t)) 0.7)
 
 (with-eval-after-load 'super-save
   (setq super-save-exclude '(".gpg"))

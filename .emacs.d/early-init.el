@@ -21,10 +21,10 @@
 
 ;; {{ Suppress GUI features
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
-; (setq default-frame-alist '((undecorated . t)))
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
+; (setq default-frame-alist '((undecorated . t))) ; title bar,but I am not using dwm or what
 
 ;; full screen
 ; (add-to-list 'default-frame-alist '(fullscreen . maximized))

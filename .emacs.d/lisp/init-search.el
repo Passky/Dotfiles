@@ -46,17 +46,6 @@
 
 
 ;; {{ minibuffer completion
-;; don't gc while minibuffer is active
-(defun my-defer-garbage-collection-h ()
-  (setq gc-cons-threshold most-positive-fixnum))
-
-(defun my-restore-garbage-collection-h ()
-  "Defer it so that commands launched immediately after will enjoy the benefits."
-  (run-at-time
-   1 nil (lambda () (setq gc-cons-threshold best-gc-cons-threshold))))
-
-(add-hook 'minibuffer-setup-hook #'my-defer-garbage-collection-h)
-(add-hook 'minibuffer-exit-hook #'my-restore-garbage-collection-h)
 (setq enable-recursive-minibuffers nil)        ; do not use minibuffer in minibuffer, causes bad bugs
 (setq history-delete-duplicates t)          ; remove repeat history
 ;; TODO: If we remove ivy,then uncomment codes below
@@ -107,7 +96,7 @@
 (my-add-package 'ivy-posframe)
 
 ;; enable ivy-mode 0.5 seconds after init
-(my-delay-after-init #'(lambda ()
+(my-delay-eval #'(lambda ()
 						(ivy-mode 1)
 						(counsel-mode 1)) 0.5)
 

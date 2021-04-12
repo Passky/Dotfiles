@@ -161,7 +161,7 @@ aliases."
        ,@branches)))
 ;;}}
 
-(defun my-delay-after-init (my-func &optional delay)
+(defun my-delay-eval (my-func &optional delay)
   "Delay exec `my-func' after init, default `delay' is `0.7'"
   (let ((delay (or 0.7 delay)))
 	(run-with-idle-timer delay nil my-func)))
@@ -205,6 +205,8 @@ aliases."
 (defun my-force-quit-without-asking()
   "Quit emacs without asking."
   (interactive)
+  (toggle-save-place-globally)
+  (recentf-save-list)
   (let ((proc (frame-parameter (selected-frame) 'client)))
 	(if proc
 		(with-no-warnings

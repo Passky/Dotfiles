@@ -112,22 +112,6 @@
   ;; See `custom-file' for details.
   (load (setq custom-file (expand-file-name (concat my-emacs-d "custom-set-variables.el"))) t t))
 
-(defvar best-gc-cons-threshold
-  16777216
-  "Best default gc threshold value.  Should NOT be too big!")
-
-;; reset gc threshold to better defaults after a timer
-(my-delay-after-init #'(lambda ()
-						(setq gc-cons-threshold best-gc-cons-threshold
-							  read-process-output-max (* 3 1024 1024) ; Increase the amount of data which Emacs reads from the process to enhance lsp performance
-							  gc-cons-percentage 0.1
-							  )
-						) 3)
-
-(put 'erase-buffer 'disabled nil)
-
-
-
 ;; benchmark
 (add-hook 'window-setup-hook #'(lambda () (setq my-init-time (float-time (time-subtract (current-time) before-init-time)))))
 

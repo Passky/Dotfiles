@@ -197,7 +197,7 @@ Nil to use font supports ligatures."
   (tab-bar-select-tab 10))
 
 ;; {{ Highlight matching paren
-(my-delay-after-init #'(lambda () (show-paren-mode t)) 1.5)
+(my-delay-eval #'(lambda () (show-paren-mode t)) 1.5)
 (with-eval-after-load 'paren
   (set-face-foreground 'show-paren-match "red")
   (set-face-bold-p 'show-paren-match t)
@@ -304,7 +304,7 @@ Nil to use font supports ligatures."
 
 ;; {{ which-key-mode
 (my-add-package 'which-key)
-(my-delay-after-init #'(lambda () (which-key-mode t)) 0.3)
+(my-delay-eval #'(lambda () (which-key-mode t)) 0.3)
 (with-eval-after-load 'which-key
   ;; (setq which-key-allow-imprecise-window-fit t) ; performance
   (setq which-key-separator ":"

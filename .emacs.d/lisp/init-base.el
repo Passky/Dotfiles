@@ -153,7 +153,7 @@
    (electric-pair-conservative-inhibit char)))
 
 (setq-default electric-pair-inhibit-predicate 'my-electric-pair-inhibit)
-(my-delay-after-init #'(lambda () (electric-pair-mode t)
+(my-delay-eval #'(lambda () (electric-pair-mode t)
 						 ;; `electric-indent-mode' is enabled by default
 						 ;; (electric-indent-mode -1)
 						 )
@@ -161,12 +161,24 @@
 
 
 ;; {{ Tools
-;; this delete buffer unused for 3 days
-(my-delay-after-init #'(lambda ()
+;; hack for gc
+(defvar my-gc-cons-threshold
+  46777216
+  "46 mb")
+(my-add-package 'gcmh) ; hack for gc
+(my-delay-eval #'(lambda ()
+						 (setq read-process-output-max (* 3 1024 1024) ; Increase the amount of data which Emacs reads from the process to enhance lsp performance
+							   gc-cons-percentage 0.1)
+						 (gcmh-mode)
+						 (setq gcmh-idle-delay 10
+							   gcmh-high-cons-threshold my-gc-cons-threshold)) 3)
+
+;; this delete buffers in buffer list which were unused for 3 days
+(my-delay-eval #'(lambda ()
 						(midnight-mode t)))
 
 ;; recent files
-(my-delay-after-init #'(lambda () (recentf-mode t)) 0.7)
+(my-delay-eval #'(lambda () (recentf-mode t)) 0.7)
 (defun my-recentf ()
   "Open recentf by `completing-read'."
   (interactive)
