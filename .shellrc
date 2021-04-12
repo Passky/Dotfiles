@@ -10,6 +10,8 @@
 # 	export CC='clang'
 # fi
 
+# TODO: set term to xterm-direct when it is widely support
+
 # Export cache path for clangd
 export XDG_CACHE_HOME=$HOME/.cache 
 
@@ -582,9 +584,9 @@ function woman()
 function _emnw()
 {
   if type emacs >/dev/null 2>&1; then
-	TERM=xterm-direct emacs -nw "$@"
+	emacs -nw "$@"
   elif [ "$OS_NAME" = "Darwin" ]; then
-	TERM=xterm-direct $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -t "$@"
+	$HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -nw "$@"
   else
 	echo "Please Install emacs."
   fi
@@ -597,17 +599,17 @@ function _e()
 {
   if [[ $# == 0 ]]; then
 	if type emacs >/dev/null 2>&1; then
-	  TERM=xterm-direct emacsclient -t --eval "(setq default-directory \"$PWD\")"
+	  emacsclient -t --eval "(setq default-directory \"$PWD\")"
 	elif [ "$OS_NAME" = "Darwin" ]; then
-	  TERM=xterm-direct $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t --eval "(setq default-directory \"$PWD)\")"
+	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t --eval "(setq default-directory \"$PWD)\")"
 	else
 	  echo "Please Install emacs."
 	fi
   else
 	if type emacs >/dev/null 2>&1; then
-	  TERM=xterm-direct emacsclient -t "$@"
+	  emacsclient -t "$@"
 	elif [ "$OS_NAME" = "Darwin" ]; then
-	  TERM=xterm-direct  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t "$@"
+	   $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t "$@"
 	else
 	  echo "Please Install emacs."
 	fi
@@ -650,11 +652,11 @@ alias edc="_edc"
 
 function _ednw
 {
-  # TODO: when git bash gets more mature,remove this
   if [ "$OS_NAME" = "win64" ]; then
-	winpty emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@"
+	# winpty emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@" # This will cause path problem
+	_edc
   else 
-	TERM=xterm-direct emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@"
+	emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@"
   fi
 }
 alias ednw="_ednw"
