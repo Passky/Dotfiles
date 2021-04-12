@@ -68,7 +68,7 @@ Return the fastest package archive."
 
 ;; Bug fix
 (when (bound-and-true-p *dump*)
-  (load my-cache-file))
+  (load (concat my-cache-file "c")))
 
 (defun my-re-init ()
   "For cross big version update."
