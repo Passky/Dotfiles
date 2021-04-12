@@ -11,6 +11,9 @@
 # fi
 
 # TODO: set term to xterm-direct when it is widely support
+# Ref for bash completion(What a mess...):
+# https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion-Builtins.html#Programmable-Completion-Builtins
+# https://stackoverflow.com/questions/14513571/how-to-enable-default-file-completion-in-bash
 
 # Export cache path for clangd
 export XDG_CACHE_HOME=$HOME/.cache 
@@ -42,18 +45,19 @@ alias grg='rg --no-require-git -e'
 alias ediff="git mergetool -t ediff"
 alias gfind='git ls-tree -r HEAD --name-status'
 alias glast="git --no-pager show --pretty=format:'%h %s (%an)' --name-only"
-alias magit='e -e "(magit-status \"$(pwd)\")"'
-alias dired='e -e "(dired \"$(pwd)\")"'
+alias magit='emacs-eval magit-status'
+alias dired='emacs-eval dired $(pwd)'
+alias woman='emacs-eval woman'
 alias escript="emacs -q --no-site-file --batch -l"
 alias edrime="rm -rf ~/.emacs.d/rime/luna_pinyin.userdb/LOCK"
 alias gohd="cd /run/media/"
 alias myaria="aria2c -s 10 -x 10 "
-# This is in software way by tuning gamma,won't do the same trick in hardware
+# Tune brightness in software level
 if type xrandr >/dev/null 2>&1; then
   alias mybright="xrandr --output `xrandr | grep " connected" | cut -f1 -d " "` --brightness"
 fi
 alias ip="curl -i http://ip.cn"
-# sql works now mariadb
+# using mariadb
 alias msqlc="mariadb-install-db"
 alias msqls="cd '/usr' ; /usr/bin/mysqld_safe --datadir='./data'"
 alias msqlt="cd '/usr/mysql-test' ; perl mysql-test-run.pl"
@@ -568,12 +572,12 @@ function fef  () {
   fi
 }
 
-function woman()
+function emacs-eval()
 {
   if type emacs >/dev/null 2>&1; then
-	emacs -nw --eval "(woman \"$1\")"
+	emacs -nw --eval "($1 \"$2\")"
   elif [ "$OS_NAME" = "Darwin" ]; then
-	$HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -nw --eval "(woman \"$1\")"
+	$HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -nw --eval "($1  \"$2\")"
   else
 	man "$1"
 	echo "Please Install emacs."
@@ -591,58 +595,67 @@ function _emnw()
 	echo "Please Install emacs."
   fi
 }
-
 alias emnw='_emnw'
 
-# if there's no argument then open dired
-function _e()
+function _emc()
 {
-  if [[ $# == 0 ]]; then
-	if type emacs >/dev/null 2>&1; then
-	  emacsclient -t --eval "(setq default-directory \"$PWD\")"
-	elif [ "$OS_NAME" = "Darwin" ]; then
-	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t --eval "(setq default-directory \"$PWD)\")"
-	else
-	  echo "Please Install emacs."
-	fi
+  if type emacs >/dev/null 2>&1; then
+	mybg emacs "$@"
+  elif [ "$OS_NAME" = "Darwin" ]; then
+	mybg $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs "$@"
   else
-	if type emacs >/dev/null 2>&1; then
-	  emacsclient -t "$@"
-	elif [ "$OS_NAME" = "Darwin" ]; then
-	   $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t "$@"
-	else
-	  echo "Please Install emacs."
-	fi
+	echo "Please Install emacs."
   fi
 }
-
-alias e='_e'
-
+alias emc='_emc'
 # if there's no argument then open dired
-function _ec()
-{
-  # -n means do not to wait client finish edit
-  # so terminal won't ba captured
-  if [[ $# == 0 ]]; then
-	if type emacs >/dev/null 2>&1; then
-	  emacsclient -c -n -e "(cd \"$PWD\")"
-	elif [ "$OS_NAME" = "Darwin" ]; then
-	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n -e "(cd \"$PWD\")"
-	else
-	  echo "Please Install emacs."
-	fi
-  else
-	if type emacs >/dev/null 2>&1; then
-	  emacsclient -c -n "$@"
-	elif [ "$OS_NAME" = "Darwin" ]; then
-	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n "$@"
-	else
-	  echo "Please Install emacs."
-	fi
-  fi
-}
+# function _e()
+# {
+#   if [[ $# == 0 ]]; then
+# 	if type emacs >/dev/null 2>&1; then
+# 	  emacsclient -t --eval "(setq default-directory \"$PWD\")"
+# 	elif [ "$OS_NAME" = "Darwin" ]; then
+# 	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t --eval "(setq default-directory \"$PWD)\")"
+# 	else
+# 	  echo "Please Install emacs."
+# 	fi
+#   else
+# 	if type emacs >/dev/null 2>&1; then
+# 	  emacsclient -t "$@"
+# 	elif [ "$OS_NAME" = "Darwin" ]; then
+# 	   $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t "$@"
+# 	else
+# 	  echo "Please Install emacs."
+# 	fi
+#   fi
+# }
 
-alias ec='_ec'
+# alias e='_e'
+
+# # if there's no argument then open dired
+# function _ec()
+# {
+#   # -n means do not to wait client finish edit
+#   # so terminal won't get captured
+#   if [[ $# == 0 ]]; then
+# 	if type emacs >/dev/null 2>&1; then
+# 	  emacsclient -c -n -e "(cd \"$PWD\")"
+# 	elif [ "$OS_NAME" = "Darwin" ]; then
+# 	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n -e "(cd \"$PWD\")"
+# 	else
+# 	  echo "Please Install emacs."
+# 	fi
+#   else
+# 	if type emacs >/dev/null 2>&1; then
+# 	  emacsclient -c -n "$@"
+# 	elif [ "$OS_NAME" = "Darwin" ]; then
+# 	  $HOME/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n "$@"
+# 	else
+# 	  echo "Please Install emacs."
+# 	fi
+#   fi
+# }
+# alias ec='_ec'
 
 function _edc
 {

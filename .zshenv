@@ -1,21 +1,27 @@
 #!/usr/bin/zsh
 
-function ____tweak_zpcompinit_custom() {
-  setopt extendedglob local_options
-  autoload -Uz compinit
-  local zcd=${ZDOTDIR:-$HOME}/.zcompdump
-  local zcdc="$zcd.zwc"
-  # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
-  # in the background as this is doesn't affect the current session
-  if [[ -f "$zcd"(#qN.m+1) ]]; then
-        compinit -i -d "$zcd"
-        { rm -f "$zcdc" && zcompile "$zcd" } &!
-  else
-        compinit -C -d "$zcd"
-        { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
-  fi
-}
-____tweak_zpcompinit_custom
+# This tweak is kinda useful,but I got a powerful computer now.
+
+# function ____tweak_zpcompinit_custom() {
+#   setopt extendedglob local_options
+#   autoload -Uz compinit
+#   local zcd=${ZDOTDIR:-$HOME}/.zcompdump
+#   local zcdc="$zcd.zwc"
+#   # Compile the completion dump to increase startup speed, if dump is newer or doesn't exist,
+#   # in the background as this is doesn't affect the current session
+#   if [[ -f "$zcd"(#qN.m+1) ]]; then
+#         compinit -i -d "$zcd"
+#         { rm -f "$zcdc" && zcompile "$zcd" } &!
+#   else
+#         compinit -C -d "$zcd"
+#         { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
+#   fi
+# }
+# ____tweak_zpcompinit_custom
+
+# Enable comp
+autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 function git_prompt() {
   (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD ) 2> /dev/null | cut -d'/' -f3
