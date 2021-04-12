@@ -163,8 +163,8 @@
 ;; {{ Tools
 ;; hack for gc
 (defvar my-gc-cons-threshold
-  46777216
-  "46 mb")
+  100000006
+  "100 mb")
 (my-add-package 'gcmh) ; hack for gc
 (my-delay-eval #'(lambda ()
 						 (setq read-process-output-max (* 3 1024 1024) ; Increase the amount of data which Emacs reads from the process to enhance lsp performance
