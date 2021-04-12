@@ -155,6 +155,7 @@
 		  ;; angular imenu
 		  (" \\(ng-[a-z]*\\)=\"\\([^\"]+\\)" 1 2 "="))))
 
+;;; REVIEW: In emacs27 `js-mode' now supports jsx nicely,and js2 is not so actively maintained,gotta keep concern
 ;; javascript with powerful js2-mode!
 (my-add-package 'js2-mode) ; a powerful javascript-ide mode
 (add-auto-mode 'js2-mode "\\.js\\(\\.erb\\)?\\'")
