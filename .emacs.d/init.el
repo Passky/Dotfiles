@@ -89,7 +89,7 @@
 						'init-ui ; theme mode-line ...
 						'init-search ; ido/icomplete/ivy and hydra/ivy
 						'init-life ; less code,more life
-						;; 'init-shell
+						'init-shell
 						'init-clipboard ; load it after init-func!
 						'init-gnus
 						'init-completion ;company with ispell and yasnippet setup
