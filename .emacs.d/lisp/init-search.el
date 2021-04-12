@@ -59,7 +59,7 @@
 ;; You may prefer to use `initials' instead of `partial-completion'.
 (my-add-package 'orderless)
 (setq completion-styles '(orderless)
-	  completion-category-defaults nil
+	  ;; completion-category-defaults nil
 	  completion-category-overrides '((file (styles . (partial-completion)))))
 
 (after! icomplete
