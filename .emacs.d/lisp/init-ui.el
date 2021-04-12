@@ -214,7 +214,7 @@ Nil to use font supports ligatures."
 ;;{{ Theme && modeline
 ;; (my-add-package 'modus-themes)
 (my-add-package 'gruvbox-theme)
-(unless (bound-and-true-p *dump*)
+(when t;; (not (bound-and-true-p *dump*))
   (setq modus-themes-bold-constructs t
 		modus-themes-variable-pitch-ui t
 		modus-themes-variable-pitch-headings t

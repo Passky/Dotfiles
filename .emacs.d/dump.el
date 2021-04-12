@@ -6,8 +6,6 @@
 (message "\n|Dumping start at %s|\n" (current-time-string))
 
 (global-font-lock-mode) ; enable color theme
-(require 'modus-themes)
-(load-theme 'modus-vivendi t)
 
 (load-file (concat (file-name-as-directory user-emacs-directory) "init.el"))
 (setq evil-want-keybinding nil)
