@@ -72,6 +72,7 @@ Return the fastest package archive."
 
 (defun my-re-init ()
   "For cross big version update."
+  (interactive)
   (delete-file (concat package-quickstart-file "c"))
   (delete-file package-quickstart-file)
   (package-quickstart-refresh))
