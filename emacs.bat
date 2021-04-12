@@ -1,2 +1,6 @@
-cd C:\app\passky
-C:\app\emacs\bin\runemacs.exe --dump-file C:\app\passky\.emacs.d\emacs.pdmp
+rem This was called batch file
+@ECHO OFF
+SETLOCAL
+set edump=%HOME%\.emacs.d\emacs.pdmp
+cd %HOME%
+runemacs --dump-file C:\app\passky\.emacs.d\emacs.pdmp
