@@ -253,8 +253,8 @@ Nil to use font supports ligatures."
 
 
 ;; Highlight some operations
-(my-add-package 'auto-highlight-symbol)
-(add-hook 'prog-mode-hook 'auto-highlight-symbol-mode)
+(my-add-package 'symbol-overlay)
+(add-hook 'prog-mode-hook 'symbol-overlay-mode)
 
 (my-add-package 'volatile-highlights)
 (add-hook 'after-init-hook 'volatile-highlights-mode)
