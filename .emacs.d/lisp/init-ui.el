@@ -7,6 +7,7 @@
 		hl-todo-keyword-faces
 		`(("TODO"       . ,(face-foreground 'warning))
 		  ("FIXME"      . ,(face-foreground 'error))
+		  ("WARNING"    . ,(face-foreground 'error))
 		  ("HACK"       . ,(face-foreground 'font-lock-constant-face))
 		  ("REVIEW"     . ,(face-foreground 'font-lock-keyword-face))
 		  ("NOTE"       . ,(face-foreground 'success))

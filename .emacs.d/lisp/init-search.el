@@ -66,7 +66,8 @@
 (my-add-package 'icomplete-vertical)
 
 ;; In Emacs 27 there is also a flex style which you might like.
-(setq completion-styles '(flex substring partial-completion))
+;; WARNING: This causes bugs in eshell and path expand,so drop this.
+;; (setq completion-styles '(flex substring partial-completion))
 
 (after! icomplete
   (setq use-native? t)
