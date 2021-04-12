@@ -234,3 +234,9 @@
            `(var ,)]
       )
     ))
+
+
+(define (init shit)
+  (print shit))
+
+(define:)

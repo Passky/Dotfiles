@@ -54,9 +54,13 @@
 ;; TODO: icomplete-vertical is merging into master,so we remove this later
 (my-add-package 'icomplete-vertical)
 
-;; In Emacs 27 there is also a flex style which you might like.
-;; WARNING: This causes bugs in eshell and path expand,so drop this.
-;; (setq completion-styles '(flex substring partial-completion))
+;; Use the `orderless' completion style.
+;; Enable `partial-completion' for files to allow path expansion.
+;; You may prefer to use `initials' instead of `partial-completion'.
+(my-add-package 'orderless)
+(setq completion-styles '(orderless)
+	  completion-category-defaults nil
+	  completion-category-overrides '((file (styles . (partial-completion)))))
 
 (after! icomplete
   (setq use-native? t)
@@ -68,7 +72,6 @@
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
    "C-c C-o" 'embark-export
-   "SPC" 'my-space
    )
   (setq icomplete-separator "\n" 
 		icomplete-show-matches-on-no-input nil
