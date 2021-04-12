@@ -161,7 +161,7 @@ lexical-binding: t; ---
   
 
 ** FUCK csdn
-1、必应搜索： https://cn.bing.com/search?q=-csdn.net+%s
+1、必应搜索： https://www.bing.com/search?q=-csdn.net+%s
 2、谷歌搜索： https://www.google.com/search?q=-csdn.net+%s
 3、百度搜索： https://www.baidu.com/s?wd=%s+-csdn.net
 ** Apt add third-party-repo
