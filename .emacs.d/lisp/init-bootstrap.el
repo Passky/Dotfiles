@@ -24,7 +24,7 @@
                ,(cons "melpa" (concat proto "://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))))))
 
 (setq package-archives
-	  (alist-get 'tencent my-package-archives-alist))
+	  (alist-get 'ustc my-package-archives-alist))
 
 ;; Refer to https://emacs-china.org/t/elpa/11192
 (defun my-test-package-archives (&optional no-chart)
@@ -63,6 +63,8 @@ Return the fastest package archive."
 
 (setq package-quickstart t
 	  package-quickstart-file my-cache-file)
+
+(package-initialize)
 
 ;; Bug fix
 (when (bound-and-true-p *dump*)
