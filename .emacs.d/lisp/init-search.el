@@ -73,13 +73,8 @@
 		icomplete-tidy-shadowed-file-names t
 		icomplete-in-buffer nil))
 
-(my-add-package 'selectrum)
-(after! selectrum
-  (setq selectrum-refine-candidates-function #'orderless-filter)
-  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches))
-
 (my-delay-eval #'(lambda ()
-				   (selectrum-mode)))
+				   (icomplete-mode)))
 
 ;; {{ embark
 (my-add-package 'embark)
@@ -97,7 +92,7 @@
 
 ;; about configration see https://github.com/abo-abo/swiper/commit/28e88ab23a191420a93a4f920ca076674ee53f94
 ;; "M-o"
-(with-eval-after-load 'selectrum
+(with-eval-after-load 'icomplete
   (defhydra hydra-minibuffer (:hint nil :color pink)
 	"
 						^minibuffer action^
