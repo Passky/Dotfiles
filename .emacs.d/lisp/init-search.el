@@ -42,7 +42,6 @@
    [remap isearch-delete-char] 'isearch-del-char))
 ;; }}
 
-
 ;; {{ minibuffer completion
 (setq enable-recursive-minibuffers nil)        ; do not use minibuffer in minibuffer, causes bad bugs
 (setq history-delete-duplicates t)          ; remove repeat history
@@ -74,7 +73,7 @@
 		icomplete-in-buffer nil))
 
 (my-delay-eval #'(lambda ()
-				   (icomplete-mode)))
+				   (fido-mode)))
 
 ;; {{ embark
 (my-add-package 'embark)
