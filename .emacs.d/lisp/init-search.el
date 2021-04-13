@@ -38,10 +38,8 @@
    "C-o"                       'swiper-from-isearch
    ;; consistent with ivy-occur'
    "C-c C-o"                   'isearch-occur ; consist with wgrep
-   [escape]                    'isearch-cancel
    ;; Edit the search string instead of jumping back
    [remap isearch-delete-char] 'isearch-del-char))
-
 ;; }}
 
 
@@ -54,16 +52,11 @@
 ;; TODO: icomplete-vertical is merging into master,so we remove this later
 (my-add-package 'icomplete-vertical)
 
-;; Use the `orderless' completion style.
-;; Enable `partial-completion' for files to allow path expansion.
-;; You may prefer to use `initials' instead of `partial-completion'.
-(my-add-package 'orderless)
-(setq completion-styles '(orderless)
-	  ;; completion-category-defaults nil
-	  completion-category-overrides '((file (styles . (partial-completion)))))
+(setq ;; completion-category-defaults nil
+ ;; completion-category-overrides '((file (styles . (partial-completion))))
+ completion-styles '(basic partial-completion substring))
 
 (after! icomplete
-  (setq use-native? t)
   (icomplete-vertical-mode)
   (my-def-key
    :keymaps 'icomplete-minibuffer-map
@@ -82,13 +75,16 @@
 
 ;; {{ embark
 (my-add-package 'embark)
+(my-add-package 'embark-consult)
 (with-eval-after-load 'embark
+  (my-ensure 'embark-collect)
   (evil-collection-define-key 'normal 'embark-general-map
 	"i" 'wgrep-change-to-wgrep-mode)
   (my-def-key
    :keymaps 'embark-general-map
    "i" 'wgrep-change-to-wgrep-mode)
   )
+(add-hook #'embark-collect-mode #'embark-consult-preview-minor-mode)
 
 
 ;; NOTE: May try to rebuild workflow with fido-mode + orderless + embark + consult instead of ivy, when it is time.
@@ -100,8 +96,10 @@
 
 ;; enable ivy-mode 0.5 seconds after init
 (my-delay-eval #'(lambda ()
-						(ivy-mode 1)
-						(counsel-mode 1)) 0.5)
+						;; (ivy-mode 1)
+						;; (counsel-mode 1)
+				   (selectrum-mode)
+						) 0.5)
 
 (with-eval-after-load 'ivy
   (define-key ivy-minibuffer-map (kbd "M-o") 'hydra-minibuffer/body)
@@ -159,7 +157,7 @@
 ;; hydra-ivy
 ;; about configration see https://github.com/abo-abo/swiper/commit/28e88ab23a191420a93a4f920ca076674ee53f94
 ;; "M-o"
-(with-eval-after-load 'ivy
+(with-eval-after-load 'selectrum
   (defhydra hydra-minibuffer (:hint nil :color pink)
 	"
 						^minibuffer action^

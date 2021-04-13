@@ -1,20 +1,16 @@
 ;;; Includes most useful function for other function
 (autoload 'ivy-read "ivy")
 
-(defvar use-native? nil
-  "Shall we use native first?")
-
-;; DONE: add caller to parameters,so ivy-occur could works.
 ;; https://github.com/mgalgs/.emacs.d/blob/8eace8e06ac441c3092a2fbdceda3bc2ec985cf3/lisp/my-util.el
 ;; `lsp-java--completing-read'
-(cl-defun my-completing-read (prompt collection &key action caller hist require-match initial-input)
+(cl-defun my-completing-read (prompt collection &key action hist require-match initial-input)
   "Wrap for `completing-read' and `ivy-read'.
   Find detailed information in `completing-read'."
   (cond
    ((and action (= 0 (length collection)))
 	(message "No candidates."))
    ;; compatable with other completion system.
-   ((or use-native? (not (fboundp 'ivy-read)))
+   (t
 	(let* ((selected (completing-read-multiple
 					  prompt
 					  collection
@@ -22,19 +18,11 @@
 					  require-match
 					  initial-input
 					  hist)))
-	  (setq selected (or (assoc selected collection) selected))
+	  ;; (setq selected (or (assoc selected collection) selected))
 	  ;; make sure only the string/file is passed to action
-	  (funcall action (if (consp selected) (cdr selected) selected))
+	  (if action (mapc action selected))
 	  selected))
-   (t
-	(setq action (or action #'ivy-completion-in-region-action)) ; if is nil,use simple completion-in-region
-	(ivy-read prompt collection
-			  :action action
-			  :history hist
-			  :caller caller
-			  :initial-input initial-input
-			  :require-match require-match
-			  ))))
+   ))
 
 (defvar my-project-file '(".svn" ".hg" ".git" ".root" "makefile" "Makefile")
   "The file/directory used to locate project root.

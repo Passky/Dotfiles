@@ -84,7 +84,6 @@
 						  'init-windows)
 						'init-evil ; evil
 						;; 'init-my-model-edit ;
-						'init-ffip
 						'init-gui ; font set up
 						'init-ui ; theme mode-line ...
 						'init-search ; ido/icomplete/ivy and hydra/ivy

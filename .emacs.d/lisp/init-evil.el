@@ -77,8 +77,6 @@
 			  "gr" 'xref-find-references
 			  "gl" 'evil-avy-goto-line
 			  "gs" 'evil-avy-goto-word-1
-			  [escape] 'keyboard-quit
-			  "<esc>" 'keyboard-quit
 			  "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
 			  "C-u" 'scroll-down
 			  "j" 'next-line
@@ -87,13 +85,10 @@
 			  :evil-visual
 			  "j" 'next-line
 			  "k" 'previous-line
-			  [escape] 'keyboard-quit
-			  "<esc>" 'keyboard-quit
 			  "C-c" 'keyboard-quit
 			  ;; "j" 'evil-next-visual-line
 			  ;; "k" 'evil-previous-visual-line
 			  :evil-insert
-			  "<esc>" 'evil-normal-state
               ;; [?\t] 'completion-at-point
 			  ;; [backspace] 'luna-hungry-delete
 			  ;; [?\d] 'luna-hungry-delete
@@ -178,22 +173,22 @@
    "]" 'flymake-goto-next-error
    "{" 'evil-prev-flyspell-error
    "}" 'evil-next-flyspell-error
-   "fd" 'counsel-dired-jump
-   "fD" 'counsel-dired
+   ;; "fd" 'counsel-dired-jump
+   ;; "fD" 'counsel-dired
    "ff" 'find-file
-   "fe" 'my-flymake-errors
+   "fe" 'consult-flymake
    "fF" 'find-file-other-window
    "fp" 'find-file-in-project
    "fP" 'find-file-in-current-directory
-   "fg" 'counsel-etags-grep ; grep at project
-   "fG" 'counsel-etags-grep-current-directory ; grep current directory
+   "fg" 'consult-grep ; grep at project
+   ;; "fG" 'counsel-etags-grep-current-directory ; grep current directory
    "fm" 'my-recentf
    "fM" 'my-recentf-the-other-window
-   "fl" 'swiper-isearch
-   "fL" 'swiper-all
+   "fl" 'consult-line
+   ; "fL" 'consult-line-all-buffer
    "fb" 'switch-to-buffer
    "fB" 'switch-to-buffer-other-window
-   "fs" 'counsel-semantic-or-imenu
+   "fs" 'imenu
    "fw" 'ace-window
    "ft" 'tab-bar-select-tab-by-name
 
@@ -246,12 +241,13 @@
    "ga" 'vc-register ; add a new file to version control
 
    ;;{{ counsel
-   "cp" 'counsel-yank-pop
-   "ca" 'counsel-linux-app
-   "cgl" 'counsel-git-log
-   "cgb" 'counsel-git-change-worktree
-   "cgc" 'counsel-git-checkout
-   "cgs" 'counsel-git-stash
+   "cp" 'consult-yank-pop
+   "cP" 'consult-yank
+   ;; "ca" 'counsel-linux-app
+   ;; "cgl" 'counsel-git-log
+   ;; "cgb" 'counsel-git-change-worktree
+   ;; "cgc" 'counsel-git-checkout
+   ;; "cgs" 'counsel-git-stash
 
    ;;{{ Gdb
    "dw" 'gud-watch
