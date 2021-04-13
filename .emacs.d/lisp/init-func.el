@@ -206,9 +206,9 @@ aliases."
   "Quit emacs without asking."
   (interactive)
   (my-ensure 'recentf)
-  (my-ensure 'save-place)
   (toggle-save-place-globally)
   (recentf-save-list)
+  (savehist-save)
   (let ((proc (frame-parameter (selected-frame) 'client)))
 	(if proc
 		(with-no-warnings

@@ -16,9 +16,6 @@
 ;; (unless *gui*
   ;; (xterm-mouse-mode 1))
 
-;; save cursor place
-(save-place-mode 1)
-
 ;; scroll smooth
 (setq mouse-wheel-scroll-amount '(0.07))
 (setq mouse-wheel-progressive-speed nil)
@@ -176,6 +173,13 @@
 ;; this delete buffers in buffer list which were unused for 3 days
 (my-delay-eval #'(lambda ()
 						(midnight-mode t)))
+
+
+;; save cursor place
+(save-place-mode 1)
+
+;; save history over restart
+(savehist-mode)
 
 ;; recent files
 (my-delay-eval #'(lambda () (recentf-mode t)) 0.7)
