@@ -46,16 +46,17 @@
 ;; {{ minibuffer completion
 (setq enable-recursive-minibuffers nil)        ; do not use minibuffer in minibuffer, causes bad bugs
 (setq history-delete-duplicates t)          ; remove repeat history
-;; TODO: If we remove ivy,then uncomment codes below
 (define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
+(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
+
+
+(my-add-package 'orderless)
+(setq completion-category-defaults nil
+	  completion-category-overrides '((file (styles . (partial-completion))))
+	  completion-styles '(orderless basic partial-completion substring))
 
 ;; TODO: icomplete-vertical is merging into master,so we remove this later
 (my-add-package 'icomplete-vertical)
-
-(setq ;; completion-category-defaults nil
- ;; completion-category-overrides '((file (styles . (partial-completion))))
- completion-styles '(basic partial-completion substring))
-
 (after! icomplete
   (icomplete-vertical-mode)
   (my-def-key
@@ -70,8 +71,15 @@
 		icomplete-show-matches-on-no-input nil
 		icomplete-hide-common-prefix nil
 		icomplete-tidy-shadowed-file-names t
-		icomplete-in-buffer nil)
-  )
+		icomplete-in-buffer nil))
+
+(my-add-package 'selectrum)
+(after! selectrum
+  (setq selectrum-refine-candidates-function #'orderless-filter)
+  (setq selectrum-highlight-candidates-function #'orderless-highlight-matches))
+
+(my-delay-eval #'(lambda ()
+				   (selectrum-mode)))
 
 ;; {{ embark
 (my-add-package 'embark)
@@ -87,74 +95,6 @@
 (add-hook #'embark-collect-mode #'embark-consult-preview-minor-mode)
 
 
-;; NOTE: May try to rebuild workflow with fido-mode + orderless + embark + consult instead of ivy, when it is time.
-;;{{ ivy core|(minibuffer fuzzy)
-;; ivy-occur
-(my-add-package 'ivy)
-(my-add-package 'counsel) ; counsel => swiper => ivy
-(my-add-package 'ivy-posframe)
-
-;; enable ivy-mode 0.5 seconds after init
-(my-delay-eval #'(lambda ()
-						;; (ivy-mode 1)
-						;; (counsel-mode 1)
-				   (selectrum-mode)
-						) 0.5)
-
-(with-eval-after-load 'ivy
-  (define-key ivy-minibuffer-map (kbd "M-o") 'hydra-minibuffer/body)
-  (define-key ivy-minibuffer-map (kbd "M-p") 'ivy-previous-line)
-  (define-key ivy-minibuffer-map (kbd "M-n") 'ivy-next-line)
-  (setq ivy-display-style 'fancy           ; fancy style
-		ivy-count-format "%d/%d "          ; better counts
-		ivy-use-virtual-buffers t          ; show recent files
-		ivy-extra-directories '("./")      ; no ".." directories
-		ivy-fixed-height-minibuffer t      ; fixed height
-		ivy-height 10
-		ivy-on-del-error-function 'ignore)
-  ;; ivy-posframe
-  (when *gui*
-	;; Different command can use different display function.
-	(setq ivy-posframe-display-functions-alist
-		  '(
-			(swiper          . ivy-posframe-display-at-window-bottom-left)
-			(complete-symbol . ivy-posframe-display-at-point)
-			(counsel-M-x     . ivy-posframe-display-at-frame-center)
-			(t               . ivy-posframe-display)))
-	(ivy-posframe-mode 1)
-	)
-
-  (defun ivy-occur-grep-mode-hook-setup ()
-	"Set up ivy occur grep mode."
-	;; no syntax highlight, I only care performance when searching/replacing
-	(font-lock-mode -1)
-	;; @see https://emacs.stackexchange.com/questions/598/how-do-i-prevent-extremely-long-lines-making-emacs-slow
-	(column-number-mode -1)
-	(local-set-key (kbd "RET") #'ivy-occur-press-and-switch))
-
-  (add-hook 'ivy-occur-grep-mode-hook 'ivy-occur-grep-mode-hook-setup))
-;;}}
-
-(with-eval-after-load 'counsel
-  (my-def-key
-   :keymaps 'override
-   ;; [remap find-file] 'counsel-find-file
-   ;; [remap find-library] 'counsel-M-x
-   ;; [remap org-capture]         'counsel-org-capture
-   ;; [remap describe-function]   'counsel-describe-function
-   ;; [remap describe-variable]   'counsel-describe-variable
-   [remap imenu]               'counsel-imenu
-   [remap describe-face]       'counsel-describe-face
-   )
-  (setq ivy-initial-inputs-alist nil) ;; It will change automaticly , so set there instead of ivy
-  (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-		counsel-rg-base-command "rg -zS --no-heading --line-number --color never %s ."
-		counsel-ag-base-command "ag -zS --nocolor --nogroup %s"
-		counsel-pt-base-command "pt -zS --nocolor --nogroup -e %s")
-  )
-;;}}
-
-;; hydra-ivy
 ;; about configration see https://github.com/abo-abo/swiper/commit/28e88ab23a191420a93a4f920ca076674ee53f94
 ;; "M-o"
 (with-eval-after-load 'selectrum
@@ -190,7 +130,6 @@
 	("sf" embark-act)
 	("ss" embark-export) 
 	("o" ivy-occur :exit t)))
-
 
 (provide 'init-search)
 ;;; init-search.el ends here
