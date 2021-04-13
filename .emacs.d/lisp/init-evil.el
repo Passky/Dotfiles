@@ -180,8 +180,8 @@
    "fF" 'find-file-other-window
    "fp" 'find-file-in-project
    "fP" 'find-file-in-current-directory
-   "fg" 'consult-grep ; grep at project
-   ;; "fG" 'counsel-etags-grep-current-directory ; grep current directory
+   "fg" 'my-consult-grep ; grep at project
+   "fG" 'my-consult-grep-at-current-dir
    "fm" 'my-recentf
    "fM" 'my-recentf-the-other-window
    "fl" 'consult-line

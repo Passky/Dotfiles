@@ -1,5 +1,24 @@
 ;; Many actions
 (my-add-package 'consult)
+(after! consult
+  (setq consult-project-root-function #'my-project-root))
+
+(defun my-consult-grep ()
+  (interactive)
+  (if
+	  (executable-find "rg")
+	  (call-interactively #'consult-ripgrep)
+	(call-interactively #'consult-grep)
+	))
+
+(defun my-consult-grep-at-current-dir ()
+  (interactive)
+  (let ((consult-project-root-function nil))
+	(if
+		(executable-find "rg")
+		(call-interactively #'consult-ripgrep)
+	  (call-interactively #'consult-grep)
+	  )))
 
 (my-add-package 'iedit) ; multi cursor
 (with-eval-after-load 'iedit
