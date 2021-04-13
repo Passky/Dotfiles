@@ -62,16 +62,15 @@
 ;; }}
 
 ;; {{ minibuffer completion
-(setq enable-recursive-minibuffers nil)        ; do not use minibuffer in minibuffer, causes bad bugs
+(setq enable-recursive-minibuffers nil)     ; do not use minibuffer in minibuffer, causes bad bugs
 (setq history-delete-duplicates t)          ; remove repeat history
 (define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
 (define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
 
-
-(my-add-package 'orderless)
+;; completion-styles
 (setq completion-category-defaults nil
 	  completion-category-overrides '((file (styles . (partial-completion))))
-	  completion-styles '(orderless basic partial-completion substring))
+	  completion-styles '(basic substring partial-completion flex))
 
 ;; TODO: icomplete-vertical is merging into master,so we remove this later
 (my-add-package 'icomplete-vertical)
