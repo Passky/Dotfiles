@@ -79,7 +79,7 @@
 (my-add-package 'embark)
 (my-add-package 'embark-consult)
 (with-eval-after-load 'embark
-  (my-ensure 'embark-collect)
+  (my-ensure 'embark-consult)
   (evil-collection-define-key 'normal 'embark-general-map
 	"i" 'wgrep-change-to-wgrep-mode)
   (my-def-key
