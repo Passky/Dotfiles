@@ -89,6 +89,7 @@
 
 ;; reply y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t) ; NOTE: emacs28 new variable
 
 ;; some project prefer tab, so be it
 ;; @see http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
