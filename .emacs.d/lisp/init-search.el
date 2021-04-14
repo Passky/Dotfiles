@@ -86,6 +86,7 @@
    "C-c C-o" 'embark-export
    )
   (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
+  (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
 
   (defun my-minibuffer-space ()
 	(interactive)

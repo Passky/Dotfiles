@@ -4,8 +4,8 @@
 ;; https://github.com/mgalgs/.emacs.d/blob/8eace8e06ac441c3092a2fbdceda3bc2ec985cf3/lisp/my-util.el
 ;; `lsp-java--completing-read'
 (cl-defun my-completing-read (prompt collection &key action hist require-match initial-input)
-  "Wrap for `completing-read' and `ivy-read'.
-  Find detailed information in `completing-read'."
+  "Wrap for `completing-read-multiple',
+split cands with `crm-separator'."
   (cond
    ((and action (= 0 (length collection)))
 	(message "No candidates."))
@@ -21,8 +21,7 @@
 	  ;; (setq selected (or (assoc selected collection) selected))
 	  ;; make sure only the string/file is passed to action
 	  (if action (mapc action selected))
-	  selected))
-   ))
+	  selected))))
 
 (defvar my-project-file '(".svn" ".hg" ".git" ".root" "makefile" "Makefile")
   "The file/directory used to locate project root.
