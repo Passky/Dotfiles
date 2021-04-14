@@ -184,7 +184,7 @@ Nil to use font supports ligatures."
 		modus-themes-slanted-constructs nil
 		;; modus-themes-mode-line '3d
 		)
-  (load-theme 'gruvbox-dark-soft t))
+  (load-theme 'gruvbox-dark-hard t))
 
 (defun my-disable-enabled-theme ()
   "Disable all enabled theme."
