@@ -69,7 +69,7 @@
 
 ;; completion-styles
 (setq completion-category-defaults nil
-	  completion-category-overrides '((file (styles . (partial-completion))))
+	  completion-category-overrides '((file (styles . (partial-completion)))) ; REVIEW: file path expand need this
 	  completion-styles '(flex basic substring partial-completion))
 
 ;; TODO: icomplete-vertical is merging into master,so we remove this later
