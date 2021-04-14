@@ -20,7 +20,7 @@
 												[remap evil-lookup] 'racket-xp-describe
 												[remap flymake-goto-next-error] 'racket-xp-next-error
 												[remap flymake-goto-prev-error] 'racket-xp-previous-error)
-									[remap lsp-rename] 'racket-xp-rename
+									"lr" 'racket-xp-rename
 									(racket-xp-mode))
 								  ))) ; provide check documentation describe
 (after! racket-mode
