@@ -206,6 +206,7 @@ aliases."
   "Quit emacs without asking."
   (interactive)
   (my-ensure 'recentf)
+  (recentf-mode)
   (toggle-save-place-globally)
   (recentf-save-list)
   (savehist-save)
