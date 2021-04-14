@@ -191,6 +191,7 @@
    "fs" 'imenu
    "fw" 'ace-window
    "ft" 'tab-bar-select-tab-by-name
+   "fo" 'consult-outline
 
    ;;{{ Tab
    "tt" 'tab-bar-new-tab
