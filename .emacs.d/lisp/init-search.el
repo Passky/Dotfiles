@@ -70,7 +70,7 @@
 ;; completion-styles
 (setq completion-category-defaults nil
 	  completion-category-overrides '((file (styles . (partial-completion))))
-	  completion-styles '(basic substring partial-completion flex))
+	  completion-styles '(flex basic substring partial-completion))
 
 ;; TODO: icomplete-vertical is merging into master,so we remove this later
 (my-add-package 'icomplete-vertical)
@@ -96,7 +96,7 @@
 	  (insert " ")))
   (define-key icomplete-minibuffer-map (kbd "SPC") 'vmacs-minibuffer-space)
 
-  (setq icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1"))
+  (setq ;; icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
 		icomplete-compute-delay 0
 		icomplete-show-matches-on-no-input t
@@ -133,8 +133,6 @@
 (my-add-package 'embark-consult)
 (with-eval-after-load 'embark
   (my-ensure 'embark-consult)
-  (evil-collection-define-key 'normal 'embark-general-map
-	"i" 'wgrep-change-to-wgrep-mode)
   (my-def-key
    :keymaps 'embark-general-map
    "i" 'wgrep-change-to-wgrep-mode)
