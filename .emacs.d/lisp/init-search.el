@@ -106,7 +106,7 @@
 		icomplete-in-buffer nil))
 
 (my-delay-eval #'(lambda ()
-				   (fido-mode)))
+				   (icomplete-mode)))
 
 (my-add-package 'orderless)
 (when (require 'orderless nil t)
