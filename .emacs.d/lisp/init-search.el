@@ -82,9 +82,10 @@
    "C-p"  'icomplete-backward-completions
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
-   "C-c C-o" 'embark-export
    [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
+   "C-c C-o" 'embark-export
    )
+  (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
 
   (defun my-minibuffer-space ()
 	(interactive)
