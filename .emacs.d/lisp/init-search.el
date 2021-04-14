@@ -94,7 +94,7 @@
 		(insert consult-async-default-split)
 	  (when (looking-back consult-async-default-split) (delete-char -1))
 	  (insert " ")))
-  (define-key icomplete-minibuffer-map (kbd "SPC") 'vmacs-minibuffer-space)
+  (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
 
   (setq ;; icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
