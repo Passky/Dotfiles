@@ -1,6 +1,7 @@
 ;; Many actions
 (my-add-package 'consult)
 (after! consult
+  ;; Or use `vc-root-dir'
   (setq consult-project-root-function #'my-project-root))
 
 (defun my-consult-grep ()
