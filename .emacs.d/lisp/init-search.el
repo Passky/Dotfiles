@@ -83,11 +83,15 @@
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
    "C-c C-o" 'embark-export
+   [?\t] 'icomplete-force-complete
    )
-  (setq icomplete-separator "\n" 
-		icomplete-show-matches-on-no-input nil
+  (setq icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1"))
+		icomplete-delay-completions-threshold 2000
+		icomplete-compute-delay 0
+		icomplete-show-matches-on-no-input t
 		icomplete-hide-common-prefix nil
 		icomplete-tidy-shadowed-file-names t
+		icomplete-in-buffer t
 		icomplete-in-buffer nil))
 
 (my-delay-eval #'(lambda ()
