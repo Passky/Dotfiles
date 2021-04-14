@@ -86,7 +86,7 @@
    [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
    )
 
-  (defun vmacs-minibuffer-space ()
+  (defun my-minibuffer-space ()
 	(interactive)
 	(require 'consult)
 	(if (and (string-prefix-p consult-async-default-split (minibuffer-contents))
@@ -106,10 +106,14 @@
 		icomplete-in-buffer nil))
 
 (my-delay-eval #'(lambda ()
-				   (icomplete-mode)))
+				   (icomplete-mode)
+				   ;; fido-mode emulate some bad parts of ido
+				   (require 'orderless)
+				   ))
 
+;; from vmacs
 (my-add-package 'orderless)
-(when (require 'orderless nil t)
+(after! orderless
   (setq completion-styles (cons 'orderless completion-styles)) ;把orderless放到completion-styles 开头
   ;; 默认按空格开隔的每个关键字支持regexp/literal/initialism 3种算法
   (setq orderless-matching-styles '(orderless-regexp orderless-literal orderless-initialism ))
