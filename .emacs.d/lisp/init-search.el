@@ -23,7 +23,7 @@
 	  (insert " ")))
   (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
 
-  (setq ;; icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
+  (setq icomplete-separator "\n" ;; (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
 		icomplete-compute-delay 0
 		icomplete-show-matches-on-no-input t
@@ -35,9 +35,9 @@
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
 
-(my-add-package 'icomplete-vertical)
-(after! icomplete
-  (icomplete-vertical-mode))
+;; (my-add-package 'icomplete-vertical)
+;; (after! icomplete
+;;   (icomplete-vertical-mode))
 
 ;; search actions
 (my-add-package 'consult)
