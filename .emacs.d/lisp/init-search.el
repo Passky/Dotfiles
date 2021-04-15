@@ -1,4 +1,45 @@
-;; Many actions
+;; TODO: icomplete-vertical is merging into master,so we remove this later
+(after! icomplete
+  (my-def-key
+   :keymaps 'icomplete-minibuffer-map
+   "C-n"  'icomplete-forward-completions
+   "C-p"  'icomplete-backward-completions
+   "M-n"  'icomplete-forward-completions
+   "M-p"  'icomplete-backward-completions
+   [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
+   "C-c C-o" 'embark-export
+   )
+  (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
+  (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
+  (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
+
+  (defun my-minibuffer-space ()
+	(interactive)
+	(require 'consult)
+	(if (and (string-prefix-p consult-async-default-split (minibuffer-contents))
+			 (= 2 (length (split-string (minibuffer-contents) consult-async-default-split))))
+		(insert consult-async-default-split)
+	  (when (looking-back consult-async-default-split) (delete-char -1))
+	  (insert " ")))
+  (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
+
+  (setq ;; icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
+		icomplete-delay-completions-threshold 2000
+		icomplete-compute-delay 0
+		icomplete-show-matches-on-no-input t
+		icomplete-hide-common-prefix nil
+		icomplete-tidy-shadowed-file-names t
+		icomplete-in-buffer t
+		icomplete-in-buffer nil))
+
+(my-delay-eval #'(lambda ()
+				   (icomplete-mode)))
+
+(my-add-package 'icomplete-vertical)
+(after! icomplete
+  (icomplete-vertical-mode))
+
+;; search actions
 (my-add-package 'consult)
 (after! consult
   ;; Or use `vc-root-dir'
@@ -78,47 +119,6 @@
 (setq completion-category-defaults nil
 	  completion-category-overrides '((file (styles . (partial-completion)))) ; REVIEW: file path expand need this
 	  completion-styles '(flex basic substring partial-completion))
-
-;; TODO: icomplete-vertical is merging into master,so we remove this later
-(my-add-package 'icomplete-vertical)
-(after! icomplete
-  (icomplete-vertical-mode)
-  (my-def-key
-   :keymaps 'icomplete-minibuffer-map
-   "C-n"  'icomplete-forward-completions
-   "C-p"  'icomplete-backward-completions
-   "M-n"  'icomplete-forward-completions
-   "M-p"  'icomplete-backward-completions
-   [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
-   "C-c C-o" 'embark-export
-   )
-  (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
-  (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
-
-  (defun my-minibuffer-space ()
-	(interactive)
-	(require 'consult)
-	(if (and (string-prefix-p consult-async-default-split (minibuffer-contents))
-			 (= 2 (length (split-string (minibuffer-contents) consult-async-default-split))))
-		(insert consult-async-default-split)
-	  (when (looking-back consult-async-default-split) (delete-char -1))
-	  (insert " ")))
-  (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
-
-  (setq ;; icomplete-separator (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
-		icomplete-delay-completions-threshold 2000
-		icomplete-compute-delay 0
-		icomplete-show-matches-on-no-input t
-		icomplete-hide-common-prefix nil
-		icomplete-tidy-shadowed-file-names t
-		icomplete-in-buffer t
-		icomplete-in-buffer nil))
-
-(my-delay-eval #'(lambda ()
-				   (icomplete-mode)
-				   ;; fido-mode emulate some bad parts of ido
-				   (require 'orderless)
-				   ))
 
 ;; from vmacs
 (my-add-package 'orderless)
