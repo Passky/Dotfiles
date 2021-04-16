@@ -122,6 +122,10 @@
 
 ;; from vmacs
 (my-add-package 'orderless)
+(my-delay-eval
+ #'(lambda ()
+	 (require 'orderless)))
+
 (after! orderless
   (setq completion-styles (cons 'orderless completion-styles)) ;把orderless放到completion-styles 开头
   ;; 默认按空格开隔的每个关键字支持regexp/literal/initialism 3种算法
