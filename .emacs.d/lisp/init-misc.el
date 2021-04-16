@@ -171,6 +171,29 @@ otherwise its height is changed."
 	selected)
   )
 
+(defun my-find-file-in-current-directory ()
+  "A warp of `project-find-file'.
+Use `project--files-in-directory'to
+Find file at current directory."
+  (interactive)
+  ;; use transient project,calls `find-program'
+  (let* ((pr (cons (or (car (project-current)) 'transient) default-directory))
+		 (dirs (list (project-root pr))))
+	(project-find-file-in (thing-at-point 'filename) dirs pr)
+	))
+
+(defun my-grep-at-current-directory-by-pr (regexp)
+  "A wrap of `project-find-regexp'.
+Grep at current directory by REGEXP."
+  (interactive (list (project--read-regexp)))
+  (require 'xref)
+  (let* ((pr (cons (or (car (project-current)) 'transient) default-directory))
+		 (dirs (list (project-root pr)))
+		 (files
+		  (project-files pr dirs)))
+	(xref--show-xrefs
+	 (apply-partially #'project--find-regexp-in-files regexp files)
+	 nil)))
 
 (provide 'init-misc)
 ;;; init-misc.el ends here
