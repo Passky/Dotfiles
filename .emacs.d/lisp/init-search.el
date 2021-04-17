@@ -107,10 +107,10 @@
   "Use ripgrep first then fallback to grep,
 search in current directory."
   (interactive)
-  (if
-	  (executable-find "rg")
+  (let ((consult-project-root-function nil))
+   (if (executable-find "rg")
 	  (call-interactively #'consult-ripgrep default-directory)
-	(call-interactively #'consult-grep default-directory)))
+	(call-interactively #'consult-grep default-directory))))
 
 (my-add-package 'iedit) ; multi cursor
 (with-eval-after-load 'iedit
