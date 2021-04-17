@@ -20,16 +20,6 @@
   (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
   (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
 
-  (defun my-minibuffer-space ()
-	(interactive)
-	(require 'consult)
-	(if (and (string-prefix-p consult-async-default-split (minibuffer-contents))
-			 (= 2 (length (split-string (minibuffer-contents) consult-async-default-split))))
-		(insert consult-async-default-split)
-	  (when (looking-back consult-async-default-split) (delete-char -1))
-	  (insert " ")))
-  (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
-
   (setq icomplete-separator "\n" ;; (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
 		icomplete-compute-delay 0
@@ -94,8 +84,16 @@
 ;; search actions
 (my-add-package 'consult)
 (after! consult
-  ;; Or use `vc-root-dir'
-  (setq consult-project-root-function #'my-project-root))
+  ;; Or use `my-project-root'
+  (setq consult-project-root-function #'vc-root-dir)
+  (defun my-minibuffer-space ()
+	(interactive)
+	(if (and (string-prefix-p consult-async-default-split (minibuffer-contents))
+			 (= 2 (length (split-string (minibuffer-contents) consult-async-default-split))))
+		(insert consult-async-default-split)
+	  (when (looking-back consult-async-default-split) (delete-char -1))
+	  (insert " ")))
+  (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space))
 
 (defun my-consult-grep ()
   "Use ripgrep first then fallback to grep."
