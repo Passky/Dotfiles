@@ -93,7 +93,7 @@
 		(insert consult-async-default-split)
 	  (when (looking-back consult-async-default-split) (delete-char -1))
 	  (insert " ")))
-  (define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space))
+  (define-key minibuffer-inactive-mode-map (kbd "SPC") 'my-minibuffer-space))
 
 (defun my-consult-grep ()
   "Use ripgrep first then fallback to grep."
