@@ -1,11 +1,18 @@
-;; TODO: icomplete-vertical is merging into master,so we remove this later
+;; At least we can have icomplete with evil,which makes debug easier
+;; completion-styles
+(setq completion-category-defaults nil
+	  completion-category-overrides '((file (styles . (partial-completion)))) ; NOTE: file path expand need this
+	  completion-styles '(flex basic substring partial-completion))
+
 (after! icomplete
+  ;; Should we use `icomplate-vertical' package?
   (my-def-key
    :keymaps 'icomplete-minibuffer-map
    "C-n"  'icomplete-forward-completions
    "C-p"  'icomplete-backward-completions
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
+   "C-r"  'previous-matching-history-element
    [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
    "C-c C-o" 'embark-export
    )
@@ -34,37 +41,6 @@
 
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
-
-;; (my-add-package 'icomplete-vertical)
-;; (after! icomplete
-;;   (icomplete-vertical-mode))
-
-;; search actions
-(my-add-package 'consult)
-(after! consult
-  ;; Or use `vc-root-dir'
-  (setq consult-project-root-function #'my-project-root))
-
-(defun my-consult-grep ()
-  (interactive)
-  (if
-	  (executable-find "rg")
-	  (call-interactively #'consult-ripgrep)
-	(call-interactively #'consult-grep)
-	))
-
-(defun my-consult-grep-at-current-dir ()
-  (interactive)
-  (let ((consult-project-root-function nil))
-	(if
-		(executable-find "rg")
-		(call-interactively #'consult-ripgrep)
-	  (call-interactively #'consult-grep)
-	  )))
-
-(my-add-package 'iedit) ; multi cursor
-(with-eval-after-load 'iedit
-  (setq iedit-search-invisible nil))
 
 (with-eval-after-load 'xref
   (when (executable-find "rg")
@@ -115,10 +91,42 @@
 (define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
 (define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
 
-;; completion-styles
-(setq completion-category-defaults nil
-	  completion-category-overrides '((file (styles . (partial-completion)))) ; NOTE: file path expand need this
-	  completion-styles '(flex basic substring partial-completion))
+;; search actions
+(my-add-package 'consult)
+(after! consult
+  ;; Or use `vc-root-dir'
+  (setq consult-project-root-function #'my-project-root))
+
+(defun my-consult-grep ()
+  "Use ripgrep first then fallback to grep."
+  (interactive)
+  (if
+	  (executable-find "rg")
+	  (call-interactively #'consult-ripgrep)
+	(call-interactively #'consult-grep)))
+
+(defun my-consult-grep-at-current-dir ()
+  "Use ripgrep first then fallback to grep,
+search in current directory."
+  (interactive)
+  (if
+	  (executable-find "rg")
+	  (call-interactively #'consult-ripgrep default-directory)
+	(call-interactively #'consult-grep default-directory)))
+
+(my-add-package 'iedit) ; multi cursor
+(with-eval-after-load 'iedit
+  (setq iedit-search-invisible nil))
+;; {{ embark
+(my-add-package 'embark)
+(my-add-package 'embark-consult)
+(with-eval-after-load 'embark
+  (my-ensure 'embark-consult)
+  (my-def-key
+   :keymaps 'embark-general-map
+   "i" 'wgrep-change-to-wgrep-mode)
+  )
+(add-hook #'embark-collect-mode #'embark-consult-preview-minor-mode)
 
 ;; from vmacs
 (my-add-package 'orderless)
@@ -143,19 +151,6 @@
               (string-suffix-p ";" pattern))
       `(orderless-literal . ,(substring pattern 0 -1))))
   (setq orderless-style-dispatchers '(literal-if-= flex-if-comma without-if-$!)))
-
-
-;; {{ embark
-(my-add-package 'embark)
-(my-add-package 'embark-consult)
-(with-eval-after-load 'embark
-  (my-ensure 'embark-consult)
-  (my-def-key
-   :keymaps 'embark-general-map
-   "i" 'wgrep-change-to-wgrep-mode)
-  )
-(add-hook #'embark-collect-mode #'embark-consult-preview-minor-mode)
-
 
 ;; about configration see https://github.com/abo-abo/swiper/commit/28e88ab23a191420a93a4f920ca076674ee53f94
 ;; "M-o"
