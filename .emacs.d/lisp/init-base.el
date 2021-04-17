@@ -140,22 +140,11 @@
 (setq history-delete-duplicates t)
 ;; }}
 
-;; {{ pairs
-(defun my-electric-pair-inhibit (char)
-  "Avoid insert quote or single quote before or backward words, CHAR is for elec."
-  (or
-   ;; input single/double quotes at the end of word
-   (and (memq char '(34 39))
-		(char-before (1- (point)))
-		(eq (char-syntax (char-before (1- (point)))) ?w))
-   (electric-pair-conservative-inhibit char)))
+;; {{ auto close pairs
+(after! elec-pair
+  (setq electric-pair-inhibit-predicate #'electric-pair-conservative-inhibit))
 
-(setq-default electric-pair-inhibit-predicate 'my-electric-pair-inhibit)
-(my-delay-eval #'(lambda () (electric-pair-mode t)
-						 ;; `electric-indent-mode' is enabled by default
-						 ;; (electric-indent-mode -1)
-						 )
-					 0.5)
+(my-delay-eval #'(lambda () (electric-pair-mode t)) 0.5)
 
 
 ;; {{ Tools
@@ -163,7 +152,7 @@
 (defvar my-gc-cons-threshold
   100000006
   "100 mb")
-(my-add-package 'gcmh) ; hack for gc
+(my-add-package 'gcmh)
 (my-delay-eval #'(lambda ()
 						 (setq read-process-output-max (* 3 1024 1024) ; Increase the amount of data which Emacs reads from the process to enhance lsp performance
 							   gc-cons-percentage 0.1)
@@ -174,7 +163,6 @@
 ;; this delete buffers in buffer list which were unused for 3 days
 (my-delay-eval #'(lambda ()
 						(midnight-mode t)))
-
 
 ;; save cursor place
 (save-place-mode 1)

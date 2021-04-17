@@ -176,7 +176,7 @@ Nil to use font supports ligatures."
 
 ;;{{ Theme && modeline
 ;; (my-add-package 'modus-themes)
-(my-add-package 'gruvbox-theme)
+(my-add-package 'doom-themes)
 (when t;; (not (bound-and-true-p *dump*))
   (setq modus-themes-bold-constructs t
 		modus-themes-variable-pitch-ui t
@@ -184,7 +184,7 @@ Nil to use font supports ligatures."
 		modus-themes-slanted-constructs nil
 		;; modus-themes-mode-line '3d
 		)
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'doom-one t))
 
 (defun my-disable-enabled-theme ()
   "Disable all enabled theme."
