@@ -277,5 +277,8 @@ Nil to use font supports ligatures."
 		which-key-add-column-padding 1))
 ;; }}
 
+;; {{ posframe and eldoc setup
+(my-add-package 'posframe) ; nice graphic work
+
 (provide 'init-ui)
 ;;; init-ui.el ends here

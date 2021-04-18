@@ -105,7 +105,6 @@ Return the fastest package archive."
 (my-add-package 'ripgrep) ; add support for rg
 (my-add-package 'dumb-jump)
 (my-add-package 'hydra) ; powerful keyboard support
-(my-add-package 'posframe) ; nice graphic work
 (my-add-package 'benchmark-init) ; yet another esup
 
 

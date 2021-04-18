@@ -50,6 +50,8 @@
 								(setq lsp-pyright-auto-import-completions t
 									  lsp-pyright-use-library-code-for-types t
 									  lsp-pyright-auto-search-paths t)
+								(when (executable-find "python3")
+								  (setq lsp-pyright-python-executable-cmd "python3"))
 								(lsp-deferred)
 								(my-def-key
 								 :keymaps 'python-mode-map
