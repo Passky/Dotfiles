@@ -27,10 +27,15 @@
 		icomplete-hide-common-prefix nil
 		icomplete-tidy-shadowed-file-names t
 		icomplete-in-buffer t
-		icomplete-in-buffer nil))
+		icomplete-prospects-height 10
+		))
 
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
+
+(my-add-package 'icomplete-vertical)
+(after! icomplete
+  (icomplete-vertical-mode))
 
 (with-eval-after-load 'xref
   (when (executable-find "rg")
