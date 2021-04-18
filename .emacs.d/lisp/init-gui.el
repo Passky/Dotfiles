@@ -53,6 +53,7 @@ the horizontal and vertical directions."
   ;; Specify font for all unicode characters
   (cl-loop for font in '("Apple Color Emoji"
 						 "Segoe UI Symbol"
+						 "Noto Color Emoji"
 						 "Symbola"
 						 "Symbol")
 		   when (font-installed-p font)
