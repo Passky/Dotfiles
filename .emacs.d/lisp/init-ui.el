@@ -184,7 +184,7 @@ Nil to use font supports ligatures."
 		modus-themes-slanted-constructs nil
 		;; modus-themes-mode-line '3d
 		)
-  (load-theme 'doom-one t))
+  (load-theme 'doom-dark+ t))
 
 (defun my-disable-enabled-theme ()
   "Disable all enabled theme."
