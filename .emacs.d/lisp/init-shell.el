@@ -103,7 +103,7 @@
 		)
 
   ;; Copy from doom
-  (defun eshell-quit-or-delete-char (arg)
+  (defun my-eshell-quit-or-delete-char (arg)
 	"Delete a character or quit eshell if there's nothing to delete."
 	(interactive "p")
 	(if (and (eolp) (looking-back eshell-prompt-regexp nil))
@@ -184,21 +184,17 @@
 	(interactive)
 	(my-ensure 'em-hist)
 	(save-excursion
-	  (let* (
-		     (start-pos (eshell-beginning-of-input))
+	  (let* ((start-pos (eshell-beginning-of-input))
 			 (input (eshell-get-old-input))
 			 (esh-history (when (> (ring-size eshell-history-ring) 0)
 							(ring-elements eshell-history-ring)))
-			 (all-shell-history (append esh-history (my-parse-zsh-history) (my-parse-bash-history)))
-			 )
+			 (all-shell-history (append esh-history (my-parse-zsh-history) (my-parse-bash-history))))
+		(eshell-kill-input)
 		(let* ((command (my-completing-read "Command: "
-								  (delete-dups all-shell-history)
-								  :initial-input input
-								  :require-match t
-								  ))
-			   )
-		  (eshell-kill-input)
-		  (insert command)
+											(delete-dups all-shell-history)
+											:require-match t
+											:action 'insert
+											)))
 		  )))
 	;; move cursor to eol
 	(end-of-line))

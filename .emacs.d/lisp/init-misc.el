@@ -20,7 +20,8 @@ split cands with `crm-separator'."
 					  hist)))
 	  ;; (setq selected (or (assoc selected collection) selected))
 	  ;; make sure only the string/file is passed to action
-	  (if action (mapc action selected))
+	  (mapc action selected)
+	  (mes! selected)
 	  selected))))
 
 (defvar my-project-file '(".svn" ".hg" ".git" ".root" "makefile" "Makefile")
