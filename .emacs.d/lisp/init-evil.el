@@ -63,7 +63,7 @@
   (evil-collection-define-key 'normal 'occur-mode-map
 	;; Keybindings tweaks
 	;; consistent with ivy
-	(kbd "C-c C-e") 'occur-edit-mode)
+	(kbd "C-x C-o") 'occur-edit-mode)
 
   (my-keychord-mode 1)
   (my-keychord-define evil-insert-state-map "kj" 'evil-normal-state)
