@@ -175,16 +175,12 @@ Nil to use font supports ligatures."
   (setq rainbow-delimiters-max-face-count 3))
 
 ;;{{ Theme && modeline
-;; (my-add-package 'modus-themes)
-(my-add-package 'doom-themes)
-(when t;; (not (bound-and-true-p *dump*))
-  (setq modus-themes-bold-constructs t
-		modus-themes-variable-pitch-ui t
-		modus-themes-variable-pitch-headings t
-		modus-themes-slanted-constructs nil
-		;; modus-themes-mode-line '3d
-		)
-  (load-theme 'doom-one t))
+;; (my-add-package 'modus-vivendi)
+(setq modus-themes-bold-constructs t
+	  modus-themes-variable-pitch-ui t
+	  modus-themes-variable-pitch-headings t
+	  modus-themes-slanted-constructs nil)
+(load-theme 'modus-vivendi t)
 
 (defun my-disable-enabled-theme ()
   "Disable all enabled theme."

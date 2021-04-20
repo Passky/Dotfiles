@@ -33,9 +33,19 @@
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
 
+(my-add-package 'marginalia)
 (my-add-package 'icomplete-vertical)
 (after! icomplete
-  (icomplete-vertical-mode))
+  (icomplete-vertical-mode)
+  (marginalia-mode))
+
+(after! marginalia
+  ;; REVIEW: will there be performance issue?
+  ;; use heavy mode by default
+  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)) 
+  ;; use `marginalia-cycle' switch from light or heavy mode
+  (define-key icomplete-minibuffer-map (kbd "M-a") 'marginalia-cycle))
+
 
 (with-eval-after-load 'xref
   (when (executable-find "rg")
