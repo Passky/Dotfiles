@@ -13,6 +13,10 @@
 (unless (functionp 'undo-redo)
   (my-add-package 'undo-fu))
 
+;; use subWord as example
+;; `w' will move cursor to sub|Word instead of subWord|
+(global-subword-mode)
+
 ;; for evil-collection
 (setq-default evil-want-keybinding nil) ; set it to nil before loading evil
 ;; use evil everywhere
