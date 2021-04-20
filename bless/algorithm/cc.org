@@ -70,4 +70,5 @@ a^a 异或
 
 *** string to int
 since string is a complex construct
-use =std::stoi();=
+use =std::stoi();= =std::stod;= or what.
+
