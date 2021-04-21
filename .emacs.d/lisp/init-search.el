@@ -5,7 +5,6 @@
 	  completion-styles '(flex basic substring partial-completion))
 
 (after! icomplete
-  ;; Should we use `icomplate-vertical' package?
   (my-def-key
    :keymaps 'icomplete-minibuffer-map
    "C-n"  'icomplete-forward-completions
@@ -42,8 +41,8 @@
 (after! marginalia
   ;; REVIEW: will there be performance issue?
   ;; use heavy mode by default
-  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)) 
-  ;; use `marginalia-cycle' switch from light or heavy mode
+  ;; (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)) 
+  ;; use `marginalia-cycle' to switch from light or heavy mode
   (define-key icomplete-minibuffer-map (kbd "M-a") 'marginalia-cycle))
 
 
