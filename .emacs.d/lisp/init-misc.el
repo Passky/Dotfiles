@@ -21,7 +21,6 @@ split cands with `crm-separator'."
 	  ;; (setq selected (or (assoc selected collection) selected))
 	  ;; make sure only the string/file is passed to action
 	  (mapc action selected)
-	  (mes! selected)
 	  selected))))
 
 (defvar my-project-file '(".svn" ".hg" ".git" ".root" "makefile" "Makefile")
@@ -33,8 +32,8 @@ May be set using .dir-locals.el.  Checks each entry if set to a list.")
 (defun my-project-root ()
   "Return project root or `default-directory'."
   (let* ((project-root  (cl-some (apply-partially 'locate-dominating-file
-													 default-directory)
-									my-project-file)))
+												  default-directory)
+								 my-project-file)))
 	(or (and project-root (file-name-as-directory project-root))
 		default-directory)))
 
