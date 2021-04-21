@@ -14,7 +14,7 @@ set history size 4096
 # print
 #set print elements 0
 set print array-indexes on
-set print array off
+set print array on
 set print pretty on
 set print object on
 set print static-members on
