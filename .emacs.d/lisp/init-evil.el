@@ -177,8 +177,6 @@
    "]" 'flymake-goto-next-error
    "{" 'evil-prev-flyspell-error
    "}" 'evil-next-flyspell-error
-   ;; "fd" 'counsel-dired-jump
-   ;; "fD" 'counsel-dired
    "ff" 'find-file
    "fe" 'consult-flymake
    "fF" 'find-file-other-window
@@ -248,11 +246,6 @@
    ;;{{ counsel
    "cp" 'consult-yank-pop
    "cP" 'consult-yank
-   ;; "ca" 'counsel-linux-app
-   ;; "cgl" 'counsel-git-log
-   ;; "cgb" 'counsel-git-change-worktree
-   ;; "cgc" 'counsel-git-checkout
-   ;; "cgs" 'counsel-git-stash
 
    ;;{{ Gdb
    "dw" 'gud-watch
