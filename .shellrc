@@ -715,7 +715,7 @@ function update_emacs()
   git clone --depth=1 https://gitee.com/mirrors/emacs.git ~/.myemacs
   cd ~/.myemacs
   ./autogen.sh
-  ./configure --without-x --without-sound --prefix=$HOME/.local --with-gnutls=ifavailable --program-transform-name='s/^ctags$/ctags.emacs/' --enable-link-time-optimization  CFLAGS="-O3 -march=native"
+  ./configure --without-x --without-sound --prefix=$HOME/.local --with-gnutls=ifavailable --program-transform-name='s/^ctags$/ctags.emacs/' --enable-link-time-optimization  CFLAGS="-O3 -march=native" --with-native-compilation=ifavailable
 
   make -j `get_logic_cpu_cores`
   make install
@@ -728,7 +728,7 @@ function update_gui_emacs()
   git clone --depth=1 https://gitee.com/mirrors/emacs.git ~/.myemacs
   cd ~/.myemacs
   ./autogen.sh
-  ./configure --prefix=$HOME/.local --with-xft=ifavailable --with-mailutils=ifavailable -with-xpm=ifavailable --with-jpeg=ifavailable --with-gif=ifavailable --with-tiff=ifavailable --with-png=ifavailable  --with-json=ifavailable --with-gnutls=ifavailable --program-transform-name='s/^ctags$/ctags.emacs/' --enable-link-time-optimization  CFLAGS="-O3 -march=native"
+  ./configure --prefix=$HOME/.local --with-xft=ifavailable --with-mailutils=ifavailable -with-xpm=ifavailable --with-jpeg=ifavailable --with-gif=ifavailable --with-tiff=ifavailable --with-png=ifavailable  --with-json=ifavailable --with-gnutls=ifavailable --program-transform-name='s/^ctags$/ctags.emacs/' --enable-link-time-optimization  CFLAGS="-O3 -march=native" --with-native-compilation=ifavailable
 
   make -j `get_logic_cpu_cores`
   make install
