@@ -130,6 +130,7 @@
 
 ;; {{ windows and jumper
 ;; winner-mode ; undo&redo for window manager
+(my-add-package 'transient) ;; TODO: remove this after merged into master.
 (add-hook 'after-init-hook 'winner-mode)
 (setq winner-boring-buffers '("*Completions*"
 							  "*Compile-Log*"
@@ -141,6 +142,32 @@
 							  "*Buffer List*"
 							  "*Ibuffer*"
 							  "*esh command on file*"))
+(after! winner
+  (defun my-transient-winner-undo ()
+	"Transient version of `winner-undo'."
+	(interactive)
+	(let ((echo-keystrokes nil))
+	  (winner-undo)
+	  (message "Winner: [u]ndo [r]edo")
+	  (set-transient-map
+	   (let ((map (make-sparse-keymap)))
+		 (define-key map [?u] #'winner-undo)
+		 (define-key map [?r] #'winner-redo)
+		 map)
+	   t)))
+
+  (defun my-transient-winner-redo ()
+	"Transient version of `winner-redo'."
+	(interactive)
+	(let ((echo-keystrokes nil))
+	  (winner-redo)
+	  (message "Winner: [u]ndo [r]edo")
+	  (set-transient-map
+	   (let ((map (make-sparse-keymap)))
+		 (define-key map [?u] #'winner-undo)
+		 (define-key map [?r] #'winner-redo)
+		 map)
+	   t))))
 
 ;; Jump to definition, used as a fallback of lsp-find-definition
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)

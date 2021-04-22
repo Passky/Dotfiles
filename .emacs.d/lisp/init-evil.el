@@ -159,8 +159,8 @@
    "wl" 'windmove-right
    "wo" 'delete-other-windows
    "ws" 'window-swap-states
-   "wu" 'winner-undo
-   "wr" 'winner-redo
+   "wu" 'my-transient-winner-undo
+   "wr" 'my-transient-winner-redo
    "wc" 'delete-window
    "wt" 'my-trans-window-split
    "wb" 'my-vsplit-window ; vertical split window
