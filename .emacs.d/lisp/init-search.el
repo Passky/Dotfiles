@@ -27,15 +27,15 @@
 		icomplete-tidy-shadowed-file-names t
 		icomplete-in-buffer t
 		icomplete-prospects-height 10
-		))
+		)
+  ;; it's in emacs core now!
+  (icomplete-vertical-mode))
 
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
 
 (my-add-package 'marginalia)
-(my-add-package 'icomplete-vertical)
 (after! icomplete
-  (icomplete-vertical-mode)
   (marginalia-mode))
 
 (after! marginalia
