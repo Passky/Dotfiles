@@ -95,7 +95,7 @@
 ;; @see http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t) ; do not replace tab with space
-(setq-default tab-always-indent nil) ; self-insert
+(setq-default tab-always-indent 'complete) ; self-insert
 
 ;; https://github.com/casouri/lunarymacs/
 ;; So nice!
