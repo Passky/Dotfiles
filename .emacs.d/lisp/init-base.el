@@ -132,7 +132,7 @@
                  (indent-for-tab-command))
                 (t (insert " "))))))))
 
-(my-def-key
+(general-define-key
  [remap backward-delete-char-untabify] 'backward-delete-char
  [remap backward-delete-char-untabify] #'luna-hungry-delete
  [remap delete-indentation] #'luna-hungry-delete

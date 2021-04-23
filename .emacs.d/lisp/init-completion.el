@@ -45,13 +45,15 @@
 
 (with-eval-after-load 'company
   ;; (company-ctags-auto-setup)
-  (my-def-key
+  (general-define-key
    :keymaps 'company-active-map
    "M-o" 'counsel-company
    "C-p"     'company-select-previous
    "C-n"     'company-select-next
    "C-s"     'company-filter-candidates
-   "<esc>" 'company-abort
+   "<esc>" 'company-abort)
+
+  (general-define-key
    :keymaps 'company-search-map
    "C-p"    'company-select-previous
    "C-n"    'company-select-next

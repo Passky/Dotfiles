@@ -53,14 +53,14 @@
 								(when (executable-find "python3")
 								  (setq lsp-pyright-python-executable-cmd "python3"))
 								(lsp-deferred)
-								(my-def-key
+								(general-define-key
 								 :keymaps 'python-mode-map
 								 [remap lsp-format-buffer] 'yapfify-buffer
 								 [remap lsp-format-region] 'yapfify-region)
 								))
 
 (with-eval-after-load 'lsp-mode
-  (my-def-key
+  (general-define-key
    :keymaps 'lsp-mode-map
    [remap xref-find-references] 'lsp-ui-peek-find-references
    [remap evil-lookup] 'lsp-ui-doc-show

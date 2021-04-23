@@ -9,6 +9,8 @@
 (my-add-package 'evil-collection)
 (my-add-package 'evil-nerd-commenter)
 (my-add-package 'evil-surround)
+(my-add-package 'key-chord)
+(my-add-package 'general)
 (my-add-package 'ace-window) ; quick window move
 (unless (functionp 'undo-redo)
   (my-add-package 'undo-fu))
@@ -65,43 +67,37 @@
 	;; consistent with ivy
 	(kbd "C-x C-o") 'occur-edit-mode)
 
-  (my-keychord-mode 1)
-  (my-keychord-define evil-insert-state-map "kj" 'evil-normal-state)
+  (key-chord-mode 1)
+  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
 
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
   (evil-ex-define-cmd "Q[uit]" 'quit-window)
 
-  (my-key-def-preset :evil-normal :keymaps '(evil-normal-state-map))
-  (my-key-def-preset :evil-visual :keymaps '(evil-visual-state-map))
-  (my-key-def-preset :evil-insert :keymaps '(evil-insert-state-map))
-  (my-key-def-preset :evil-ex :keymaps '(evil-ex-completion-map))
-  (my-def-key :evil-normal
-			  "gd" 'xref-find-definitions
-			  "gD" 'xref-find-definitions-other-window
-			  "gr" 'xref-find-references
-			  "gl" 'evil-avy-goto-line
-			  "gs" 'evil-avy-goto-word-1
-			  "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
-			  "C-u" 'scroll-down
-			  "j" 'next-line
-			  "k" 'previous-line
-			  "J" 'nil
-			  :evil-visual
-			  "j" 'next-line
-			  "k" 'previous-line
-			  "C-c" 'keyboard-quit
-			  ;; "j" 'evil-next-visual-line
-			  ;; "k" 'evil-previous-visual-line
-			  :evil-insert
-              ;; [?\t] 'completion-at-point
-			  ;; [backspace] 'luna-hungry-delete
-			  ;; [?\d] 'luna-hungry-delete
-			  :evil-ex
-			  "C-a" 'move-beginning-of-line
-			  "C-b" 'backward-char
-			  "M-p" 'previous-complete-history-element
-			  "M-n" 'next-complete-history-element
-			  )
+  (general-define-key
+   :states 'visual
+   "j" 'next-line
+   "k" 'previous-line
+   "C-c" 'keyboard-quit)
+  (general-define-key
+   :states 'normal
+   "gd" 'xref-find-definitions
+   "gD" 'xref-find-definitions-other-window
+   "gr" 'xref-find-references
+   "gl" 'evil-avy-goto-line
+   "gs" 'evil-avy-goto-word-1
+   "gh" 'beginning-of-defun
+   "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
+   "C-u" 'scroll-down
+   "j" 'next-line
+   "k" 'previous-line
+   "J" 'nil
+   )
+  (general-define-key
+   :states 'ex
+   "C-a" 'move-beginning-of-line
+   "C-b" 'backward-char
+   "M-p" 'previous-complete-history-element
+   "M-n" 'next-complete-history-elemen)
 
   ;; {{ evil-surround
   ;; left tag will comes with an extra space, like `[' 
@@ -135,22 +131,12 @@
 	  (kbd "TAB") 'markdown-cycle))
 
   ;;{{ My leader
-  (my-key-def-preset :my-space-leader
-	:prefix "SPC"
-	:keymaps '(evil-normal-state-map evil-visual-state-map))
+  (general-create-definer my-leader-def
+	;; :prefix my-leader
+	:prefix "SPC")
 
-  (my-key-def-preset :my-backslash-leader
-	:prefix "\\"
-	:keymaps '(evil-normal-state-map evil-visual-state-map))
-
-  ;; my setup for specific-lang
-  (my-key-def-preset :my-lang-leader
-	:prefix ","
-	:keymaps '(evil-normal-state-map evil-visual-state-map))
-
-  (my-def-key
-   :my-space-leader
-   ;;{{ window move
+  (my-leader-def
+   :states 'normal
    "jj" 'scroll-other-window
    "kk" 'scroll-other-window-up
    "wh" 'windmove-left
@@ -187,7 +173,7 @@
    "fm" 'my-recentf
    "fM" 'my-recentf-the-other-window
    "fl" 'consult-line
-   ; "fL" 'consult-line-all-buffer
+										; "fL" 'consult-line-all-buffer
    "fb" 'switch-to-buffer
    "fB" 'switch-to-buffer-other-window
    "fs" 'imenu
@@ -323,8 +309,14 @@
    "o," 'org-priority
    "o." 'org-time-stamp
    "dp" 'luna-hungry-delete ; or will cause paren error
+   )
 
-   :my-backslash-leader
+  (general-create-definer my-backslash-leader
+   ;; :prefix my-leader
+   :prefix "\\")
+
+  (my-backslash-leader
+   :states 'normal
    ;;{{ file-action
    "frd" 'my-remove-dos-eol
    "fd" 'my-delete-this-file

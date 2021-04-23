@@ -217,11 +217,8 @@
   )
 
 ;;; term-mode and ansi-term and shell-mode
-(my-key-def-preset :term-raw-map :keymaps 'term-raw-map) ; char-mode
-(my-key-def-preset :term-mode-map :keymaps 'term-raw-map) ; line-mode
-(my-key-def-preset :shell-mode-map :keymaps 'term-raw-map)
-(my-def-key
- :term-raw-map
+(general-define-key
+ :keymaps 'term-raw-map
  "M-x" nil ; never bind my M-x
  )
 

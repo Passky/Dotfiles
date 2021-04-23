@@ -78,7 +78,6 @@
 						'init-bootstrap ;; setup pakcage-repo and many package-about functions and basic packages
 						'init-misc ; my misc
 						'init-func ; my functions
-						'init-mykey ;; replace global-set-key or define-key in long set
 						'init-base ;; most builtin package and mode 
 						(when *win64*
 						  'init-windows)

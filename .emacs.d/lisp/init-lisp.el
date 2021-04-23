@@ -16,20 +16,22 @@
 									  (require 'lsp-racket)
 									  (lsp))
 								  (progn
-									(my-def-key :keymaps 'racket-mode-map
-												[remap evil-lookup] 'racket-xp-describe
-												[remap flymake-goto-next-error] 'racket-xp-next-error
-												[remap flymake-goto-prev-error] 'racket-xp-previous-error)
+									(general-define-key
+									 :keymaps 'racket-mode-map
+									 [remap evil-lookup] 'racket-xp-describe
+									 [remap flymake-goto-next-error] 'racket-xp-next-error
+									 [remap flymake-goto-prev-error] 'racket-xp-previous-error)
 									"lr" 'racket-xp-rename
 									(racket-xp-mode))
 								  ))) ; provide check documentation describe
 (after! racket-mode
-  (my-def-key :keymaps 'racket-mode-map
-			  [remap quickrun-shell] 'racket-run-with-errortrace
-			  [remap quickrun] 'racket-run-with-debugging
-			  ;; [backspace] 'luna-hungry-delete
-			  ;; [?\d] 'luna-hungry-delete
-			  )
+  (general-define-key
+   :keymaps 'racket-mode-map
+   [remap quickrun-shell] 'racket-run-with-errortrace
+   [remap quickrun] 'racket-run-with-debugging
+   ;; [backspace] 'luna-hungry-delete
+   ;; [?\d] 'luna-hungry-delete
+   )
   
   (add-hook 'racket-xp-mode-hook ; improve performance
 			(lambda ()
