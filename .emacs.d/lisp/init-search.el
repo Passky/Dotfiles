@@ -28,14 +28,16 @@
 		icomplete-in-buffer t
 		icomplete-prospects-height 10
 		)
-  ;; it's in emacs core now!
-  (icomplete-vertical-mode))
+  )
 
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
 
 (my-add-package 'marginalia)
+(my-add-package 'icomplete-vertical)
 (after! icomplete
+  ;; it will be in emacs core soon!
+  (icomplete-vertical-mode)
   (marginalia-mode))
 
 (after! marginalia
