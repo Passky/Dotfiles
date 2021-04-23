@@ -176,7 +176,7 @@ Nil to use font supports ligatures."
   (setq rainbow-delimiters-max-face-count 3))
 
 ;;{{ Theme && modeline
-;; (my-add-package 'modus-vivendi)
+(my-add-package 'modus-vivendi-theme)
 (setq modus-themes-bold-constructs t
 	  modus-themes-variable-pitch-ui t
 	  modus-themes-variable-pitch-headings t
