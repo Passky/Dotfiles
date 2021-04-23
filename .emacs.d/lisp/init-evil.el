@@ -86,6 +86,7 @@
    "gl" 'evil-avy-goto-line
    "gs" 'evil-avy-goto-word-1
    "gh" 'beginning-of-defun
+   "ge" 'end-of-defun
    "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
    "C-u" 'scroll-down
    "j" 'next-line
@@ -107,6 +108,7 @@
   ;; evil-nerd-commenter
   (autoload 'evilnc-comment-operator "evil-nerd-commenter")
   (define-key evil-motion-state-map "gc" 'evilnc-comment-operator)
+  (define-key evil-motion-state-map "gC" 'evilnc-comment-operator)
 
   ;; matchit
   (global-evil-matchit-mode t)
@@ -132,11 +134,11 @@
 
   ;;{{ My leader
   (general-create-definer my-leader-def
+	:states '(normal visual)
 	;; :prefix my-leader
 	:prefix "SPC")
 
   (my-leader-def
-   :states 'normal
    "jj" 'scroll-other-window
    "kk" 'scroll-other-window-up
    "wh" 'windmove-left
@@ -312,27 +314,27 @@
    )
 
   (general-create-definer my-backslash-leader
-   ;; :prefix my-leader
-   :prefix "\\")
+	:states '(normal visual)
+	;; :prefix my-leader
+	:prefix "\\")
 
   (my-backslash-leader
-   :states 'normal
-   ;;{{ file-action
-   "frd" 'my-remove-dos-eol
-   "fd" 'my-delete-this-file
-   "frf" 'my-rename-this-file-and-buffer
-   "ss" 'my-reload-emacs
+	;;{{ file-action
+	"frd" 'my-remove-dos-eol
+	"fd" 'my-delete-this-file
+	"frf" 'my-rename-this-file-and-buffer
+	"ss" 'my-reload-emacs
   ;;;{{ tools
-   "y" 'my-system-copy
-   "Y" 'my-kill-ring-to-clipboard
-   "p" 'my-system-paste
-   "P" 'my-clipboard-to-kill-ring
-   "q" 'my-force-quit-without-asking
-   "ef" 'eval-defun
-   "er" 'eval-region ;; eval text selection
-   "eb" 'eval-buffer ;; eval buffer
-   "ee" 'eval-expression ;;
-   ))
+	"y" 'my-system-copy
+	"Y" 'my-kill-ring-to-clipboard
+	"p" 'my-system-paste
+	"P" 'my-clipboard-to-kill-ring
+	"q" 'my-force-quit-without-asking
+	"ef" 'eval-defun
+	"er" 'eval-region ;; eval text selection
+	"eb" 'eval-buffer ;; eval buffer
+	"ee" 'eval-expression ;;
+	))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here.
