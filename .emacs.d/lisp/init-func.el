@@ -5,7 +5,6 @@
 (autoload 'buf-move-right "buffer-move" "move buffer" t)
 (autoload 'buf-move-up "buffer-move" "move buffer" t)
 (autoload 'buf-move-down "buffer-move" "move buffer" t)
-(autoload 'dumb-jump-go "dumb-jump" "" t)
 ;;}}
 
 (defun mes! (symbol)

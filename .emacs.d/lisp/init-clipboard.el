@@ -24,9 +24,12 @@ If HINT is empty, use symbol at point."
 (autoload 'xclip-set-selection "xclip" "" t)
 (autoload 'xclip-get-selection "xclip" "" t)
 
-;; (setq save-interprogram-paste-before-kill nil)
 ;; not use system clipboard
-(setq select-enable-clipboard nil)
+(setq select-enable-clipboard nil
+	  ;; save current clipboard text
+	  save-interprogram-paste-before-kill nil
+	  ;; eliminate duplicates
+	  kill-do-not-save-duplicates t)
 
 (defun copy-yank-str (msg &optional clipboard-only)
   (unless clipboard-only (kill-new msg))

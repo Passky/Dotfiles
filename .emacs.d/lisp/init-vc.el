@@ -27,6 +27,7 @@
 (setq vc-follow-symlinks t
 	  ;; auto revert git info(used by diff-hl)
 	  auto-revert-check-vc-info t
+	  global-auto-revert-non-file-buffers t
 	  vc-allow-async-revert t ; commit without all changes been found,just smoother
 	  vc-make-backup-files nil ; Do not make backups of files, not safe
 	  )

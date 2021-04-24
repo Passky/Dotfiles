@@ -103,7 +103,6 @@ Return the fastest package archive."
 (my-add-package 'esup) ; now use benchmark-init too
 (my-add-package 'rainbow-delimiters)
 (my-add-package 'ripgrep) ; add support for rg
-(my-add-package 'dumb-jump)
 (my-add-package 'hydra) ; powerful keyboard support
 (my-add-package 'benchmark-init) ; yet another esup
 

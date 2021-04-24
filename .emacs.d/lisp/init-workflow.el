@@ -170,7 +170,9 @@
 	   t))))
 
 ;; Jump to definition, used as a fallback of lsp-find-definition
+(my-add-package 'dumb-jump)
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(autoload 'dumb-jump-go "dumb-jump" "" t)
 (with-eval-after-load 'dumb-jump
   (setq dumb-jump-quiet t
 		dumb-jump-aggressive nil

@@ -1,8 +1,36 @@
-;; At least we can have icomplete with evil,which makes debug easier
+;; {{ minibuffer completion
+;; Do not allow the cursor in the minibuffer prompt
+(setq minibuffer-prompt-properties
+	  '(read-only t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+;; minibuffer
+(setq enable-recursive-minibuffers t
+	  minibuffer-eldef-shorten-default t
+	  history-delete-duplicates t)          ; remove repeat history
+(minibuffer-depth-indicate-mode)
+(minibuffer-electric-default-mode)
+
+(define-key minibuffer-local-map [escape] 'abort-recursive-edit)
+(define-key minibuffer-local-ns-map [escape] 'abort-recursive-edit)
+(define-key minibuffer-local-completion-map [escape] 'abort-recursive-edit)
+(define-key minibuffer-local-must-match-map [escape] 'abort-recursive-edit)
+(define-key minibuffer-local-isearch-map [escape] 'abort-recursive-edit)
+(define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
+(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
+(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
+
 ;; completion-styles
-(setq completion-category-defaults nil
+(setq completion-auto-help nil ; NOTE: I do not know what its mean
+	  completion-category-defaults nil
 	  completion-category-overrides '((file (styles . (partial-completion)))) ; NOTE: file path expand need this
-	  completion-styles '(flex basic substring partial-completion))
+	  completion-styles '(flex basic substring partial-completion)
+	  completion-ignore-case t
+	  completion-cycle-threshold 3
+	  read-file-name-completion-ignore-case t
+	  read-buffer-completion-ignore-case t
+	  )
+;; }}
 
 (after! icomplete
   (general-define-key
@@ -12,10 +40,10 @@
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
    "C-r"  'previous-matching-history-element
-   [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
+   ;; [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
    "C-c C-o" 'embark-export
    )
-  (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
+  ;; (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
   (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
   (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
 
@@ -28,7 +56,8 @@
 		icomplete-in-buffer t
 		icomplete-prospects-height 10
 		)
-  )
+  ;; highlight current selected
+  (custom-set-faces '(icomplete-first-match ((t (:inherit highlight))))))
 
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)))
@@ -87,19 +116,7 @@
    [remap isearch-delete-char] 'isearch-del-char))
 ;; }}
 
-;; {{ minibuffer completion
-;; Do not allow the cursor in the minibuffer prompt
-(setq minibuffer-prompt-properties
-	  '(read-only t cursor-intangible t face minibuffer-prompt))
-(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-;; Enable recursive minibuffers
-(setq enable-recursive-minibuffers t)
-(setq history-delete-duplicates t)          ; remove repeat history
-(define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
-(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
-
-;; search actions
+;; {{ search actions
 (my-add-package 'consult)
 (after! consult
   ;; Or use `my-project-root'
