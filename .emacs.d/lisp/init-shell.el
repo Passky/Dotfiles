@@ -93,9 +93,9 @@
 		;; Don't record command in history if starts with whitespace
 		eshell-input-filter 'eshell-input-filter-initial-space
 		eshell-error-if-no-glob t
-		eshell-hist-ignoredups t ; ignore repeat
+		eshell-hist-ignoredups t ; ignore duplicates
 		eshell-glob-case-insensitive t
-		eshell-highlight-prompt t ; apart from highlight,it also make prompt read-only
+		eshell-highlight-prompt t ; apart from highlight,it also makes prompt read-only
 		eshell-cmpl-ignore-case t ; ignore case when cmpl filename
 
 		eshell-prompt-function 'eshell-prompt

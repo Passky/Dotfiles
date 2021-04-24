@@ -135,15 +135,14 @@
 		xref-show-definitions-function #'consult-xref))
 
 (defun my-consult-grep ()
-  "Use ripgrep first then fallback to grep."
+  "Use ripgrep first or fallback to grep."
   (interactive)
-  (if
-	  (executable-find "rg")
+  (if (executable-find "rg")
 	  (call-interactively #'consult-ripgrep)
 	(call-interactively #'consult-grep)))
 
 (defun my-consult-grep-at-current-dir ()
-  "Use ripgrep first then fallback to grep,
+  "Use ripgrep first or fallback to grep,
 search in current directory."
   (interactive)
   (let ((consult-project-root-function nil))
