@@ -30,21 +30,11 @@
 ;; }}
 
 (after! icomplete
-  (general-define-key
-   :keymaps 'icomplete-minibuffer-map
-   "C-n"  'icomplete-forward-completions
-   "C-p"  'icomplete-backward-completions
-   "M-n"  'icomplete-forward-completions
-   "M-p"  'icomplete-backward-completions
-   "C-r"  'previous-matching-history-element
-   [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
-   "C-c C-o" 'embark-export
-   )
   (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
   (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
   (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
 
-  (setq icomplete-separator "\n" ;; (propertize " ☯" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
+  (setq icomplete-separator (propertize "☯\n" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
 		icomplete-compute-delay 0
 		icomplete-show-matches-on-no-input t
@@ -64,7 +54,17 @@
 (after! icomplete
   ;; it will be in emacs core soon!
   (icomplete-vertical-mode)
-  (marginalia-mode))
+  (marginalia-mode)
+  (general-define-key
+   :keymaps 'icomplete-minibuffer-map
+   "C-n"  'icomplete-forward-completions
+   "C-p"  'icomplete-backward-completions
+   "M-n"  'icomplete-forward-completions
+   "M-p"  'icomplete-backward-completions
+   "C-r"  'previous-matching-history-element
+   [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
+   "C-c C-o" 'embark-export
+   ))
 
 (after! marginalia
   ;; REVIEW: will there be performance issue?
