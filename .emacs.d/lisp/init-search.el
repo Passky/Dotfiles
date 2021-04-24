@@ -60,7 +60,7 @@
   (custom-set-faces '(icomplete-first-match ((t (:inherit highlight))))))
 
 (my-delay-eval #'(lambda ()
-				   (icomplete-mode)))
+				   (icomplete-mode)) 0) 
 
 (my-add-package 'marginalia)
 (my-add-package 'icomplete-vertical)
