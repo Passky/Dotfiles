@@ -7,7 +7,7 @@
 ;; minibuffer
 (setq enable-recursive-minibuffers t
 	  minibuffer-eldef-shorten-default t
-	  history-delete-duplicates t)          ; remove repeat history
+	  history-delete-duplicates t)
 (minibuffer-depth-indicate-mode)
 (minibuffer-electric-default-mode)
 
