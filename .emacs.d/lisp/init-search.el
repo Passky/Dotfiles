@@ -16,9 +16,6 @@
 (define-key minibuffer-local-completion-map [escape] 'abort-recursive-edit)
 (define-key minibuffer-local-must-match-map [escape] 'abort-recursive-edit)
 (define-key minibuffer-local-isearch-map [escape] 'abort-recursive-edit)
-(define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
-(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
-(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
 
 ;; completion-styles
 (setq completion-auto-help nil ; NOTE: I do not know what its mean
@@ -40,10 +37,10 @@
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
    "C-r"  'previous-matching-history-element
-   ;; [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
+   [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
    "C-c C-o" 'embark-export
    )
-  ;; (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
+  (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
   (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
   (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
 
@@ -160,6 +157,9 @@ search in current directory."
 ;; {{ embark
 (my-add-package 'embark)
 (my-add-package 'embark-consult)
+(define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
+(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
+(define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
 (with-eval-after-load 'embark
   (my-ensure 'embark-consult)
   (general-define-key
