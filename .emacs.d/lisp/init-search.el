@@ -115,6 +115,9 @@
 
 ;; {{ search actions
 (my-add-package 'consult)
+;; TODO: remove this in emacs 28
+(setq xref-show-xrefs-function #'consult-xref
+	  xref-show-definitions-function #'consult-xref)
 (after! consult
   ;; Or use `my-project-root'
   (setq consult-project-root-function #'vc-root-dir
@@ -128,11 +131,7 @@
 	  (when (looking-back consult-async-default-split) (delete-char -1))
 	  (insert " ")))
   (after! icomplete
-	(define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space))
-
-  ;; TODO: remove this in emacs 28
-  (setq xref-show-xrefs-function #'consult-xref
-		xref-show-definitions-function #'consult-xref))
+	(define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)))
 
 (defun my-consult-grep ()
   "Use ripgrep first or fallback to grep."
