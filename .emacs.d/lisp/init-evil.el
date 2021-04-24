@@ -158,8 +158,9 @@
    "ps" 'project-async-shell-command
    "pt" 'project-eshell
    "pm" 'project-compile
-   "pg" 'project-vc-dir
    "pp" 'project-switch-project
+   "pf" 'project-find-file
+   "pg" 'project-find-regexp
 
    ;;{{ Find && Grep
    "[" 'flymake-goto-prev-error
@@ -220,6 +221,7 @@
    "gdm" 'smerge-ediff ; use ediff to resolve conflicts
    "gpl" 'vc-pull ; git pull
    "gpp" 'vc-push ; git push
+   "gpd" 'project-vc-dir
    "gm" 'vc-merge ; git merge
    "gh" 'vc-insert-headers ; insert head into file
    "gcc" 'vc-checkout ; git checkout
