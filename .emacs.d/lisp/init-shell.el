@@ -139,6 +139,11 @@
 		(eshell-command-result unpack-command))
 	  ))
 
+  (defun eshell/mybg (process &rest args)
+	"Execute string PROCESS asynchronously."
+	(let ((exec-command (concat process " " (mapconcat 'identity args " "))))
+	  (my-async-shell-command exec-command)))
+
 
   (defun my-kill-word-backward ()
 	"Let Eshell kill word acting like zsh."

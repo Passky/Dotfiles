@@ -24,15 +24,8 @@
 ;; company-mode
 (my-add-package 'company)
 (my-add-package 'company-prescient)
-;; Tag based completion
-;; (my-add-package 'company-ctags)
-(my-add-package 'counsel-etags)
-(with-eval-after-load 'counsel-etags
-  (setq counsel-etags-update-interval 6)
-  (add-hook 'prog-mode-hook
-			(lambda ()
-			  (add-hook 'after-save-hook
-						'counsel-etags-virtual-update-tags 'append 'local))))
+;; TODO: add a tag based completion system(works out of box and async and compatable with capf)
+
 
 (add-hook 'after-init-hook 'global-company-mode)
 (when (fboundp 'evil-declare-change-repeat)

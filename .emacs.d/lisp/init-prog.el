@@ -246,7 +246,8 @@
 			   "\\.gitignore\\'")
 
 (add-auto-mode 'conf-space-mode
-			   "/cgdbrc\\'")
+			   "/cgdbrc\\'"
+			   "/.clang-format\\'")
 
 (provide 'init-prog)
 ;;; init-prog.el ends here

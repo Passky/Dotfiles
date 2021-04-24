@@ -83,9 +83,10 @@
    "gd" 'xref-find-definitions
    "gD" 'xref-find-definitions-other-window
    "gr" 'xref-find-references
+   "gR" 'xref-find-apropos
    "gl" 'evil-avy-goto-line
    "gs" 'evil-avy-goto-word-1
-   "gh" 'beginning-of-defun
+   "gb" 'beginning-of-defun
    "ge" 'end-of-defun
    "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
    "C-u" 'scroll-down

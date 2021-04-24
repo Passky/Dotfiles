@@ -15,6 +15,7 @@
 		  ("DEPRECATED" . ,(face-foreground 'font-lock-doc-face))
 		  ("NEXT" . ,(face-foreground 'warning))
 		  ("DONE" . ,(face-foreground 'success))
+		  ("FIXED" . ,(face-foreground 'success))
 		  )))
 
 ;; Highlight the current line.

@@ -571,5 +571,9 @@ for specifying the tag."
   (interactive)
   (insert "~"))
 
+(defun my-recompile-all-package ()
+  (interactive)
+  (byte-recompile-directory package-user-dir nil 'force))
+
 (provide 'init-func)
 ;;; init-func.el ends here.
