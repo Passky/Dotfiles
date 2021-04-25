@@ -38,8 +38,9 @@
 (setq bidi-paragraph-direction 'left-to-right
 	  bidi-inhibit-bpa t) 
 
-;; don't disturb while open a big file
-(setq large-file-warning-threshold nil)
+;; prompt while opening a too big file
+;; 1mb,good choice
+(setq large-file-warning-threshold 1000000)
 
 ;; no bell-ring
 (setq ring-bell-function 'ignore) 
