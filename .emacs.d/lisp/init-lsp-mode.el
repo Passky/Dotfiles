@@ -128,7 +128,7 @@
 
 		lsp-completion-provider :none ; avoid lsp forcely change `company-backends'
 		lsp-diagnostic-package :flymake ; prefer flymake
-		lsp-enable-snippet nil ; causes issue in parens
+		lsp-enable-snippet t ; causes issue in parens
 		lsp-eldoc-enable-hover t ; eldoc hover
 		lsp-signature-auto-activate t     ; show function signature
 		lsp-headerline-breadcrumb-enable nil ; headerline,conflicts with hack in org

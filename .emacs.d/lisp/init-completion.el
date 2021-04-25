@@ -76,8 +76,8 @@
 		company-dabbrev-char-regexp "\\(\\sw\\|\\s_\\|_\\|-\\|!\\|?\\)" ; dabbrev will accept '- ! ? into candidates too.
 		company-format-margin-function #'company-detect-icons-margin ; add icon for lisp edit
 		company-backends '((company-files)
-						   (company-capf :with company-yasnippet)
-						   (company-dabbrev-code)
+						   (company-capf :with company-dabbrev-code)
+						   (company-dabbrev)
 						   (company-etags)
 						   (company-dabbrev)
 						   (company-keywords)
