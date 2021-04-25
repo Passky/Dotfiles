@@ -5,6 +5,7 @@
 ;;;{{ Input method.
 ; 1. For where without rime,you can use builtin pinyin `chinese-py'
 ; 2. You can use builtin japanese input method,which named `japanese', smooth enough.
+(set-input-method 'chinese-py) ; works everywhere
 
 ;; Better rime
 (my-add-package 'rime)

@@ -25,7 +25,6 @@
 									   'c-mode-hook
 									   'c++-mode-hook
 									   'js-mode-hook
-									   ;; 'js2-mode-hook ; js2 remap this with `js2-break-line'
 									   'typescript-mode-hook
 									   )
   "Enable nice comment(`M-j') in these modes.")
@@ -155,26 +154,22 @@
 		  ;; angular imenu
 		  (" \\(ng-[a-z]*\\)=\"\\([^\"]+\\)" 1 2 "="))))
 
-;;; REVIEW: In emacs27 `js-mode' now supports jsx nicely,and js2 is not so actively maintained,gotta keep concern
-;; javascript with powerful js2-mode!
-(my-add-package 'js2-mode) ; a powerful javascript-ide mode
-(add-auto-mode 'js2-mode "\\.js\\(\\.erb\\)?\\'")
-(add-interpreter-mode 'js2-mode "node")
-(with-eval-after-load 'js2-mode
-  (setq js2-mode-show-parse-errors nil
-		js2-mode-show-strict-warnings nil))
-;; JSX
-(my-add-package 'rjsx-mode)
-(add-auto-mode 'rjsx-mode
-			   "\\.jsx\\'"
-			   "components\\/.*\\.js\\'")
+(add-hook 'mhtml-mode-hook
+		  #'(lambda ()
+					 (setq sgml-quick-keys 'close)
+					 ))
+
 ;; mock file
 (add-auto-mode 'js-mode "\\.mock.js\\'")
 (add-interpreter-mode 'js-mode "node")
 
 (add-auto-mode 'js-mode
-			   ;; "\\.js\\(\\.erb\\)?\\'"
+			   "\\.js\\(\\.erb\\)?\\'"
 			   "\\.babelrc\\'")
+;; jsx
+(add-auto-mode 'js-mode
+			   "\\.jsx\\'"
+			   "components\\/.*\\.js\\'")
 
 (my-add-package 'typescript-mode)
 (add-auto-mode 'typescript-mode "\\.ts$"

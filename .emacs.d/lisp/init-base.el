@@ -63,6 +63,11 @@
 ;; improve performance for too too big file
 (setq so-long-threshold 850) ; default threshold is too small
 (add-hook 'after-init-hook 'global-so-long-mode)
+(add-hook 'so-long-mode-hook #'(lambda ()
+								 (visual-line-mode -1)
+								 (page-break-lines -1)
+								 (setq evil-respect-visual-line-mode nil)
+								 ))
 
 ;; IO related tuning
 (setq process-adaptive-read-buffering nil)
