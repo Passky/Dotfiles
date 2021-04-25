@@ -123,22 +123,93 @@
   (dolist (lang my-org-babel-lang-list)
 	(eval `(my-lsp-org-babel-enable ,lang))))
 
+;; {{ rst
+(after! rst
+  (add-hook 'rst-adjust 'rst-toc-update))
 
 ;; {{ read pdf by emacs
 ;; TODO: EAF is great,considering add it.
 ;; {{ builtin doc-view,reading pdf
 (with-eval-after-load 'doc-view
-  ;; This requires ghost script or mudraw/pdfdraw(mupdf)
+  ;; This requires external ghost script or mudraw/pdfdraw(mupdf)
   (setq doc-view-resolution 250))
 
-;; Latex work space
+;; {{ epub
+(my-add-package 'nov)
+(add-auto-mode 'nov-mode "\\.epub\\'")
+
+;; {{ rss
+(define-advice newsticker--cache-read (:around (func &rest args))
+    "Read cache data without prompt."
+    (cl-letf* (((symbol-function 'y-or-n-p) (lambda (_) t)))
+      (apply func args)))
+
+(after! newsticker
+  (setq
+   ;; Keep obsolete items for a month
+   newsticker-keep-obsolete-items t
+   newsticker-obsolete-item-max-age (* 30 86400)
+   ;; Sane behavior
+   newsticker-automatically-mark-items-as-old nil
+   newsticker-automatically-mark-visited-items-as-old t
+   ;; Emacs async sucks,so when it dose not work,set it to extern
+   newsticker-retrieval-method 'intern
+   ;; Improve the default display
+   newsticker-treeview-listwindow-height 20
+   newsticker-treeview-date-format "%F %a, %H:%M  "
+   newsticker-url-list-defaults nil
+   newsticker-url-list '(("Planet Emacslife" "https://planet.emacslife.com/atom.xml")
+						 ("LWN (Linux Weekly News)" "https://lwn.net/headlines/rss"))))
+
+;; {{ websearch
+(after! webjump
+  (setq webjump-sites '(;; Internet search engines.
+                   ("Bing" .
+                    [simple-query "www.bing.com"
+                                  "www.bing.com/search?q=" ""])
+                   ("Google" .
+                    [simple-query "www.google.com"
+                                  "www.google.com/search?q=" ""])
+                   ("Wikipedia" .
+                    [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""])
+                   ("Urban Dictionary" .
+                    [simple-query "urbandictionary.com" "www.urbandictionary.com/define.php?term=" ""])
+                   ("Ludwig Guru" .
+                    [simple-query "ludwig.guru" "ludwig.guru/s/" ""])
+                   ("Etymology" .
+                    [simple-query "etymonline.com" "etymonline.com/word/" ""])
+                   ("Stack Overflow" .
+                    [simple-query "stackoverflow.com" "stackoverflow.com/search?q=" ""])
+                   ("TLDR" .
+                    [simple-query "linux.cn" "tldr.linux.cn/cmd/" ""])
+                   ("Man Search" .
+                    [simple-query "archlinux.org" "man.archlinux.org/search?q=" ""])
+                   ("Man Go" .
+                    [simple-query "archlinux.org" "man.archlinux.org/search?q=" "&go=Go"])
+
+                   ;; Language specific engines.
+                   ("x86 Instructions Reference" .
+                    [simple-query "www.felixcloutier.com"
+                                  "www.felixcloutier.com/x86/" ""])
+                   ("Python Docs" .
+                    [simple-query "docs.python.org"
+                                  "docs.python.org/3/search.html?q=" ""])
+                   ("Racket Docs" .
+                    [simple-query "docs.racket-lang.org"
+                                  "https://docs.racket-lang.org/search/index.html?q=" ""])
+                   ("Cpp Reference" .
+                    [simple-query "en.cppreference.com"
+                                  "en.cppreference.com/mwiki/index.php?search=" ""]))))
+
+;; {{ Latex work space
 (my-add-package 'latex-preview-pane) ; on the fly latex build and pdf preview
 ;; \resizebox{\textwidth}{!}{...} make width same with screen and resize with height
 (add-hook 'latex-mode-hook #'(lambda ()
 							  (flymake-start)
 							  (latex-preview-pane-mode)))
-;; REVIEW: Use org-latex-impatient in org for quick review
+;; REVIEW: Use org-latex-impatient in org for quick preview
 
+;; TODO in emacs28 there'a builtin dictionary package
 
 
 

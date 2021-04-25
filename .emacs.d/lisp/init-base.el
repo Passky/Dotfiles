@@ -19,20 +19,24 @@
 ;;{{ improve performance
 ;; Suppress GUI features and more
 (setq use-file-dialog nil
-      use-dialog-box nil
-      inhibit-x-resources t
-      inhibit-default-init t
-      inhibit-startup-screen t
-      inhibit-startup-message t
-      inhibit-startup-buffer-menu t)
+	  use-dialog-box nil
+	  inhibit-x-resources t
+	  inhibit-default-init t
+	  inhibit-startup-screen t
+	  inhibit-startup-message t
+	  inhibit-startup-buffer-menu t)
 
 ;; Pixelwise resize
 (setq window-resize-pixelwise t
-      frame-resize-pixelwise t)
+	  frame-resize-pixelwise t)
 
 ;; Improve display
 (setq display-raw-bytes-as-hex t
-      redisplay-skip-fontification-on-input t)
+	  redisplay-skip-fontification-on-input t)
+
+;; improve performance for long-line
+(setq bidi-paragraph-direction 'left-to-right
+	  bidi-inhibit-bpa t) 
 
 ;; don't disturb while open a big file
 (setq large-file-warning-threshold nil)
@@ -43,13 +47,10 @@
 ;; No backup files
 (setq make-backup-files nil
 	  auto-save-silent t
-      auto-save-default nil)
+	  auto-save-default nil)
 
 ;; No lock files
 (setq create-lockfiles nil)
-
-;; Always load the newest file
-(setq load-prefer-newer t)
 
 ;; No gc for font caches
 (setq inhibit-compacting-font-caches t)
@@ -61,11 +62,6 @@
 ;; improve performance for too too big file
 (setq so-long-threshold 850) ; default threshold is too small
 (add-hook 'after-init-hook 'global-so-long-mode)
-
-;; improve performance for long-line
-;; though correct bidi is good,but it has issues with performance.
-(setq-default bidi-paragraph-direction 'left-to-right ; never care about bidirectional text
-			  bidi-inhibit-bpa t) ; for long-line
 
 ;; IO related tuning
 (setq process-adaptive-read-buffering nil)
@@ -84,6 +80,9 @@
 (setq command-error-function #'my-command-error-function)
 
 ;; {{ Base configration
+;; Always load the newest file
+(setq load-prefer-newer t)
+
 ;; auto reload changed file
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 (setq auto-revert-check-vc-info t
@@ -100,7 +99,7 @@
 (setq use-short-answers t) ; NOTE: emacs28 new variable
 ;; Inhibit switching out from `y-or-n-p' and `read-char-choice'
 (setq y-or-n-p-use-read-key t
-      read-char-choice-use-read-key t)
+	  read-char-choice-use-read-key t)
 
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t) ; do not replace tab with space
@@ -122,32 +121,32 @@
   "Delete backwards and also take away white spaces around point."
   (interactive)
   (if (region-active-p)
-      (delete-region (region-beginning) (region-end))
-    (catch 'end
-      (let ((p (point)) beg end line-count)
-        (save-excursion
-          (skip-chars-backward " \t\n")
-          (setq beg (point))
-          (goto-char p)
-          (skip-chars-forward " \t\n")
-          (setq end (point)))
-        (setq line-count
-              (cl-count ?\n (buffer-substring-no-properties beg end)))
-        (if (or (eq beg end)
-                (eq (ppss-depth (syntax-ppss)) 0)
-                (save-excursion (skip-chars-backward " \t")
-                                (not (eq (char-before) ?\n))))
-            (backward-delete-char-untabify 1)
-          (delete-region beg end)
-          (cond ((eq (char-after) ?})
-                 (insert "\n")
-                 (indent-for-tab-command))
-                ((eq (char-after) ?\))
-                 nil)
-                ((> line-count 1)
-                 (insert "\n")
-                 (indent-for-tab-command))
-                (t (insert " "))))))))
+	  (delete-region (region-beginning) (region-end))
+	(catch 'end
+	  (let ((p (point)) beg end line-count)
+		(save-excursion
+		  (skip-chars-backward " \t\n")
+		  (setq beg (point))
+		  (goto-char p)
+		  (skip-chars-forward " \t\n")
+		  (setq end (point)))
+		(setq line-count
+			  (cl-count ?\n (buffer-substring-no-properties beg end)))
+		(if (or (eq beg end)
+				(eq (ppss-depth (syntax-ppss)) 0)
+				(save-excursion (skip-chars-backward " \t")
+								(not (eq (char-before) ?\n))))
+			(backward-delete-char-untabify 1)
+		  (delete-region beg end)
+		  (cond ((eq (char-after) ?})
+				 (insert "\n")
+				 (indent-for-tab-command))
+				((eq (char-after) ?\))
+				 nil)
+				((> line-count 1)
+				 (insert "\n")
+				 (indent-for-tab-command))
+				(t (insert " "))))))))
 
 (general-define-key
  [remap backward-delete-char-untabify] 'backward-delete-char
@@ -173,15 +172,15 @@
   "100 mb")
 (my-add-package 'gcmh)
 (my-delay-eval #'(lambda ()
-						 (setq read-process-output-max (* 3 1024 1024) ; Increase the amount of data which Emacs reads from the process to enhance lsp performance
-							   gc-cons-percentage 0.1)
-						 (gcmh-mode)
-						 (setq gcmh-idle-delay 10
-							   gcmh-high-cons-threshold my-gc-cons-threshold)) 3)
+				   (setq read-process-output-max (* 3 1024 1024) ; Increase the amount of data which Emacs reads from the process to enhance lsp performance
+						 gc-cons-percentage 0.1)
+				   (gcmh-mode)
+				   (setq gcmh-idle-delay 10
+						 gcmh-high-cons-threshold my-gc-cons-threshold)) 3)
 
 ;; this delete buffers in buffer list which were unused for 3 days
 (my-delay-eval #'(lambda ()
-						(midnight-mode t)))
+				   (midnight-mode t)))
 
 ;; save cursor place
 (save-place-mode 1)

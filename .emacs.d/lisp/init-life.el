@@ -5,46 +5,15 @@
   (setq epa-file-select-keys nil))
 
 
-;; {{ websearch
-(after! webjump
-  (setq webjump-sites '(;; Internet search engines.
-                   ("Bing" .
-                    [simple-query "www.bing.com"
-                                  "www.bing.com/search?q=" ""])
-                   ("Google" .
-                    [simple-query "www.google.com"
-                                  "www.google.com/search?q=" ""])
-                   ("Wikipedia" .
-                    [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""])
-                   ("Urban Dictionary" .
-                    [simple-query "urbandictionary.com" "www.urbandictionary.com/define.php?term=" ""])
-                   ("Ludwig Guru" .
-                    [simple-query "ludwig.guru" "ludwig.guru/s/" ""])
-                   ("Etymology" .
-                    [simple-query "etymonline.com" "etymonline.com/word/" ""])
-                   ("Stack Overflow" .
-                    [simple-query "stackoverflow.com" "stackoverflow.com/search?q=" ""])
-                   ("TLDR" .
-                    [simple-query "linux.cn" "tldr.linux.cn/cmd/" ""])
-                   ("Man Search" .
-                    [simple-query "archlinux.org" "man.archlinux.org/search?q=" ""])
-                   ("Man Go" .
-                    [simple-query "archlinux.org" "man.archlinux.org/search?q=" "&go=Go"])
-
-                   ;; Language specific engines.
-                   ("x86 Instructions Reference" .
-                    [simple-query "www.felixcloutier.com"
-                                  "www.felixcloutier.com/x86/" ""])
-                   ("Python Docs" .
-                    [simple-query "docs.python.org"
-                                  "docs.python.org/3/search.html?q=" ""])
-                   ("Racket Docs" .
-                    [simple-query "docs.racket-lang.org"
-                                  "https://docs.racket-lang.org/search/index.html?q=" ""])
-                   ("Cpp Reference" .
-                    [simple-query "en.cppreference.com"
-                                  "en.cppreference.com/mwiki/index.php?search=" ""]))))
-
+(after! rcirc
+  (add-hook 'rcirc-mode-hook 'rcirc-track-minor-mode)
+  (add-hook 'rcirc-mode-hook 'rcirc-omit-mode)
+  (setq rcirc-always-use-server-buffer-flag t
+		rcirc-authenticate-before-join t
+		rcirc-auto-authenticate-flag t
+		rcirc-fill-column #'window-text-width
+		rcirc-kill-channel-buffers t
+		))
 
 ;; {{ calendar
 ;; 分别是妇女节、植树节、劳动节、青年节、儿童节、教师节、国庆节、程序员节、双11
