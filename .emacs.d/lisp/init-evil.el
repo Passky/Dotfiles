@@ -75,8 +75,6 @@
 
   (general-define-key
    :states 'visual
-   "j" 'next-line
-   "k" 'previous-line
    "C-c" 'keyboard-quit)
   (general-define-key
    :states 'normal
@@ -90,8 +88,6 @@
    "ge" 'end-of-defun
    "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
    "C-u" 'scroll-down
-   "j" 'next-line
-   "k" 'previous-line
    "J" 'nil
    )
   (general-define-key
