@@ -62,6 +62,8 @@
    "M-n"  'icomplete-forward-completions
    "M-p"  'icomplete-backward-completions
    "C-r"  'previous-matching-history-element
+   "<up>" 'icomplete-backward-completions
+   "<down>" 'icomplete-forward-completions
    [?\t] 'icomplete-force-complete ; keep up with ivy or selectrum
    "C-c C-o" 'embark-export
    ))
