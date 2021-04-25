@@ -67,11 +67,12 @@
 	;; consistent with ivy
 	(kbd "C-x C-o") 'occur-edit-mode)
 
-  (key-chord-mode 1)
-  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)
-
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
   (evil-ex-define-cmd "Q[uit]" 'quit-window)
+
+  (general-define-key :keymaps 'evil-insert-state-map
+					  (general-chord "jk") 'evil-normal-state
+					  (general-chord "kj") 'evil-normal-state)
 
   (general-define-key
    :states 'visual
@@ -335,5 +336,6 @@
 	"ee" 'eval-expression ;;
 	))
 
+(key-chord-mode) ; Have to put it there,or it won't work.我
 (provide 'init-evil)
 ;;; init-evil.el ends here.
