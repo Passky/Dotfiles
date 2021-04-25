@@ -1,49 +1,74 @@
 ;;; -*- coding: utf-8; lexical-binding: t; -*-
 ;;; Commentary:
 
-;;
-;; enter scratch buffer directly
-(setq inhibit-startup-screen t)
-(setq inhibit-startup-echo-area-message t)
-;; Show a marker in the left fringe for lines not in the buffer
-(setq indicate-empty-lines t)
-
-;;{{ coding system
-(prefer-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-
-;; mouse support
-;; (unless *gui*
-  ;; (xterm-mouse-mode 1))
-
 ;; scroll smooth
 (setq mouse-wheel-scroll-amount '(0.07))
 (setq mouse-wheel-progressive-speed nil)
+
+;; Smooth scroll & friends
+(setq scroll-step 2
+	  scroll-margin 3
+	  hscroll-step 2
+	  hscroll-margin 2
+	  scroll-conservatively 101
+	  scroll-up-aggressively 0.01
+	  scroll-down-aggressively 0.01
+	  scroll-preserve-screen-position 'always)
 ;;}}
 
 ;;{{ improve performance
-;; @see https://www.reddit.com/r/emacs/comments/988paa/emacs_on_windows_seems_lagging/
-;; speed up font rendering for special characters(no gc for font cache)
+;; Suppress GUI features and more
+(setq use-file-dialog nil
+      use-dialog-box nil
+      inhibit-x-resources t
+      inhibit-default-init t
+      inhibit-startup-screen t
+      inhibit-startup-message t
+      inhibit-startup-buffer-menu t)
+
+;; Pixelwise resize
+(setq window-resize-pixelwise t
+      frame-resize-pixelwise t)
+
+;; Improve display
+(setq display-raw-bytes-as-hex t
+      redisplay-skip-fontification-on-input t)
+
+;; don't disturb while open a big file
+(setq large-file-warning-threshold nil)
+
+;; no bell-ring
+(setq ring-bell-function 'ignore) 
+
+;; No backup files
+(setq make-backup-files nil
+	  auto-save-silent t
+      auto-save-default nil)
+
+;; No lock files
+(setq create-lockfiles nil)
+
+;; Always load the newest file
+(setq load-prefer-newer t)
+
+;; No gc for font caches
 (setq inhibit-compacting-font-caches t)
 
 ;; kill bufer without ask
 (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function 
 										kill-buffer-query-functions))
 
-;; improvement for too long line
+;; improve performance for too too big file
 (setq so-long-threshold 850) ; default threshold is too small
 (add-hook 'after-init-hook 'global-so-long-mode)
 
 ;; improve performance for long-line
-;; though correct bidi is good,but it has issues with edit.
+;; though correct bidi is good,but it has issues with performance.
 (setq-default bidi-paragraph-direction 'left-to-right ; never care about bidirectional text
 			  bidi-inhibit-bpa t) ; for long-line
 
 ;; IO related tuning
 (setq process-adaptive-read-buffering nil)
-
-;; no need for default paren highlight
-(setq blink-paren-function nil)
 ;; }}
 
 ;;{{ Ignore read-only-error
@@ -59,45 +84,37 @@
 (setq command-error-function #'my-command-error-function)
 
 ;; {{ Base configration
-;; don't disturb while open a big file
-(setq large-file-warning-threshold nil)
-
-(setq ring-bell-function 'ignore) ;; no bell-ring
-(setq make-backup-files nil) ;; no back up
-;; No lock files
-(setq create-lockfiles nil)
-;; Make the prompt of "*Python*" buffer readonly
-(setq comint-prompt-read-only t)
-(setq auto-save-default nil  ;;
-	  auto-save-silent t)   ;;
-
 ;; auto reload changed file
 (add-hook 'after-init-hook 'global-auto-revert-mode)
-
-;; Smooth scroll & friends
-(setq scroll-step 2
-	  scroll-margin 3
-	  hscroll-step 2
-	  hscroll-margin 2
-	  scroll-conservatively 101
-	  scroll-up-aggressively 0.01
-	  scroll-down-aggressively 0.01
-	  scroll-preserve-screen-position 'always)
+(setq auto-revert-check-vc-info t
+	  auto-revert-interval 3
+	  auto-revert-avoid-polling t ; quite a trange doc string
+	  auto-revert-verbose nil ; message
+	  global-auto-revert-non-file-buffers t)
 
 ;; Disable auto vertical scroll for tall lines
 (setq auto-window-vscroll nil)
 
 ;; reply y/n instead of yes/no
-(fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p) ; TODO: remove this in emacs28
 (setq use-short-answers t) ; NOTE: emacs28 new variable
+;; Inhibit switching out from `y-or-n-p' and `read-char-choice'
+(setq y-or-n-p-use-read-key t
+      read-char-choice-use-read-key t)
 
-;; some project prefer tab, so be it
-;; @see http://stackoverflow.com/questions/69934/set-4-space-indent-in-emacs-in-text-mode
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t) ; do not replace tab with space
+
 ;; Enable indentation+completion using the TAB key.
 ;; Completion is often bound to M-TAB.
 (setq-default tab-always-indent 'complete) ; self-insert
+
+;; {{ and other
+(after! comint
+  ;; Make the prompt of "*Python*" buffer readonly
+  (setq comint-prompt-read-only t
+		comint-scroll-to-bottom-on-input 'all)
+  )
 
 ;; https://github.com/casouri/lunarymacs/
 ;; So nice!

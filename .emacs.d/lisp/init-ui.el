@@ -1,3 +1,6 @@
+;;{{ coding system
+(prefer-coding-system 'utf-8)
+
 ;; {{ highlight
 ;; highlight TODO/FIXME/NOTE...
 (my-add-package 'hl-todo)
@@ -163,10 +166,6 @@ Nil to use font supports ligatures."
 ;; {{ Highlight matching paren
 (my-delay-eval #'(lambda () (show-paren-mode t)) 1.5)
 (with-eval-after-load 'paren
-  (set-face-foreground 'show-paren-match "red")
-  (set-face-bold-p 'show-paren-match t)
-  (set-face-background 'show-paren-match nil)
-  (set-face-underline 'show-paren-match t)
   (setq show-paren-delay 0.1
 		show-paren-when-point-inside-paren t
 		show-paren-when-point-in-periphery t))
