@@ -3,9 +3,12 @@ https://www.msftnext.com/fix-blank-or-empty-insider-program-settings-page-in-win
 - Open PowerShell as Administator.
 - In the elevated PowerShell window, copy and paste the following command, all at once, and hit Enter to run it.
 
+#+begin_src 
 $path = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
 # Telemetry level: 1 - basic, 3 - full
 $value = "3"
 New-ItemProperty -Path $path -Name AllowTelemetry -Value $value -Type Dword -Force
 New-ItemProperty -Path $path -Name MaxTelemetryAllowed -Value $value -Type Dword -Force
+#+end_src
+
 - Restart the OS.
