@@ -39,8 +39,8 @@
 	  bidi-inhibit-bpa t) 
 
 ;; prompt while opening a too big file
-;; 1mb,good choice
-(setq large-file-warning-threshold 1000000)
+;; 1.2megabyte
+(setq large-file-warning-threshold 1200000)
 
 ;; no bell-ring
 (setq ring-bell-function 'ignore) 
