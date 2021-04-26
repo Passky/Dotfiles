@@ -108,7 +108,6 @@
    :keymaps 'isearch-mode-map
    "M-<return>"                'isearch-repeat-forward
    "M-S-<return>"              'isearch-repeat-backward
-   "C-o"                       'swiper-from-isearch
    ;; consistent with ivy-occur'
    "C-c C-o"                   'isearch-occur ; consist with wgrep
    ;; Edit the search string instead of jumping back
@@ -192,9 +191,9 @@ search in current directory."
 	  `(orderless-literal . ,(substring pattern 0 -1))))
   (setq orderless-style-dispatchers '(literal-if-= flex-if-comma without-if-$!)))
 
-;; about configration see https://github.com/abo-abo/swiper/commit/28e88ab23a191420a93a4f920ca076674ee53f94
 ;; "M-o"
 (with-eval-after-load 'icomplete
+  ;; TODO: replace this with transient
   (defhydra hydra-minibuffer (:hint nil :color pink)
 	"
 						^minibuffer action^

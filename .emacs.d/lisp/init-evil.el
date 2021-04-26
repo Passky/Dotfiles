@@ -64,7 +64,7 @@
 	(setq evil-collection-mode-list (remove ig-mode evil-collection-mode-list)))
   (evil-collection-define-key 'normal 'occur-mode-map
 	;; Keybindings tweaks
-	;; consistent with ivy
+	;; consistent with wgrep
 	(kbd "C-x C-o") 'occur-edit-mode)
 
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
@@ -230,10 +230,6 @@
    "gbs" 'vc-retrieve-tag ; switch to a branch
    "gn" 'vc-next-action ; perform the next logical control operation on file
    "ga" 'vc-register ; add a new file to version control
-
-   ;;{{ counsel
-   "cp" 'consult-yank-pop
-   "cP" 'consult-yank
 
    ;;{{ Gdb
    "dw" 'gud-watch

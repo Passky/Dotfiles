@@ -1,5 +1,4 @@
 ;;; Includes most useful function for other function
-(autoload 'ivy-read "ivy")
 
 ;; https://github.com/mgalgs/.emacs.d/blob/8eace8e06ac441c3092a2fbdceda3bc2ec985cf3/lisp/my-util.el
 ;; `lsp-java--completing-read'

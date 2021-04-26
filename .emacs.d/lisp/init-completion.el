@@ -40,7 +40,6 @@
   ;; (company-ctags-auto-setup)
   (general-define-key
    :keymaps 'company-active-map
-   "M-o" 'counsel-company
    "C-p"     'company-select-previous
    "C-n"     'company-select-next
    "C-s"     'company-filter-candidates

@@ -153,6 +153,7 @@
 	(call-interactively 'kill-region))
 
   ;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
+  ;; But we use `completing-read-multiple' there.
   (defun my-parse-bash-history ()
 	"Parse the bash history."
 	(interactive)

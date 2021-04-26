@@ -52,15 +52,14 @@ If HINT is empty, use symbol at point."
 
 (defun my-select-from-kill-ring (fn)
   "If N > 1, yank the Nth item in `kill-ring'.
-If N is nil, use `ivy-mode' to browse `kill-ring'."
+If N is nil, use `completing-read-multiple' to browse `kill-ring'."
   (interactive "P")
   (let* ((candidates (cl-remove-if
 					  (lambda (s)
 						(or (< (length s) 5)
 							(string-match-p "\\`[\n[:blank:]]+\\'" s)))
-					  (delete-dups kill-ring)))
-		 (ivy-height (/ (frame-height) 2)))
-	(ivy-read "Browse `kill-ring':"
+					  (delete-dups kill-ring))))
+	(my-completing-read "Browse `kill-ring':"
 			  (mapcar #'my-prepare-candidate-fit-into-screen candidates)
 			  :action fn)))
 

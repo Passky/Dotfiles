@@ -85,8 +85,6 @@ Nil to use font supports ligatures."
 	jabber-chat-mode
 	inferior-js-mode
 	inferior-python-mode
-	ivy-occur-grep-mode ; better performance
-	ivy-occur-mode ; better performance
 	twittering-mode
 	compilation-mode
 	weibo-timeline-mode
