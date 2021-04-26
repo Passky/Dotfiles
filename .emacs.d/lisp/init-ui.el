@@ -269,7 +269,8 @@ Nil to use font supports ligatures."
 				   (advice-add #'windmove-up :after #'pulse-line)
 				   (advice-add #'windmove-down :after #'pulse-line)
 				   (advice-add #'evil-undo :after #'pulse-line)
-				   (advice-add #'evil-redo :after #'pulse-line)
+				   (advice-add #'evil-paste-after :after #'pulse-line)
+				   (advice-add #'evil-delete :after #'pulse-region)
 				   ))
 
 ;; {{ which-key-mode
