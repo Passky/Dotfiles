@@ -455,7 +455,13 @@ function killps()   # kill by process name
 function get_logic_cpu_cores()
 {
   # return logic cpu core -1 for build
-  expr `cat /proc/cpuinfo| grep "processor"| wc -l` - 1
+  local numstr=`cat /proc/cpuinfo| grep "processor"| wc -l`
+  local num=$(( $numstr - 1 ))
+  if [ $num -gt 1 ] ; then
+	echo $num
+  else
+	echo 1
+  fi
 }
 
 # swap 2 filenames around
