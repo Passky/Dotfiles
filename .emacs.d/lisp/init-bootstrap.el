@@ -90,12 +90,12 @@ Return the fastest package archive."
 
 ;; for native-comp branch
 (when (fboundp 'native-compile-async)
-  (setq comp-async-jobs-number 7 ;; not to use all cores
+  (setq comp-async-jobs-number 7 
 		comp-deferred-compilation t
 		;; comp-deferred-compilation-black-list '()
-		comp-async-report-warnings-errors nil) ; or it will be too annoying
+		;; or it will be too annoying
+		comp-async-report-warnings-errors nil) 
   )
-;; 
 
 (my-add-package 'gnu-elpa-keyring-update) ; keep keyring up with time
 (my-add-package 'auto-package-update) ; auto-package-update

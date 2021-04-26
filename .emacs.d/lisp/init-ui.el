@@ -247,20 +247,30 @@ Nil to use font supports ligatures."
 				 )))
 
 
-;; Highlight some operations
+;; Highlight same symbol
 (my-add-package 'symbol-overlay)
 (add-hook 'prog-mode-hook 'symbol-overlay-mode)
 
-(my-add-package 'volatile-highlights)
-(add-hook 'after-init-hook 'volatile-highlights-mode)
-(with-eval-after-load 'volatile-highlights
-  (with-no-warnings
-	(when (fboundp 'pulse-momentary-highlight-region)
-	  (defun my-vhl-pulse (beg end &optional _buf face)
-		"Pulse the changes."
-		(pulse-momentary-highlight-region beg end face))
-	  (advice-add #'vhl/.make-hl :override #'my-vhl-pulse))))
-
+;; better notification
+(my-delay-eval #'(lambda ()
+				   (defun pulse-region (beg end &rest _)
+					 "Pulse the current region."
+					 (pulse-momentary-highlight-region beg end))
+				   (defun pulse-line (&rest _)
+					 "Pulse the current line."
+					 (pulse-momentary-highlight-one-line (point)))
+				   (defun recenter-and-pulse (&rest _)
+					 "Recenter and pulse the current line."
+					 (recenter)
+					 (pulse-line))
+				   (advice-add #'pop-tag-mark         :after #'recenter-and-pulse)
+				   (advice-add #'windmove-left :after #'pulse-line)
+				   (advice-add #'windmove-right :after #'pulse-line)
+				   (advice-add #'windmove-up :after #'pulse-line)
+				   (advice-add #'windmove-down :after #'pulse-line)
+				   (advice-add #'evil-undo :after #'pulse-line)
+				   (advice-add #'evil-redo :after #'pulse-line)
+				   ))
 
 ;; {{ which-key-mode
 (my-add-package 'which-key)

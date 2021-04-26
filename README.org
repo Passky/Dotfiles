@@ -1,13 +1,13 @@
 ** COPYRIGHT
-- This setup is based on @redguardtoo but heavily rebuild,
+- This setup is based on @redguardtoo,but heavily rebuild
 
 - I also copy many interesting codes from
-  - @ramsayleung (about eshell) l
+  - @ramsayleung (about eshell) 
   - lunary-emacs
   - doom-emacs
   - https://github.com/seagle0128/.emacs.d
-  - https://github.com/condy0919/.emacs.d
-  and thanks to them all!
+  - https://github.com/condy0919/.emacs.d **Strongly suggest for new guy**
+  Thanks to them all!
 
 - Use dictionary from https://github.com/dolph/dictionary to provide words completion in markdown and org.
 
