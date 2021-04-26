@@ -1,10 +1,10 @@
 ;;; Includes most useful function for other function
 
-;; https://github.com/mgalgs/.emacs.d/blob/8eace8e06ac441c3092a2fbdceda3bc2ec985cf3/lisp/my-util.el
-;; `lsp-java--completing-read'
+;; (setq selected (or (assoc selected collection) selected))
+;; make sure only the string/file is passed to action
 (cl-defun my-completing-read (prompt collection &key action hist require-match initial-input)
   "Wrap for `completing-read-multiple',
-split cands with `crm-separator'."
+split cands with `crm-separator'(default ,)."
   (cond
    ((and action (= 0 (length collection)))
 	(message "No candidates."))
@@ -17,8 +17,6 @@ split cands with `crm-separator'."
 					  require-match
 					  initial-input
 					  hist)))
-	  ;; (setq selected (or (assoc selected collection) selected))
-	  ;; make sure only the string/file is passed to action
 	  (mapc action selected)
 	  selected))))
 
@@ -35,41 +33,6 @@ May be set using .dir-locals.el.  Checks each entry if set to a list.")
 								 my-project-file)))
 	(or (and project-root (file-name-as-directory project-root))
 		default-directory)))
-
-(defmacro bind-key (key-name command &optional keymap predicate)
-  "Bind KEY-NAME to COMMAND in KEYMAP (`global-map' if not passed).
-KEY-NAME may be a vector, in which case it is passed straight to
-`define-key'. Or it may be a string to be interpreted as
-spelled-out keystrokes, e.g., \"C-c C-z\". See documentation of
-`edmacro-mode' for details.
-COMMAND must be an interactive function or lambda form.
-KEYMAP, if present, should be a keymap variable or symbol.
-For example:
-  (bind-key \"M-h\" #'some-interactive-function my-mode-map)
-  (bind-key \"M-h\" #'some-interactive-function 'my-mode-map)
-If PREDICATE is non-nil, it is a form evaluated to determine when
-a key should be bound. It must return non-nil in such cases.
-Emacs can evaluate this form at any time that it does redisplay
-or operates on menu data structures, so you should write it so it
-can safely be called at any time."
-  (let ((namevar (make-symbol "name"))
-		(keyvar (make-symbol "key"))
-		(kdescvar (make-symbol "kdesc"))
-		(bindingvar (make-symbol "binding")))
-	`(let* ((,namevar ,key-name)
-			(,keyvar (if (vectorp ,namevar) ,namevar
-					   (read-kbd-macro ,namevar)))
-			(kmap (if (and ,keymap (symbolp ,keymap)) (symbol-value ,keymap) ,keymap))
-			(,kdescvar (cons (if (stringp ,namevar) ,namevar
-							   (key-description ,namevar))
-							 (if (symbolp ,keymap) ,keymap (quote ,keymap))))
-			(,bindingvar (lookup-key (or kmap global-map) ,keyvar)))
-	   ,(if predicate
-			`(define-key (or kmap global-map) ,keyvar
-			   '(menu-item "" nil :filter (lambda (&optional _)
-											(when ,predicate
-											  ,command))))
-		  `(define-key (or kmap global-map) ,keyvar ,command)))))
 
 (defun my-vsplit-window (&optional split-left?)
   (interactive)
