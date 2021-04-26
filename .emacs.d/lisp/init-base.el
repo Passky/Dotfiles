@@ -93,7 +93,7 @@
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 (setq auto-revert-check-vc-info t
 	  auto-revert-interval 3
-	  auto-revert-avoid-polling t ; quite a trange doc string
+	  auto-revert-avoid-polling t ; quite a strange doc string
 	  auto-revert-verbose nil ; message
 	  global-auto-revert-non-file-buffers t)
 
