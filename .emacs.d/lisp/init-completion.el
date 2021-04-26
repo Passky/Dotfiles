@@ -61,7 +61,7 @@
 		company-echo-delay (if *gui* nil 0.1)
 		company-show-numbers t ; Easy navigation to candidates with M-<n>
 		company-require-match nil ; allow input string that do not match candidate words
-		company-minimum-prefix-length 1 ; faster!
+		company-minimum-prefix-length 2 ; minimal prefix to triger completion
 		company-tooltip-align-annotations t
 		company-tooltip-limit 8 ; faster!
 		completion-ignore-case t      ; ignore case for `company-capf'

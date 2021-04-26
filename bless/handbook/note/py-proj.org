@@ -1,0 +1,8 @@
+* Set virtual env
+#+begin_src elisp :file .dir-locals.el
+;;; Directory Local Variables
+;;; For more information see (info "(emacs) Directory Variables")
+((python-mode . ((eval . (lsp-register-custom-settings
+                          '(("python.pythonPath" "/home/wts/.anaconda3/envs/iswc/bin/python"
+                             "python.venvPath" "/home/wts/.anaconda3/envs/iswc")))))))
+#+end_src
