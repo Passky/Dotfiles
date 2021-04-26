@@ -260,6 +260,7 @@
    "ck" 'kill-compilation
    "cX" 'quickrun
    "cx" 'quickrun-shell
+   "cp" 'my-yank-pop
 
    ;;{{ interesting builtin work
    "sss" 'my-sudo-save

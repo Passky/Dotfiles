@@ -85,7 +85,7 @@
 						   (company-yasnippet)))
 
   ;; better fuzzy match
-  ;; (company-prescient-mode 1)
+  (company-prescient-mode 1)
 
   ;; like vim
   (company-tng-mode)

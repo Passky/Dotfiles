@@ -215,5 +215,10 @@ If N is 4, rectangle paste. "
 	(my-copy-to-x-clipboard)
 	))
 
+;; my yank pop
+(defun my-yank-pop ()
+  (interactive)
+  (funcall-interactively 'my-select-from-kill-ring #'insert))
+
 (provide 'init-clipboard)
 ;;; init-clipboard.el ends here.
