@@ -186,34 +186,44 @@ If no region is selected, `kill-ring' or clipboard is used instead."
 
 ;; minor mode for solve conflicts
 (with-eval-after-load 'smerge-mode
-  (defhydra hydra-smerge (:color pink
-								 :hint nil
-								 :pre (unless smerge-mode (smerge-mode +1))
-								 :post (smerge-auto-leave))
-	"
+  (defun my-transient-emerge ()
+	"Use transient fo emerge actions."
+	(interactive)
+	(let ((echo-keystrokes nil)
+		  (minibuffer-mes
+		   "
 ^Move^       ^Keep^               ^Diff^                 ^Other^
 ^^-----------^^-------------------^^---------------------^^-------
 _n_ext       _b_ase               _<_: upper/base        _C_ombine
 _p_rev       _u_pper              _=_: upper/lower       _r_esolve
-^^           _l_ower              _>_: base/lower        _k_ill current
-^^           _a_ll                _R_efine
-^^           _RET_: current       _E_diff
+		 _l_ower              _>_: base/lower        _k_ill current
+		 _a_ll                _R_efine
+		 _RET_: current       _E_diff
 "
-	("n" smerge-next)
-	("p" smerge-prev)
-	("b" smerge-keep-base)
-	("u" smerge-keep-upper)
-	("l" smerge-keep-lower)
-	("a" smerge-keep-all)
-	("RET" smerge-keep-current)
-	("\C-m" smerge-keep-current)
-	("<" smerge-diff-base-upper)
-	("=" smerge-diff-upper-lower)
-	(">" smerge-diff-base-lower)
-	("R" smerge-refine)
-	("E" smerge-ediff)
-	("C" smerge-combine-with-next)
-	("r" smerge-resolve)
-	("k" smerge-kill-current)
-	("q" nil "cancel" :color blue)))
+		   ))
+	  (message minibuffer-mes)
+	  (set-transient-map
+	   (let ((map (make-sparse-keymap)))
+		 (define-key map (kbd "n") #'smerge-next)
+		 (define-key map (kbd "p") #'smerge-prev)
+		 (define-key map (kbd "b") #'smerge-keep-base)
+		 (define-key map (kbd "u") #'smerge-keep-upper)
+		 (define-key map (kbd "l") #'smerge-keep-lower)
+		 (define-key map (kbd "a") #'smerge-keep-all)
+		 (define-key map (kbd "RET") #'smerge-keep-current)
+		 (define-key map (kbd "\C-m") #'smerge-keep-current)
+		 (define-key map (kbd "<") #'smerge-diff-base-upper)
+		 (define-key map (kbd "=") #'smerge-diff-upper-lower)
+		 (define-key map (kbd ">") #'smerge-diff-base-lower)
+		 (define-key map (kbd "R") #'smerge-refine)
+		 (define-key map (kbd "E") #'smerge-ediff)
+		 (define-key map (kbd "C") #'smerge-combine-with-next)
+		 (define-key map (kbd "r") #'smerge-resolve)
+		 (define-key map (kbd "k") #'smerge-kill-current)
+		 (define-key map (kbd "q") #'quit)
+		 map)
+	   t)))
+  
+  )
+
 (provide 'init-vc)

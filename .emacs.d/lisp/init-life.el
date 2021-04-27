@@ -178,78 +178,29 @@
 	(message "%s => clipboard & yank ring"
 			 (copy-yank-str (funcall fn (dired-file-name-at-point)))))
 
-(defun my-ediff-files ()
-  "@see https://oremacs.com/2017/03/18/dired-ediff/."
-  (interactive)
-  (let* ((files (dired-get-marked-files))
-         (wnd (current-window-configuration)))
-    (cond
-     ((<= (length files) 2)
-      (let* ((file1 (car files))
-             (file2 (if (cdr files)
-                        (cadr files)
-                      (read-file-name
-                       "file: "
-                       (dired-dwim-target-directory)))))
-        (if (file-newer-than-file-p file1 file2)
-            (ediff-files file2 file1)
-          (ediff-files file1 file2))
-        (add-hook 'ediff-after-quit-hook-internal
-                  (lambda ()
-                    (setq ediff-after-quit-hook-internal nil)
-                    (set-window-configuration wnd)))))
-     (t
-      (error "no more than 2 files should be marked")))))
+  (defun my-ediff-files ()
+	"@see https://oremacs.com/2017/03/18/dired-ediff/."
+	(interactive)
+	(let* ((files (dired-get-marked-files))
+		   (wnd (current-window-configuration)))
+	  (cond
+	   ((<= (length files) 2)
+		(let* ((file1 (car files))
+			   (file2 (if (cdr files)
+						  (cadr files)
+						(read-file-name
+						 "file: "
+						 (dired-dwim-target-directory)))))
+		  (if (file-newer-than-file-p file1 file2)
+			  (ediff-files file2 file1)
+			(ediff-files file1 file2))
+		  (add-hook 'ediff-after-quit-hook-internal
+					(lambda ()
+					  (setq ediff-after-quit-hook-internal nil)
+					  (set-window-configuration wnd)))))
+	   (t
+		(error "no more than 2 files should be marked"))))))
 
-  (defhydra hydra-dired (:color blue :exit nil)
-	"
-^Misc^                      ^File^              ^Copy Info^
------------------------------------------------------------------
-[_vv_] video2mp3            [_R_] Move          [_pp_] Path
-[_aa_] Record by mp3        [_cf_] New          [_nn_] Name
-[_zz_] Play wav&mp3         [_rr_] Rename       [_bb_] Base
-[_ee_] Mkv => Srt           [_ff_] Find         [_dd_] directory
-[_sa_] Fetch all subtitles  [_C_]  Copy
-[_s1_] Fetch on subtitle    [_rb_] Change base  [_m_] mark
-[_vv_] Video => Mp3         [_df_] Diff 2 files [_M_] unmark
-[_aa_] Recording Wav        [_d_] Delete
-[_+_] Create directory      [_D_] Delete Marked
-[_S_]  Stop play
-
-
-"
-	("sa" (my-fetch-subtitles))
-	("s1" (my-fetch-subtitles (dired-file-name-at-point)))
-	("pp" (my-copy-file-info 'file-truename))
-	("nn" (my-copy-file-info 'file-name-nondirectory))
-	("bb" (my-copy-file-info 'file-name-base))
-	("dd" (my-copy-file-info 'file-name-directory))
-	("rb" (my-replace-dired-base (car kill-ring)))
-	("vv" my-extract-mp3-from-video)
-	("ee" my-extract-mkv-subtitle)
-	("aa" my-record-wav-by-mp3)
-	("zz" my-play-both-mp3-and-wav)
-	("C" dired-do-copy)
-	("R" dired-do-rename)
-	("S" my-stop-player)
-	("cf" find-file)
-	("df" my-ediff-files)
-	("rr" dired-toggle-read-only)
-	("ff" (lambda (regexp)
-			(interactive "sMatching regexp: ")
-			(find-lisp-find-dired default-directory regexp)))
-	("+" dired-create-directory)
-	("d"  dired-do-delete)
-	("D"  dired-do-flagged-delete)
-	("m"  dired-mark)
-	("M"  dired-unmark)
-	("j"  dired-next-line)
-	("k"  dired-previous-line)
-	("q" nil)))
-
-(defun dired-mode-hook-hydra-setup ()
-    (local-set-key (kbd "M-o") 'hydra-dired/body))
-(add-hook 'dired-mode-hook 'dired-mode-hook-hydra-setup)
 
 
 (provide 'init-life)

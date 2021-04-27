@@ -18,7 +18,7 @@
 (define-key minibuffer-local-isearch-map [escape] 'abort-recursive-edit)
 
 ;; completion-styles
-(setq completion-auto-help nil ; NOTE: I do not know what its mean
+(setq completion-auto-help nil
 	  completion-category-defaults nil
 	  ;;  file path expand need this
 	  completion-category-overrides '((file (styles . (partial-completion)))) 
@@ -158,7 +158,6 @@ search in current directory."
 ;; {{ embark
 (my-add-package 'embark)
 (my-add-package 'embark-consult)
-(define-key minibuffer-local-map (kbd "M-o") 'hydra-minibuffer/body)
 (define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
 (define-key minibuffer-local-map (kbd "C-c C-o") 'embark-export)
 (with-eval-after-load 'embark
@@ -196,38 +195,26 @@ search in current directory."
 ;; "M-o"
 (with-eval-after-load 'icomplete
   ;; TODO: replace this with transient
-  (defhydra hydra-minibuffer (:hint nil :color pink)
-	"
-						^minibuffer action^
---------------------------------------------------------------------------
-[_m_] mark            [_TAB_] Done        [_h_] Actions
-[_M_] unmark          [_gg_] Go-Begin     [_G_] Go-end
-[_u_] Scroll-up       [_d_] Scroll-down   [_o_] ivy-occur
-[_f_] Call                                [_c_] ivy-toggle-calling
-[_q_] quit                                [<esc>] quit
-[_sf_] embark-act     [_ss_] embark-export 
-"
-	;; arrows
-	;; ("h" ivy-backward-delete-char)
-	("h" ivy-dispatching-done)
-	("gg" ivy-beginning-of-buffer)
-	("G" ivy-end-of-buffer)
-	("d" ivy-scroll-up-command)
-	("u" ivy-scroll-down-command)
-	;; actions
-	("q" keyboard-escape-quit :exit t)
-	("<escape>" keyboard-escape-quit :exit t)
-	("TAB" ivy-alt-done :exit nil)
-	("RET" ivy-done :exit t)
-	;; ("C-SPC" ivy-call-and-recenter :exit nil)
-	("f" ivy-call)
-	("c" ivy-toggle-calling)
-	("m" ivy-mark)
-	("M" ivy-unmark)
-	;; ("t" (setq truncate-lines (not truncate-lines)))
-	("sf" embark-act)
-	("ss" embark-export) 
-	("o" ivy-occur :exit t)))
+  (defun my-transient-minibuffer ()
+	"Use transient fo minibuffer actions."
+	(interactive)
+	(let ((echo-keystrokes nil)
+		  (minibuffer-mes "[ea] embark-act  [ee] embark-export  [ee] embark-export
+[ei] embark-isearch [es] embark-eshell"
+		   ))
+	  (message minibuffer-mes)
+	  (set-transient-map
+	   (let ((map (make-sparse-keymap)))
+		 (define-key map (kbd "ea") #'embark-act)
+		 (define-key map (kbd "ec") #'embark-collect-live)
+		 (define-key map (kbd "ee") #'embark-export)
+		 (define-key map (kbd "ei") #'embark-isearch)
+		 (define-key map (kbd "es") #'embark-eshell)
+		 map)
+	   t))
+	))
+
+(define-key minibuffer-local-map (kbd "M-o") #'my-transient-minibuffer)
 
 (provide 'init-search)
 ;;; init-search.el ends here
