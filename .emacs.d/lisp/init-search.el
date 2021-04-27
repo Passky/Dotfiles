@@ -20,7 +20,8 @@
 ;; completion-styles
 (setq completion-auto-help nil ; NOTE: I do not know what its mean
 	  completion-category-defaults nil
-	  completion-category-overrides '((file (styles . (partial-completion)))) ; NOTE: file path expand need this
+	  ;;  file path expand need this
+	  completion-category-overrides '((file (styles . (partial-completion)))) 
 	  completion-styles '(flex basic substring partial-completion)
 	  completion-ignore-case t
 	  completion-cycle-threshold 3
@@ -40,7 +41,8 @@
 		icomplete-show-matches-on-no-input t
 		icomplete-hide-common-prefix nil
 		icomplete-tidy-shadowed-file-names t
-		icomplete-in-buffer t
+		;; in-buffer completion is buggy now.
+		;; icomplete-in-buffer t
 		icomplete-prospects-height 10
 		)
   ;; highlight current selected
