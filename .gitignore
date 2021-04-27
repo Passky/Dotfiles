@@ -1,21 +1,7 @@
-
 # http://www.gnu.org/software/automake
-
 Makefile.in
 autoloads.el
 autoloads.elc
-.emacs.d/company-statistics-cache.el
-.emacs.d/eclipse.jdt.ls/
-.emacs.d/url
-.emacs.d/eln-cache
-.emacs.d/pdf-view-dump
-.emacs.d/quelpa
-.emacs.d/rime
-.emacs.d/emacs.pdmp
-.emacs.d/kkcrc
-.emacs.d/.dap-breakpoints
-.config/fish/fish_variables
-
 \#%*
 
 /ar-lib
@@ -40,12 +26,11 @@ compile_commands.json
 /missing
 .LfCache/
 *.zwc
-# https://www.gnu.org/software/libtool/
 
+# https://www.gnu.org/software/libtool/
 /ltmain.sh
 
 # http://www.gnu.org/software/texinfo
-
 /texinfo.tex
 
 # http://www.gnu.org/software/m4/
@@ -54,15 +39,26 @@ m4/ltoptions.m4
 m4/ltsugar.m4
 m4/ltversion.m4
 m4/lt~obsolete.m4
-.trash/*
+
+# emacs
+.emacs.d/company-statistics-cache.el
+.emacs.d/eclipse.jdt.ls/
+.emacs.d/url
+.emacs.d/eln-cache
+.emacs.d/pdf-view-dump
+.emacs.d/quelpa
+.emacs.d/rime
+.emacs.d/emacs.pdmp
+.emacs.d/kkcrc
+.emacs.d/.dap-breakpoints
+.config/fish/fish_variables
+
 .emacs.d/eaf/*
 .emacs.d/places
 .emacs.d/pdf-view-dump
 .emacs.d/request/
 .emacs.d/workspace/
 .emacs.d/.depend
-# This is pyim cache
-.emacs.d/pyim/
 .emacs.d/anaconda-mode/
 .emacs.d/.wg-file.el
 .emacs.d/url/cache
@@ -128,11 +124,13 @@ m4/lt~obsolete.m4
 .emacs.d/transient/
 .emacs.d/elpy/
 .emacs.d/.lsp-session-v1
-.log/
 
 # lsp
-.ccls-cache
+.ccls-cache/
 .cache
+.log/
+
+.trash/*
 
 # TAGS
 TAGS
