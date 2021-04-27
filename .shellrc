@@ -33,7 +33,6 @@ export ALTERNATE_EDITOR=""
 
 # alias cp=" cp -i"                          # confirm before overwriting something
 # alias vi='vim --clean'
-alias cd=' cd'
 alias gitu='git add . && git commit && git push'
 alias df=' df -h'                          # human-readable sizes
 alias free=' free -m'                      # show sizes in MB
