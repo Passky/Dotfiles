@@ -585,7 +585,6 @@ function emacs-eval()
   elif [ "$OS_NAME" = "Darwin" ]; then
 	$HOME/Applications/Emacs.app/Contents/MacOS/bin/emacs -nw --eval "($1  \"$2\")"
   else
-	man "$1"
 	echo "Please Install emacs."
   fi
 }
