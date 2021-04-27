@@ -64,11 +64,12 @@ Return the fastest package archive."
 (setq package-quickstart t
 	  package-quickstart-file my-cache-file)
 
-(package-initialize)
-
 ;; Bug fix
-(when (bound-and-true-p *dump*)
-  (load (concat my-cache-file "c")))
+(if (bound-and-true-p *dump*)
+	;; (load (concat my-cache-file "c")))
+	(load my-cache-file)
+  (package-initialize)
+  )
 
 (defun my-re-init ()
   "For cross big version update."
