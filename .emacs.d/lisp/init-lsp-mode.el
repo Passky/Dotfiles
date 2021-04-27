@@ -16,7 +16,6 @@
 							  'cc-mode-hook
 							  'c++-mode-hook
 							  'js-mode-hook
-							  'js2-mode-hook
 							  'web-mode-hook
 							  ;; 'html-mode-hook ; there's builtin snippet completion
 							  'typescript-mode-hook
