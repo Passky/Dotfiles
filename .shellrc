@@ -665,7 +665,7 @@ alias emc='_emc'
 
 function _edc
 {
-  mybg emacs --dump-file ~/.emacs.d/emacs.pdmp "$@"
+  emc --dump-file ~/.emacs.d/emacs.pdmp "$@"
 }
 alias edc="_edc"
 
@@ -675,7 +675,7 @@ function _ednw
 	# winpty emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@" # This will cause path problem
 	_edc
   else 
-	emacs -nw --dump-file ~/.emacs.d/emacs.pdmp "$@"
+	emnw --dump-file ~/.emacs.d/emacs.pdmp "$@"
   fi
 }
 alias ednw="_ednw"
@@ -903,6 +903,7 @@ function get_clang()
 }
 
 function get_csharp
+# https://docs.microsoft.com/zh-cn/dotnet/core/tools/enable-tab-autocomplete
 {
   # export DOTNET_ROOT=$HOME/dotnet
   # export PATH=$PATH:$HOME/dotnet
