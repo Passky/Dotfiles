@@ -1,0 +1,55 @@
+# Compiled
+*.elc
+
+# Packaging
+.cask
+
+# Backup files
+*~
+
+# Undo-tree save-files
+*.~undo-tree
+
+# flycheck temp file
+.flycheck*
+
+/elpa/
+/straight/
+/quelpa/
+/var/
+/etc/
+/eln-cache/
+/eshell/lastdir
+/eshell/history
+/rime
+/emacs.pdmp
+/kkcrc
+/.dap-breakpoints
+
+/.cache/
+/.cask
+/.edbi-ds-history
+/.lsp-session-v1
+/.my-private.el
+/META-INF
+/abbrev_defs
+/ac-comphist.dat
+/async-bytecomp.log
+/auto-save-list
+/bookmarks
+/dictionaries
+/ede-projects.el
+/el-get/
+/emms/
+/flycheck_*
+/forge-database.sqlite
+/games/
+/geben
+/hacker-typer/
+/haskell-fun/
+/image-dired/
+/keyfrek.html
+/logview-cache.extmap
+/lsp-cache/
+/network-security.data
+/newsticker/
