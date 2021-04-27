@@ -1,9 +1,0 @@
-;;; -*- coding: utf-8 -*-
-(("/home/passky/git/test-git-mergetool/hello.txt" . 78)
- ("/home/passky/config/"
-  (dired-filename . "/home/passky/config/.Xdefaults"))
- ("/home/passky/config/.emacs.d/lisp/init-ui.el" . 1127)
- ("/home/passky/config/bless/algorithm/elisp.org" . 30)
- ("/home/passky/.emacs.d/elpa/projectile-20210407.707/projectile.el" . 93352)
- ("/home/passky/.emacs.d/.cache/lsp/npm/typescript-language-server/lib/node_modules/typescript-language-server/node_modules/vscode-languageserver/lib/main.d.ts" . 1681)
- ("/home/passky/.emacs.d/elpa/projectile-20210407.707/projectile-autoloads.el" . 21115))
