@@ -199,7 +199,7 @@ search in current directory."
 	"Use transient fo minibuffer actions."
 	(interactive)
 	(let ((echo-keystrokes nil)
-		  (minibuffer-mes "[ea] embark-act  [ee] embark-export  [ee] embark-export
+		  (minibuffer-mes "[ea] embark-act  [ee] embark-export  [ec] embark-collect-live
 [ei] embark-isearch [es] embark-eshell"
 		   ))
 	  (message minibuffer-mes)
