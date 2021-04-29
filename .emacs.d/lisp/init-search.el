@@ -33,7 +33,7 @@
 (after! icomplete
   (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-fido-ret)
   (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
-  (define-key icomplete-minibuffer-map (kbd "M-m") 'icomplete-ret)
+  (define-key icomplete-minibuffer-map (kbd "M-m") 'minibuffer-complete-and-exit)
 
   (setq icomplete-separator (propertize "☯\n" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
