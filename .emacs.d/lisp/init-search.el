@@ -18,7 +18,7 @@
 (define-key minibuffer-local-isearch-map [escape] 'abort-recursive-edit)
 
 ;; completion-styles
-(setq completion-auto-help nil
+(setq completion-auto-help 'lazy
 	  completion-category-defaults nil
 	  ;;  file path expand need this
 	  completion-category-overrides '((file (styles . (partial-completion)))) 
@@ -73,7 +73,7 @@
 (after! marginalia
   ;; REVIEW: will there be performance issue?
   ;; use heavy mode by default
-  (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)) 
+  ;; (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)) 
   ;; use `marginalia-cycle' to switch from light or heavy mode
   (define-key icomplete-minibuffer-map (kbd "M-a") 'marginalia-cycle))
 
