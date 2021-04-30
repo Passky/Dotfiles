@@ -20,8 +20,8 @@
 ;; completion-styles
 (setq completion-auto-help 'lazy
 	  completion-category-defaults nil
-	  ;;  file path expand need this
-	  completion-category-overrides '((file (styles . (partial-completion)))) 
+	  ;; let filepath expend correctly
+	  completion-category-overrides '((file (styles . (partial-completion))))
 	  completion-styles '(flex basic substring partial-completion)
 	  completion-ignore-case t
 	  completion-cycle-threshold 3
@@ -35,7 +35,7 @@
   (define-key icomplete-minibuffer-map (kbd "DEL") 'icomplete-fido-backward-updir)
   (define-key icomplete-minibuffer-map (kbd "M-m") 'minibuffer-complete-and-exit)
 
-  (setq icomplete-separator (propertize "☯\n" 'face  '(foreground-color . "SlateBlue1")) ; using icomplete-vertical
+  (setq icomplete-separator (propertize "☆\n" 'face  '(face-foreground . 'warning)) ; using icomplete-vertical
 		icomplete-delay-completions-threshold 2000
 		icomplete-compute-delay 0
 		icomplete-show-matches-on-no-input t
@@ -201,7 +201,7 @@ search in current directory."
 	(let ((echo-keystrokes nil)
 		  (minibuffer-mes "[ea] embark-act  [ee] embark-export  [ec] embark-collect-live
 [ei] embark-isearch [es] embark-eshell"
-		   ))
+						  ))
 	  (message minibuffer-mes)
 	  (set-transient-map
 	   (let ((map (make-sparse-keymap)))
