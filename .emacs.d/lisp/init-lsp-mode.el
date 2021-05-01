@@ -120,8 +120,8 @@
 		lsp-enable-text-document-color nil
 		lsp-enable-file-watchers nil
 		lsp-enable-semantic-highlighting nil
-		lsp-enable-imenu nil
 		lsp-lens-enable nil ; actionable contextual information interspersed
+		lsp-enable-imenu t
 		lsp-idle-delay 0.5 ; lazy refresh
 
 
