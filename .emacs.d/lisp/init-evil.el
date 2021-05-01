@@ -158,6 +158,7 @@
    "pp" 'project-switch-project
    "pf" 'project-find-file
    "pg" 'project-find-regexp
+   "pc" 'project-execute-extended-command
 
    ;;{{ Find && Grep
    "[" 'flymake-goto-prev-error
