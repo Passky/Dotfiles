@@ -134,7 +134,9 @@
 	  (when (looking-back consult-async-default-split) (delete-char -1))
 	  (insert " ")))
   (after! icomplete
-	(define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)))
+	(define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
+	(define-key crm-local-completion-map (kbd "SPC") 'my-minibuffer-space)
+	))
 
 (defun my-consult-grep ()
   "Use ripgrep first or fallback to grep."
