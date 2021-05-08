@@ -25,6 +25,7 @@
 (setq-default evil-overriding-maps nil ; do not override my-leader
 			  evil-insert-state-modes '(eshell-mode) ; do not enter some mode with insert state
 			  evil-motion-state-modes nil ; do not enter some mode with motion state
+			  evil-respect-visual-line-mode t
 			  ) ;
 
 (add-hook 'after-init-hook 'evil-mode)

@@ -135,6 +135,7 @@
 	  (insert " ")))
   (after! icomplete
 	(define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
+	(my-ensure 'crm)
 	(define-key crm-local-completion-map (kbd "SPC") 'my-minibuffer-space)
 	))
 
