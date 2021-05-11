@@ -64,8 +64,8 @@
 		company-tooltip-align-annotations t
 		company-tooltip-limit 8 ; faster!
 		completion-ignore-case t      ; ignore case for `company-capf'
-        company-etags-ignore-case t
-        company-etags-everywhere t
+		company-etags-ignore-case t
+		company-etags-everywhere t
 		company-dabbrev-other-buffers t
 		company-dabbrev-ignore-case t
 		company-dabbrev-downcase nil ; do not return downcase string
@@ -76,7 +76,7 @@
 		company-format-margin-function #'company-detect-icons-margin ; add icon for lisp edit
 		;; company-transformers '(company-sort-by-backend-importance)
 		company-backends '((company-files)
-						   (company-capf)
+						   (company-capf :separate company-dabbrev-code)
 						   ;; (company-dabbrev-code)
 						   (company-dabbrev)
 						   (company-etags)
@@ -90,9 +90,16 @@
   ;; like vim
   (company-tng-mode)
 
-  ;; Integrate company-dabbrev with company-capf
-  ;; https://emacs-china.org/t/tabnine/9988/40
-  ;; I delete this, but still hold link for review
+  ;; remove dups
+  ;; check https://emacs-china.org/t/company/17187
+  (defun my-company-remove-dups (candidates)
+	(let ((newseq))
+	  (mapcar #'(lambda (c)
+				  (if (not (member c newseq))
+					  (add-to-list 'newseq c)))
+			  candidates)
+	  newseq))
+  (add-to-list 'company-transformers #'my-company-remove-dups)
 
   ;; The free version of TabNine is good enough,
   ;; and below code is recommended that TabNine not always
