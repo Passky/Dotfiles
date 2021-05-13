@@ -27,7 +27,7 @@
 	  ;; do not ignore ctrl/alt/shift when input method is on
 	  )
 
-(when (functionp w32-set-ime-open-status)
+(when (functionp 'w32-set-ime-open-status)
   (defun emacs-ime-disable ()
 	(w32-set-ime-open-status nil))
 
