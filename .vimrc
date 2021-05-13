@@ -19,7 +19,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'jiangmiao/auto-pairs'
-Plug 'morhetz/gruvbox'
 nnoremap <silent> <space> :WhichKey '<Space>'<CR>
 nmap <silent> g :WhichKey 'g'<CR>
 nmap gg :1<cr>
@@ -175,7 +174,7 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " configration for Theme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme gruvbox
+colorscheme industry
 " if strftime("%H") < 18 && strftime("%H") > 6
 "   set background=light
 " else
