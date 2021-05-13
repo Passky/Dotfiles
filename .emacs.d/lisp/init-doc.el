@@ -1,5 +1,4 @@
 (my-add-package 'edit-indirect) ; edit in code block
-(my-add-package 'htmlize) ; org/mrakdown -> html
 (my-add-package 'bing-dict) ; search words in bing
 
 ;; {{ markdown

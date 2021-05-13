@@ -88,17 +88,23 @@
 
   ;; {{ C/Cpp
   (defconst ccls-args nil)
-  (defconst clangd-args '("-j=2"
-						  "--background-index"
-						  "--clang-tidy"
-						  "--recovery-ast"
-						  "--cross-file-rename"
-						  "--completion-style=bundled"
-						  ; (when *win64*
-							; "--target=x86_64-w64-mingw")
-						  "--pch-storage=memory"
-						  "--suggest-missing-includes"
-						  "--header-insertion-decorators=0"))
+  (if *win64*
+	  (defconst clangd-args '("-j=2"
+							  "--background-index"
+							  "--clang-tidy"
+							  "--cross-file-rename"
+							  "--completion-style=bundled"
+							  "--target=x86_64-w64-mingw"
+							  "--pch-storage=memory"
+							  "--header-insertion-decorators=0"))
+	(defconst clangd-args '("-j=2"
+							"--background-index"
+							"--clang-tidy"
+							"--cross-file-rename"
+							"--completion-style=bundled"
+							"--pch-storage=memory"
+							"--header-insertion-decorators=0")))
+  
 
   ;; Prefer `clangd' over `ccls'
   (cond ((executable-find "clangd") (setq lsp-clients-clangd-executable "clangd"
