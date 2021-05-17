@@ -208,7 +208,16 @@
 							  (latex-preview-pane-mode)))
 ;; REVIEW: Use org-latex-impatient in org for quick preview
 
-;; TODO in emacs28 there'a builtin dictionary package
+;; TODO in emacs28 there'a builtin `dictionary' package
+(autoload 'dictionary-search "dictionary" "" t)
+(after! dictionary
+  (add-hook 'dictionary-mode-hook #'(lambda ()
+									  (setq-local imenu-generic-expression '((nil "^From <<\\(.+\\)>>" 1)))))
+  (setq dictionary-server "dict.org" ; anyway default localhost will fail
+		dictionary-default-popup-strategy "lev" ; lex search
+		dictionary-description-open-delimiter "<<"
+		dictionary-description-close-delimiter ">>"))
+
 
 
 
