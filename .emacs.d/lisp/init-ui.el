@@ -198,56 +198,9 @@ Nil to use font supports ligatures."
 		doom-modeline-persp-name nil
 		doom-modeline-enable-word-count nil
 		))
+(add-hook 'after-init-hook #'doom-modeline-mode)
 
-(if (not *win64*)
-	(add-hook 'after-init-hook #'doom-modeline-mode)
-  ;; Do not calling extra process,
-  ;; which will cost much in windows
-  (setq-default mode-line-format
-				(list
-				 ;; the buffer name; the file name as a tool tip
-				 '(:eval evil-mode-line-tag)
-				 '(:eval (propertize "%b " 'face nil 'help-echo (buffer-file-name)))
-				 ;; line and column
-				 "(" ;; '%02' to set to 2 chars at least; prevents flickering
-				 "%02l" "," "%01c"
-				 ") "
-				 "["
-				 ;; the current major mode for the buffer.
-				 '(:eval mode-name)
-				 " "
-				 ;; buffer file encoding
-				 '(:eval (let ((sys (coding-system-plist buffer-file-coding-system)))
-						   (if (memq (plist-get sys :category)
-									 '(coding-category-undecided coding-category-utf-8))
-							   "UTF-8"
-							 (upcase (symbol-name (plist-get sys :name))))))
-				 " "
-				 ;; was this buffer modified since the last save?
-				 '(:eval (if (buffer-modified-p)
-							 (propertize "Moded"
-										 'face nil
-										 'help-echo "Buffer has been modified")
-						   (propertize "Saved"
-									   'face nil
-									   'help-echo "Buffer has been saved")
-						   ))
-
-				 ;; is this buffer read-only?
-				 '(:eval (when buffer-read-only
-						   (concat ","  (propertize "RO" 'face nil 'help-echo "Buffer is read-only"))))
-				 "] "
-				 ;;global-mode-string, org-timer-set-timer in org-mode need this
-				 '(:eval global-mode-string)
-				 " "
-				 ;; show process
-				 '(:eval mode-line-process)
-				 ;; Don't show `minor-mode'
-				 ;; minor-mode-alist  ;; list of minor modes
-				 )))
-
-
-;; Highlight same symbol
+;; Highlight symbol and actions
 (my-add-package 'symbol-overlay)
 (add-hook 'prog-mode-hook 'symbol-overlay-mode)
 
