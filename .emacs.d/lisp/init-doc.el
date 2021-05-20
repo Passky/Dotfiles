@@ -159,10 +159,12 @@
    newsticker-url-list '(
 						 ;; ("Planet Emacslife" "https://planet.emacslife.com/atom.xml")
 						 ("LWN (Linux Weekly News)" "https://lwn.net/headlines/rss")
-						 ("Renmingwang en world" "http://english.people.com.cn/rss/90777.xml")
 						 ("Renmingwang en English" "http://en.people.cn/rss/90000.xml")
 						 ("Renmingwang" "http://www.people.com.cn/rss/world.xml")
+						 ("虎嗅" "https://www.huxiu.com/rss/0.xml")
+						 ("BBC news" "http://feeds.bbci.co.uk/news/rss.xml")
 						 ("Hacker News" "https://hnrss.org/frontpage")
+						 ("Zhihu Daily" "https://www.zhihu.com/rss")
 						 )))
 
 ;; {{ websearch
