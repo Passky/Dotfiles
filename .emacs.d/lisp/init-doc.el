@@ -130,7 +130,7 @@
 ;; TODO: EAF is great,considering add it.
 ;; {{ builtin doc-view,reading pdf
 (with-eval-after-load 'doc-view
-  ;; This requires external ghost script or mudraw/pdfdraw(mupdf)
+  ;; This requires external ghostscript/mudraw/pdfdraw(mupdf) program to work.
   (setq doc-view-resolution 250))
 
 ;; {{ epub
@@ -139,13 +139,12 @@
 
 ;; {{ rss
 (define-advice newsticker--cache-read (:around (func &rest args))
-    "Read cache data without prompt."
-    (cl-letf* (((symbol-function 'y-or-n-p) (lambda (_) t)))
-      (apply func args)))
+  "Read cache data without prompt."
+  (cl-letf* (((symbol-function 'y-or-n-p) (lambda (_) t)))
+	(apply func args)))
 
-(after! newsticker
-  (setq
-   ;; Keep obsolete items for a month
+(after! newst-backend
+  (setq ;; Keep obsolete items for a month
    newsticker-keep-obsolete-items t
    newsticker-obsolete-item-max-age (* 30 86400)
    ;; Sane behavior
@@ -157,8 +156,14 @@
    newsticker-treeview-listwindow-height 20
    newsticker-treeview-date-format "%F %a, %H:%M  "
    newsticker-url-list-defaults nil
-   newsticker-url-list '(("Planet Emacslife" "https://planet.emacslife.com/atom.xml")
-						 ("LWN (Linux Weekly News)" "https://lwn.net/headlines/rss"))))
+   newsticker-url-list '(
+						 ;; ("Planet Emacslife" "https://planet.emacslife.com/atom.xml")
+						 ("LWN (Linux Weekly News)" "https://lwn.net/headlines/rss")
+						 ("Renmingwang en world" "http://english.people.com.cn/rss/90777.xml")
+						 ("Renmingwang en English" "http://en.people.cn/rss/90000.xml")
+						 ("Renmingwang" "http://www.people.com.cn/rss/world.xml")
+						 ("Hacker News" "https://hnrss.org/frontpage")
+						 )))
 
 ;; {{ websearch
 (after! webjump
