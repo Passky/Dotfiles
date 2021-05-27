@@ -6,7 +6,7 @@
 (defconst my-lsp-enable-hook (list
 							  ;; 'java-mode-hook  ; use lsp-java
 							  ;; 'verilog-mode-hook ; pip install --user hdl-checker
-							  ;; TODO: When lsp-haskell and lsp-racket works,add 'em
+							  ;; TODO: lsp-haskell and lsp-racket will get used later.
 							  'sh-mode-hook
 							  'xml-mode-hook
 							  'yaml-mode-hook
@@ -15,14 +15,17 @@
 							  'c-mode-hook
 							  'cc-mode-hook
 							  'c++-mode-hook
-							  'js-mode-hook
-							  'web-mode-hook
-							  ;; 'html-mode-hook ; there's builtin snippet completion
-							  'typescript-mode-hook
-							  'css-mode-hook
+							  'lua-mode-hook
 							  'go-mode-hook
 							  'latex-mode-hook
-							  'rust-mode-hook)
+							  'rust-mode-hook
+							  'js-mode-hook
+							  'typescript-mode-hook
+							  'web-mode-hook
+							  'css-mode-hook
+							  ;; 'html-mode-hook ; there's builtin snippet completion
+							  ;; 'mhtml-mode-hook ; there's builtin snippet completion
+							  )
   "Enable `lsp' in these modes.")
 
 (dolist (hook my-lsp-enable-hook)
