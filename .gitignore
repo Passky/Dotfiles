@@ -47,7 +47,8 @@ m4/lt~obsolete.m4
 .emacs.d/eln-cache
 .emacs.d/pdf-view-dump
 .emacs.d/quelpa
-.emacs.d/rime
+.emacs.d/rime/build
+.emacs.d/rime/installation.yaml
 .emacs.d/emacs.pdmp
 .emacs.d/kkcrc
 .emacs.d/.dap-breakpoints
