@@ -49,6 +49,7 @@ m4/lt~obsolete.m4
 .emacs.d/quelpa
 .emacs.d/rime/build
 .emacs.d/rime/installation.yaml
+.emacs.d/rime/luna_pinyin.userdb
 .emacs.d/emacs.pdmp
 .emacs.d/kkcrc
 .emacs.d/.dap-breakpoints
