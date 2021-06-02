@@ -154,12 +154,15 @@
 				 (indent-for-tab-command))
 				(t (insert " "))))))))
 
-(general-define-key
- [remap backward-delete-char-untabify] 'backward-delete-char
- [remap backward-delete-char-untabify] #'luna-hungry-delete
- [remap delete-indentation] #'luna-hungry-delete
- [remap delete-backward-char] #'luna-hungry-delete
- [remap c-electric-backspace] #'luna-hungry-delete)
+;; (general-define-key
+;;  [remap backward-delete-char-untabify] 'backward-delete-char
+;;  [remap backward-delete-char-untabify] #'luna-hungry-delete
+;;  [remap delete-indentation] #'luna-hungry-delete
+;;  [remap delete-backward-char] #'luna-hungry-delete
+;;  [remap c-electric-backspace] #'luna-hungry-delete)
+
+(my-add-package 'hungry-delete)
+(global-hungry-delete-mode)
 
 (setq history-delete-duplicates t)
 ;; }}
