@@ -74,6 +74,7 @@
 		company-dabbrev-code-everywhere nil ; complete `abbrev' words only in current buffer
 		company-dabbrev-char-regexp "\\(\\sw\\|\\s_\\|_\\|-\\|!\\|?\\)" ; dabbrev will accept '- ! ? into candidates too.
 		company-format-margin-function #'company-detect-icons-margin ; add icon for lisp edit
+		company-etags-use-main-table-list nil ; less annoying
 		;; company-transformers '(company-sort-by-backend-importance)
 		company-backends '((company-files)
 						   (company-capf :separate company-dabbrev-code)
