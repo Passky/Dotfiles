@@ -187,7 +187,7 @@
                    ("Stack Overflow" .
                     [simple-query "stackoverflow.com" "stackoverflow.com/search?q=" ""])
                    ("TLDR" .
-                    [simple-query "linux.cn" "tldr.linux.cn/cmd/" ""])
+                    [simple-query "linux.cn" "tldr.linux.cn/cmd/" "/"])
                    ("Man Search" .
                     [simple-query "archlinux.org" "man.archlinux.org/search?q=" ""])
                    ("Man Go" .
