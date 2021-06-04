@@ -35,6 +35,19 @@
 (my-add-package 'ob-go)
 (my-add-package 'valign) ; visual align table for all lang!
 
+;; Drag to insert Image
+(my-add-package 'org-download)
+(add-hook 'org-mode-hook 'org-download-enable)
+(add-hook 'dired-mode-hook 'org-download-enable)
+(after! org-download
+  (defun +org-download-method (link)
+	(org-download--fullname (org-link-unescape link)))
+  (setq org-download-method '+org-download-method)
+
+  (setq org-download-annotate-function (lambda (_link) "")
+		org-download-method 'attach
+		org-download-screenshot-method "screencapture -i %s"))
+
 ;; (my-add-package 'org) ; don't use newer org-mode
 (add-hook 'org-mode-hook #'(lambda ()
 							 (org-indent-mode 1)
@@ -123,6 +136,7 @@
 	(eval `(my-lsp-org-babel-enable ,lang))))
 
 ;; {{ rst
+;; Most used by python community.
 (after! rst
   (add-hook 'rst-adjust 'rst-toc-update))
 
