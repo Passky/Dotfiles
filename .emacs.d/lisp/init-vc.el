@@ -46,8 +46,6 @@
 	(add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
 	(add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
 
-(setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
-
 ;; Change log
 (after! add-log
   (setq add-log-keep-changes-together t))

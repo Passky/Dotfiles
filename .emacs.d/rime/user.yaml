@@ -4,4 +4,4 @@ patch:
     - {name: full_shape, states: ["半角", "全角"]}
     - {name: simplification, reset: 1, states: ["漢字", "汉字"]}
 var:
-  last_build_time: 1622634569
+  last_build_time: 1622871689
