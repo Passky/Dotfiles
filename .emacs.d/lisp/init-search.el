@@ -47,7 +47,7 @@
 		icomplete-prospects-height 10
 		)
   ;; highlight current selected
-  ;; (custom-set-faces '(icomplete-first-match ((t (:inherit highlight)))))
+  (custom-set-faces '(icomplete-first-match ((t (:inherit highlight))))) ; NOTE: REMOVE this line in emacs28
   )
 
 (my-delay-eval #'(lambda ()
