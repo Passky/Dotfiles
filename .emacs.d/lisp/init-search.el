@@ -41,12 +41,14 @@
 		icomplete-show-matches-on-no-input t
 		icomplete-hide-common-prefix nil
 		icomplete-tidy-shadowed-file-names t
+		icomplete-scroll t ; like ivy!
 		;; in-buffer completion is buggy now.
-		;; icomplete-in-buffer t
+		icomplete-in-buffer t
 		icomplete-prospects-height 10
 		)
   ;; highlight current selected
-  (custom-set-faces '(icomplete-first-match ((t (:inherit highlight))))))
+  ;; (custom-set-faces '(icomplete-first-match ((t (:inherit highlight)))))
+  )
 
 (my-delay-eval #'(lambda ()
 				   (icomplete-mode)) 0) 
