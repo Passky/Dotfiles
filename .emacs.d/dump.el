@@ -11,7 +11,7 @@
 (setq evil-want-keybinding nil)
 
 (dolist (package '(icomplete
-					   company company-capf company-files company-dabbrev company-dabbrev-code company-yasnippet company-prescient prescient yasnippet-snippets yasnippet 
+					   company company-capf company-files company-dabbrev company-dabbrev-code company-yasnippet yasnippet-snippets yasnippet 
 					   which-key evil evil-matchit evil-collection evil-surround evil-nerd-commenter evil-surround evil-avy bing-dict htmlize
 					   hl-todo buffer-move wgrep hydra xclip page-break-lines package elpy posframe dumb-jump
 					   rainbow-delimiters elpy diff-hl quickrun 
