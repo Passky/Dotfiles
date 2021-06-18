@@ -162,6 +162,7 @@
 ;;  [remap c-electric-backspace] #'luna-hungry-delete)
 
 (my-add-package 'hungry-delete)
+(setq hungry-delete-join-reluctantly t)
 (global-hungry-delete-mode)
 
 (setq history-delete-duplicates t)
