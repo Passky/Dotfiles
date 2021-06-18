@@ -1,0 +1,7 @@
+2021/06/16-18:35:46.190675 7f49ec3d7700 Log #9: 12 ops saved to Table #10 OK
+2021/06/16-18:35:46.190822 7f49ec3d7700 Archiving /home/passky/.emacs.d/rime/luna_pinyin.userdb/000009.log: OK
+2021/06/16-18:35:46.190936 7f49ec3d7700 Table #8: 135 entries OK
+2021/06/16-18:35:46.190988 7f49ec3d7700 Table #5: 22 entries OK
+2021/06/16-18:35:46.191034 7f49ec3d7700 Table #10: 12 entries OK
+2021/06/16-18:35:46.191157 7f49ec3d7700 Archiving /home/passky/.emacs.d/rime/luna_pinyin.userdb/MANIFEST-000007: OK
+2021/06/16-18:35:46.198910 7f49ec3d7700 **** Repaired leveldb /home/passky/.emacs.d/rime/luna_pinyin.userdb; recovered 3 files; 3016 bytes. Some data may have been lost. ****

@@ -136,7 +136,7 @@
 (with-eval-after-load 'go-mode
   (with-eval-after-load 'exec-path-from-shell
 	(exec-path-from-shell-copy-envs '("GOPATH" "GOPROXY")))
-  (godoc-reuse-buffer t))
+  (setq godoc-reuse-buffer t))
 ;;}}
 
 ;;{{ web and js/ts
