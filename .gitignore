@@ -50,6 +50,7 @@ m4/lt~obsolete.m4
 .emacs.d/rime/build
 .emacs.d/rime/installation.yaml
 .emacs.d/rime/luna_pinyin.userdb
+.emacs.d/rime/luna_pinyin.userdb.old
 .emacs.d/emacs.pdmp
 .emacs.d/kkcrc
 .emacs.d/.dap-breakpoints
