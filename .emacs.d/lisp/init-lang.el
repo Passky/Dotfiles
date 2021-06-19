@@ -10,7 +10,8 @@
 ;; Better rime
 (my-add-package 'rime)
 (after! rime
-  (setq rime-show-candidate 'posframe))
+  (when *gui*
+	(setq rime-show-candidate 'posframe)))
 
 ;;; {{ language learn
 ;; japanese
