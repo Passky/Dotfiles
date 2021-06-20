@@ -48,6 +48,7 @@ m4/lt~obsolete.m4
 .emacs.d/pdf-view-dump
 .emacs.d/quelpa
 .emacs.d/rime/build
+.emacs.d/rime/user.yaml
 .emacs.d/rime/installation.yaml
 .emacs.d/rime/luna_pinyin.userdb
 .emacs.d/rime/luna_pinyin.userdb.old
