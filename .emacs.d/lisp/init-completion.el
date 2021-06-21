@@ -23,7 +23,7 @@
 
 ;; company-mode
 (my-add-package 'company)
-;; (my-add-package 'company-prescient)
+(my-add-package 'company-prescient)
 ;; TODO: add a tag based completion system(works out of box and async and compatable with capf)
 
 
@@ -87,7 +87,7 @@
 						   (company-yasnippet)))
 
   ;; better fuzzy match
-  ;; (company-prescient-mode 1)
+  (company-prescient-mode 1)
 
   ;; like vim
   (company-tng-mode)

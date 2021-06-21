@@ -247,8 +247,8 @@
    "df" 'gud-finish
 
    ;;{{ QuickAction
-   "qQ" 'quickrun
-   "qq" 'quickrun-shell
+   "qq" 'quickrun
+   "qQ" 'quickrun-shell
    "qd" 'bing-dict-brief
    "qt" 'my-eshell-pop
    "qs" 'async-shell-command
@@ -260,8 +260,8 @@
    "cc" 'compile
    "cC" 'recompile
    "ck" 'kill-compilation
-   "cX" 'quickrun
-   "cx" 'quickrun-shell
+   "cx" 'quickrun
+   "cX" 'quickrun-shell
    "cp" 'my-yank-pop
 
    ;;{{ interesting builtin work

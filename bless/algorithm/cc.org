@@ -72,3 +72,33 @@ a^a 异或
 since string is a complex construct
 use =std::stoi();= =std::stod;= or what.
 
+*** read full content in a file to string
+#+begin_src c++
+  // Like this:
+
+  #include <fstream>
+  #include <string>
+
+  int main(int argc, char** argv)
+  {
+
+      std::ifstream ifs("myfile.txt");
+      std::string content( (std::istreambuf_iterator<char>(ifs) ),
+          (std::istreambuf_iterator<char>()    ) );
+
+      return 0;
+  }
+
+  // The statement
+
+  std::string content( (std::istreambuf_iterator<char>(ifs) ),
+      (std::istreambuf_iterator<char>()    ) );
+
+  // can be split into
+
+  std::string content;
+  content.assign( (std::istreambuf_iterator<char>(ifs) ),
+      (std::istreambuf_iterator<char>()    ) );
+#+end_src
+
+
