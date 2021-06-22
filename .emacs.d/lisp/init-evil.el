@@ -88,6 +88,7 @@
    "gs" 'evil-avy-goto-word-1
    "gb" 'beginning-of-defun
    "ge" 'end-of-defun
+   "ga" 'beginning-of-defun
    "C-d" 'scroll-up ; it looks strange, but in emacs it exactly is.
    "C-u" 'scroll-down
    "J" 'nil
