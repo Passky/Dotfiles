@@ -169,6 +169,10 @@
 (add-hook 'org-mode-hook 'my-company-ispell-setup)
 (add-hook 'markdown-mode-hook 'my-company-ispell-setup)
 
+;; ctags based completion and navigation system.
+(my-add-package 'citre)
+(require 'citre-config)
+
 ;;}}
 (provide 'init-completion)
 ;;; init-completion.el ends here
