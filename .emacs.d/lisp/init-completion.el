@@ -92,16 +92,8 @@
   ;; like vim
   (company-tng-mode)
 
-  ;; remove dups
-  ;; check https://emacs-china.org/t/company/17187
-  (defun my-company-remove-dups (candidates)
-	(let ((newseq))
-	  (mapcar #'(lambda (c)
-				  (if (not (member c newseq))
-					  (add-to-list 'newseq c)))
-			  candidates)
-	  newseq))
-  (add-to-list 'company-transformers #'my-company-remove-dups)
+  ;; remove duplicates
+  (add-to-list 'company-transformers #'delete-dups)
 
   ;; The free version of TabNine is good enough,
   ;; and below code is recommended that TabNine not always
