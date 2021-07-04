@@ -315,7 +315,7 @@
 		speedbar-indentation-width 2))
 
 ;; restore desktop
-(desktop-save-mode)
+;; (desktop-save-mode)
 ;; inhibit no-loaded prompt
 (setq desktop-file-modtime (file-attribute-modification-time
 							(file-attributes

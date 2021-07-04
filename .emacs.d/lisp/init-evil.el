@@ -336,6 +336,6 @@
 	"ee" 'eval-expression ;;
 	))
 
-(key-chord-mode) ; Have to put it there,or it won't work.我
+(key-chord-mode) ; Have to put it there,or it won't work.
 (provide 'init-evil)
 ;;; init-evil.el ends here.
