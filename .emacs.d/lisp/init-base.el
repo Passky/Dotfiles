@@ -314,5 +314,22 @@
 		speedbar-show-unknown-files t
 		speedbar-indentation-width 2))
 
+;; restore desktop
+(desktop-save-mode)
+;; inhibit no-loaded prompt
+(setq desktop-file-modtime (file-attribute-modification-time
+							(file-attributes
+							 (desktop-full-file-name)))
+	  desktop-lazy-verbose nil
+	  desktop-load-locked-desktop t
+	  desktop-restore-eager 1
+	  desktop-restore-frames nil
+	  desktop-save t)
+
+(defun restart-emacs-without-desktop (&optional args)
+  "Restart emacs without desktop."
+  (interactive)
+  (restart-emacs (cons "--no-desktop" args)))
+
 (provide 'init-base)
 ;;; base ends here
