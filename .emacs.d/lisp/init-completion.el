@@ -162,8 +162,8 @@
 (add-hook 'markdown-mode-hook 'my-company-ispell-setup)
 
 ;; ctags based completion and navigation system.
-(my-add-package 'citre)
-(require 'citre-config)
+;; (my-add-package 'citre)
+;; (require 'citre-config)
 
 ;;}}
 (provide 'init-completion)
