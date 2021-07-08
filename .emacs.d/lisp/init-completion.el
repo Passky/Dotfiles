@@ -77,8 +77,7 @@
 		company-etags-use-main-table-list nil ; less annoying
 		;; company-transformers '(company-sort-by-backend-importance)
 		company-backends '((company-files)
-						   (company-capf)
-						   ;; (company-capf :separate company-dabbrev-code)
+						   (company-yasnippet :separate company-capf)
 						   ;; (company-dabbrev-code)
 						   (company-dabbrev)
 						   (company-etags)

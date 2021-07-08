@@ -174,10 +174,10 @@
 						 ;; ("Planet Emacslife" "https://planet.emacslife.com/atom.xml")
 						 ("LWN (Linux Weekly News)" "https://lwn.net/headlines/rss")
 						 ("Renmingwang en English" "http://en.people.cn/rss/90000.xml")
-						 ("Renmingwang" "http://www.people.com.cn/rss/world.xml")
 						 ("虎嗅" "https://www.huxiu.com/rss/0.xml")
 						 ("BBC news" "http://feeds.bbci.co.uk/news/rss.xml")
 						 ("Hacker News" "https://hnrss.org/frontpage")
+						 ("Raymond Chen – The Old New Thing" "https://devblogs.microsoft.com/oldnewthing/author/oldnewthing/feed")
 						 ("Zhihu Daily" "https://www.zhihu.com/rss")
 						 )))
 
