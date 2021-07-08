@@ -226,8 +226,9 @@
 ;; \resizebox{\textwidth}{!}{...} make width same with screen and resize with height
 (add-hook 'latex-mode-hook #'(lambda ()
 							  (flymake-start)
-							  (latex-preview-pane-mode)))
-;; REVIEW: Use org-latex-impatient in org for quick preview
+							  ;; (latex-preview-pane-mode)
+							  ))
+;; TODO: Use org-latex-impatient in org for quick preview
 
 ;; TODO in emacs28 there'a builtin `dictionary' package
 (autoload 'dictionary-search "dictionary" "" t)
