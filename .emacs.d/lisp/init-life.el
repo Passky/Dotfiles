@@ -49,6 +49,28 @@
 ;;{{ dired
 (with-eval-after-load 'dired
 
+  ;; re-use dired buffer, available in Emacs 28
+  ;; @see https://debbugs.gnu.org/cgi/bugreport.cgi?bug=20598
+  (setq dired-kill-when-opening-new-dired-buffer t)
+
+   ;; search file name only when focus is over file
+  (setq dired-isearch-filenames 'dwim)
+
+  ;; when there is two dired buffer, Emacs will select another buffer
+  ;; as target buffer (target for copying files, for example).
+  ;; It's similar to windows commander.
+  (setq dired-dwim-target t)
+
+  ;; Listing directory failed but access-file worked
+  (when (eq system-type 'darwin)
+    (require 'ls-lisp)
+    (setq ls-lisp-use-insert-directory-program nil))
+
+  ;; @see http://blog.twonegatives.com/post/19292622546/dired-dwim-target-is-j00-j00-magic
+  ;; op open two new dired buffers side-by-side and give your new-found automagic power a whirl.
+  ;; Now combine that with a nice window configuration stored in a register and you’ve got a pretty slick work flow.
+  (setq dired-dwim-target t)
+
   ;; wsl tune
   (when *wsl*
 	(defmacro wsl--open-with (id &optional app dir)

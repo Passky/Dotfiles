@@ -65,7 +65,6 @@
 (add-hook 'after-init-hook 'global-so-long-mode)
 (add-hook 'so-long-mode-hook #'(lambda ()
 								 (visual-line-mode -1)
-								 (page-break-lines -1)
 								 (setq evil-respect-visual-line-mode nil)
 								 ))
 

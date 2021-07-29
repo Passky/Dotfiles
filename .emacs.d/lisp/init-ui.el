@@ -127,9 +127,7 @@ Nil to use font supports ligatures."
 
 ;; (add-hook 'after-init-hook 'my-enable-linum)
 
-;; {{ Page-reak-line && visual-line
-(my-add-package 'page-break-lines)
-(add-hook 'after-init-hook 'global-page-break-lines-mode)
+;; {{ visual-line
 (add-hook 'after-init-hook 'global-visual-line-mode)
 
 ;;{{ whitespace
@@ -203,28 +201,6 @@ Nil to use font supports ligatures."
 ;; Highlight symbol and actions
 (my-add-package 'symbol-overlay)
 (add-hook 'prog-mode-hook 'symbol-overlay-mode)
-
-;; better notification
-(my-delay-eval #'(lambda ()
-				   (defun pulse-region (beg end &rest _)
-					 "Pulse the current region."
-					 (pulse-momentary-highlight-region beg end))
-				   (defun pulse-line (&rest _)
-					 "Pulse the current line."
-					 (pulse-momentary-highlight-one-line (point)))
-				   (defun recenter-and-pulse (&rest _)
-					 "Recenter and pulse the current line."
-					 (recenter)
-					 (pulse-line))
-				   (advice-add #'pop-tag-mark         :after #'recenter-and-pulse)
-				   (advice-add #'windmove-left :after #'pulse-line)
-				   (advice-add #'windmove-right :after #'pulse-line)
-				   (advice-add #'windmove-up :after #'pulse-line)
-				   (advice-add #'windmove-down :after #'pulse-line)
-				   (advice-add #'evil-undo :after #'pulse-line)
-				   (advice-add #'evil-paste-after :after #'pulse-line)
-				   (advice-add #'evil-delete :after #'pulse-region)
-				   ))
 
 ;; {{ which-key-mode
 (my-add-package 'which-key)
