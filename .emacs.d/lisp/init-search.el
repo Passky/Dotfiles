@@ -121,26 +121,6 @@
 
 ;; {{ search actions
 (my-add-package 'consult)
-;; TODO: remove this in emacs 28
-(setq xref-show-xrefs-function #'consult-xref
-	  xref-show-definitions-function #'consult-xref)
-(after! consult
-  ;; Or use `my-project-root'
-  (setq consult-project-root-function #'vc-root-dir
-		;; this will disable preview,unless you trigger it
-		consult-preview-key nil)
-  (defun my-minibuffer-space ()
-	(interactive)
-	(if (and (string-prefix-p consult-async-default-split (minibuffer-contents))
-			 (= 2 (length (split-string (minibuffer-contents) consult-async-default-split))))
-		(insert consult-async-default-split)
-	  (when (looking-back consult-async-default-split) (delete-char -1))
-	  (insert " ")))
-  (after! icomplete
-	(define-key icomplete-minibuffer-map (kbd "SPC") 'my-minibuffer-space)
-	(my-ensure 'crm)
-	(define-key crm-local-completion-map (kbd "SPC") 'my-minibuffer-space)
-	))
 
 (defun my-consult-grep ()
   "Use ripgrep first or fallback to grep."
