@@ -178,6 +178,13 @@ search in current directory."
 	  `(orderless-literal . ,(substring pattern 0 -1))))
   (setq orderless-style-dispatchers '(literal-if-= flex-if-comma without-if-$!)))
 
+(my-add-package 'pinyinlib) ; pinyin regex match by 首字母
+(after! orderless
+  (require 'pinyinlib)
+  (defun completion--regex-pinyin (str)
+		 (orderless-regexp (pinyinlib-build-regexp-string str)))
+  (add-to-list 'orderless-matching-styles 'completion--regex-pinyin))
+
 ;; "M-o"
 (with-eval-after-load 'icomplete
   ;; TODO: replace this with transient
