@@ -12,6 +12,7 @@
 (my-add-package 'key-chord)
 (my-add-package 'general)
 (my-add-package 'ace-window) ; quick window move
+(my-add-package 'better-jumper)
 (unless (functionp 'undo-redo)
   (my-add-package 'undo-fu))
 
@@ -28,7 +29,16 @@
 			  evil-respect-visual-line-mode t
 			  ) ;
 
-(add-hook 'after-init-hook 'evil-mode)
+;; enable evil
+(add-hook 'after-init-hook #'(lambda ()
+							   (evil-mode)))
+
+;; better jumper like vim
+(my-delay-eval #'(lambda ()
+				   (better-jumper-mode)
+				   (define-key evil-motion-state-map (kbd "C-o") 'better-jumper-jump-backward)
+				   (define-key evil-motion-state-map (kbd "C-i") 'better-jumper-jump-forward)
+				   ) 2)
 ;; {{ evil-self
 (with-eval-after-load 'evil
   (if (not (functionp 'undo-redo))

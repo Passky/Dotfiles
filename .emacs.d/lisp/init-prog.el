@@ -181,9 +181,14 @@
 ;; ("C-c C-c" . dante-eval-block))
 (my-add-package 'haskell-mode)
 (my-add-package 'dante)
-(add-hook 'haskell-mode 'haskell-indentation-mode)
-(add-hook 'haskell-mode 'haskell-doc-mode)
-(add-hook 'haskell-mode 'dante-mode)
+(add-auto-mode 'haskell-mode "\\.ghci\\'")
+(add-hook 'haskell-mode-hook #'(lambda ()
+								 (haskell-indentation-mode)
+								 (haskell-doc-mode)
+								 (dante-mode)
+								 (turn-on-haskell-indentation)
+								 (flymake-start)
+								 ))
 (with-eval-after-load 'haskell-mode
   (setq haskell-completing-read-function 'completing-read
 		haskell-process-check-cabal-config-on-load nil

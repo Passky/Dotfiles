@@ -159,7 +159,7 @@
 
 (after! newst-backend
   (setq ;; Keep obsolete items for a month
-   newsticker-keep-obsolete-items t
+   newsticker-keep-obsolete-items nil
    newsticker-obsolete-item-max-age (* 30 86400)
    ;; Sane behavior
    newsticker-automatically-mark-items-as-old nil
@@ -173,6 +173,7 @@
    newsticker-url-list '(
 						 ;; ("Planet Emacslife" "https://planet.emacslife.com/atom.xml")
 						 ("LWN (Linux Weekly News)" "https://lwn.net/headlines/rss")
+						 ("Chris's Blog" "https://chriszheng.science/atom.xml")
 						 ("Renmingwang en English" "http://en.people.cn/rss/90000.xml")
 						 ("虎嗅" "https://www.huxiu.com/rss/0.xml")
 						 ("BBC news" "http://feeds.bbci.co.uk/news/rss.xml")

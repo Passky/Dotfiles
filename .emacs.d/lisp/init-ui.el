@@ -21,7 +21,7 @@
 		  ("FIXED" . ,(face-foreground 'success))
 		  )))
 
-;; Highlight the current line.
+;; Highlight current line.
 ;; NOTE: `tty-defined-color-alist' won't be correct until `tty-setup-hook',but that won't get triggerred in gui emacs
 (add-hook 'window-setup-hook #'(lambda ()
 								 (when (or (>= (length tty-defined-color-alist) 256) *gui*)
