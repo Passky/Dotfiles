@@ -43,12 +43,11 @@
 		))
 
 ;; {{ c#-mode
-;; It requires `tree-sitter' which will download a binary from github.
-;; (my-maybe-add-package 'csharp-mode)
+(my-add-package 'csharp-mode) ; it could use tree-sitter for better highlight
 ;; (add-auto-mode 'csharp-tree-sitter-mode
 ;; 			   "\\.cs\\'")
-;; (with-eval-after-load 'csharp-mode
-;;   )
+(with-eval-after-load 'csharp-mode
+  )
 
 ;;{{ cc-mode
 (add-auto-mode 'c++-mode
