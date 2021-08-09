@@ -127,6 +127,7 @@ m4/lt~obsolete.m4
 .emacs.d/projects
 .emacs.d/transient/
 .emacs.d/elpy/
+.emacs.d/devdocs
 .emacs.d/.lsp-session-v1
 
 # lsp
