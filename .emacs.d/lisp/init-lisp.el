@@ -43,7 +43,7 @@
 ;; (add-hook 'lisp-mode 'sly-mode)
 (my-add-package 'sly)
 (with-eval-after-load 'sly
-  (setq sly-net-coding-system 'utf-8-unix)
+  ;; (setq sly-net-coding-system 'utf-8-unix)
   (let ((sbcl-bin-path (concat (getenv "HOME") "/lib/sbcl")))
 	(when (file-exists-p sbcl-bin-path)
 	  (setenv "SBCL_HOME" sbcl-bin-path)))

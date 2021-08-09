@@ -1,5 +1,5 @@
 ;;{{ coding system
-(prefer-coding-system 'utf-8)
+;; (prefer-coding-system 'utf-8)
 
 ;; {{ highlight
 ;; highlight TODO/FIXME/NOTE...
@@ -197,10 +197,6 @@ Nil to use font supports ligatures."
 		doom-modeline-enable-word-count nil
 		))
 (add-hook 'after-init-hook #'doom-modeline-mode)
-
-;; Highlight symbol and actions
-(my-add-package 'symbol-overlay)
-(add-hook 'prog-mode-hook 'symbol-overlay-mode)
 
 ;; {{ which-key-mode
 (my-add-package 'which-key)

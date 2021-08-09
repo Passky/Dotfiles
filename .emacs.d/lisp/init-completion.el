@@ -161,8 +161,12 @@
 (add-hook 'markdown-mode-hook 'my-company-ispell-setup)
 
 ;; ctags based completion and navigation system.
-;; (my-add-package 'citre)
-;; (require 'citre-config)
+(my-add-package 'citre)
+;; (citre-auto-enable-citre-mode-modes '(haskell-mode))
+(after! citre
+  (setq citre-prompt-language-for-ctags-command t
+		citre-ctags-program (executable-find "ctags")
+		citre-readtags-program (executable-find "readtags")))
 
 ;;}}
 (provide 'init-completion)
