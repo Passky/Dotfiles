@@ -121,6 +121,7 @@
 
 ;; {{ search actions
 (my-add-package 'consult)
+(my-add-package 'consult-lsp)
 
 (after! consult
   ;; only preview in opened buffers
