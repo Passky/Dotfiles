@@ -940,7 +940,8 @@ function get_racket_langserver ()
 function run_baidunetdisk()
 {
   # This is a electron app,may find a better way later.
-  HOME="${HOME:-/tmp}/.local/share/baidu" mybg /usr/lib/baidunetdisk/baidunetdisk "$@"
+  # HOME="${HOME:-/tmp}/.local/share/baidu" mybg /usr/lib/baidunetdisk/baidunetdisk "$@" # Native version,but can not work
+  mybg /usr/lib/baidunetdisk/baidunetdisk "$@"
 }
 
 function set_wireshark ()
