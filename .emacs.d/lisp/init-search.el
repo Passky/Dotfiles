@@ -124,12 +124,9 @@
 (my-add-package 'consult-lsp)
 
 (after! consult
-  ;; only preview in opened buffers
-  (consult-customize
-   consult-ripgrep consult-git-grep consult-grep
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-file consult--source-project-file consult--source-bookmark
-   :preview-key (kbd "M-P")))
+  (setq consult-async-refresh-delay 0.1
+		consult-preview-key nil))
+
 (defun my-consult-grep ()
   "Use ripgrep first or fallback to grep."
   (interactive)
